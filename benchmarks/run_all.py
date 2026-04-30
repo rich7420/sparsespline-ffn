@@ -22,17 +22,34 @@ BENCH_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BENCH_DIR.parent
 
 # Each entry is (name, args).  Order matters for readability of the report.
+# Cheap analytical benchmarks first, then quality benchmarks (training),
+# then system benchmarks (latency / memory).
 BENCHMARKS = [
-    ("flops",                []),
-    ("activation_memory",    []),
-    ("invariant_audit",      []),
-    ("latency",              ["--B", "4", "--T", "512", "--warmup", "5", "--iters", "20"]),
-    ("quality_regression",   []),
-    ("quality_high_freq",    []),
-    ("quality_jacobian",     []),
-    ("quality_distill",      []),
-    ("quality_convergence",  []),
-    ("param_count",          []),
+    # --- analytical / static ---
+    ("param_count",            []),
+    ("flops",                  []),
+    ("activation_memory",      []),
+    ("invariant_audit",        []),
+    # --- quality / training ---
+    ("quality_regression",     []),
+    ("quality_high_freq",      []),
+    ("quality_jacobian",       []),
+    ("quality_distill",        []),
+    ("quality_convergence",    []),
+    ("quality_rank_sweep",     []),     # F.4.b
+    ("quality_asymmetric_rank", []),    # F.4.c Strategy A
+    ("quality_placement_K",    []),     # F.5.1
+    ("quality_warmstart",      []),     # L.4 HOSVD
+    ("quality_mixer_ablation", []),     # M.5
+    ("quality_grid_resolution", []),    # E.2 / I.2 G sweep
+    # --- diagnostics ---
+    ("init_sensitivity",       []),     # L.4 sigma_c sweep
+    ("subspace_diversity",     []),     # F.5.1 caveat
+    # --- system ---
+    ("latency",                ["--B", "4", "--T", "512",
+                                "--warmup", "5", "--iters", "20"]),
+    ("fwd_bwd_split",          ["--B", "4", "--T", "512",
+                                "--warmup", "5", "--iters", "20"]),
 ]
 
 

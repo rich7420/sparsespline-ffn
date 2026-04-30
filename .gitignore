@@ -33,3 +33,6 @@ outputs/
 *.pt
 *.pth
 *.safetensors
+
+# Vendored copy of nanochat (kept locally, not committed)
+nanochat/
