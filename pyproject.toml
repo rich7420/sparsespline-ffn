@@ -42,6 +42,7 @@ dev = [
     "pytest-cov",
     "ruff>=0.5",
     "build>=1.2",
+    "pre-commit>=3.7",
 ]
 bench = [
     "numpy>=1.26",
@@ -52,6 +53,9 @@ all = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+sparsespline_ffn = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

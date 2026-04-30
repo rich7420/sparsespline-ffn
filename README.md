@@ -85,8 +85,16 @@ Planned:
 
 ```bash
 pytest
-ruff check src tests examples
+ruff check --no-cache src tests examples benchmarks
 python examples/basic_usage.py
+```
+
+Or use the project targets:
+
+```bash
+make install-dev
+make check
+PYTHONPATH=src python3 benchmarks/param_count.py
 ```
 
 The reference implementation is intentionally kept readable.  Do not remove it
