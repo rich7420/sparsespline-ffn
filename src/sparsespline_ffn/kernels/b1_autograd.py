@@ -2,23 +2,33 @@
 
 Wraps the B1 spline lookup so PyTorch's autograd never builds an indexing
 backward graph through ``Q[bin_idx]``.  All gradient flow is owned by
-``backward()`` which calls the Triton dQ kernel and computes dt manually.
+``backward()`` which calls the fused Triton dQ+dt kernel.
 
-This is the integration point of the Triton kernel into FullMixTuckerFFN.
+This is the integration point of the Triton kernels into FullMixTuckerFFN.
 
 Math contract:
   forward : beta[n,j,c] = (1-t[n,j])*Q[bin[n,j], c] + t[n,j]*Q[bin[n,j]+1, c]
   backward:
-    dQ[bin,   c]  += (1-t)*dbeta[:,:,c]      (Triton kernel)
-    dQ[bin+1, c]  += t    *dbeta[:,:,c]      (Triton kernel)
-    dt[n,j]       = sum_c (Q[bin+1,c] - Q[bin,c]) * dbeta[n,j,c]
+    dQ[bin,   c]  += (1-t)*dbeta[:,:,c]      (Triton kernel, atomic)
+    dQ[bin+1, c]  += t    *dbeta[:,:,c]      (Triton kernel, atomic)
+    dt[n,j]       = sum_c (Q[bin+1,c] - Q[bin,c]) * dbeta[n,j,c]   (Triton)
     dbin          = None  (integer, no gradient)
+
+Tier 3 implementation: forward and backward are both Triton kernels.  We do
+NOT save Q0/Q1 in autograd state; instead we save Q itself (by reference)
+and the bwd kernel re-loads Q[bin], Q[bin+1] from global memory.  This saves
+~2 * N * m * R_b bytes of activation memory per layer (~384 MB at nanochat
+scale, bf16) and folds the ``((Q1-Q0)*dbeta).sum(-1)`` op chain into the
+same launch as dQ.
 """
 from __future__ import annotations
 
 import torch
 
-from sparsespline_ffn.kernels.triton_b1 import b1_backward_dq
+from sparsespline_ffn.kernels.triton_b1 import (
+    b1_backward_dq_dt,
+    b1_forward,
+)
 
 
 class B1Lookup(torch.autograd.Function):
@@ -31,42 +41,27 @@ class B1Lookup(torch.autograd.Function):
 
         Returns beta: (..., m, R_b) in t's dtype.
         """
-        # Read Q with .detach() so PyTorch never wires an indexing-backward
-        # graph through these reads.  We drive Q's gradient ourselves in
-        # backward() via the Triton kernel.
+        # Use detached Q for forward read; backward will use Q again from
+        # the saved tensors.  PyTorch's tensor versioning ensures Q is not
+        # mutated between fwd and bwd of a single training iter.
         Q_detached = Q.detach()
-        Q0 = Q_detached.index_select(0, bin_idx.reshape(-1))
-        Q1 = Q_detached.index_select(0, (bin_idx + 1).reshape(-1))
-        # Restore (..., m, R_b) shape
-        out_shape = (*bin_idx.shape, Q.shape[-1])
-        Q0 = Q0.view(out_shape)
-        Q1 = Q1.view(out_shape)
-        beta = torch.lerp(Q0, Q1, t.unsqueeze(-1))
+        beta = b1_forward(Q_detached, bin_idx, t)
 
-        # Save for backward.  We save Q0, Q1 (not Q) because dt only needs
-        # the difference, which is shape-matching the output.  This avoids
-        # holding a reference to Q (which would block in-place updates).
-        ctx.save_for_backward(bin_idx, t, Q0, Q1)
-        ctx.Q_shape = tuple(Q.shape)
+        # Tier 3: save Q (not Q0/Q1) to amortize activation memory.
+        ctx.save_for_backward(Q_detached, bin_idx, t)
         return beta
 
     @staticmethod
     def backward(ctx, dbeta: torch.Tensor):
-        bin_idx, t, Q0, Q1 = ctx.saved_tensors
-        L, R_b = ctx.Q_shape
+        Q, bin_idx, t = ctx.saved_tensors
 
-        # dQ via Triton kernel.  Always returns fp32; cast back if Q dtype
-        # differs.  Keeping fp32 grads is fine — Adam will mix anyway.
-        dQ_fp32 = b1_backward_dq(bin_idx, t, dbeta, L=L)
+        # Single fused kernel: dQ (atomic scatter-add) + dt (per-token sum).
+        dQ_fp32, dt_fp32 = b1_backward_dq_dt(Q, bin_idx, t, dbeta)
 
-        # dt = sum_c (Q1 - Q0) * dbeta   in fp32 for precision; cast back.
-        # Cast to fp32 inside this op so bf16 inputs do not lose accuracy.
-        dt = ((Q1.float() - Q0.float()) * dbeta.float()).sum(dim=-1).to(t.dtype)
-
-        # Cast dQ to Q's dtype if needed.  Q dtype matches Q0 dtype (we built
-        # Q0 from Q.detach().index_select).  Adam state is fp32 internally
-        # via promotion; nanochat's optimizer handles this transparently.
-        dQ = dQ_fp32.to(Q0.dtype)
+        # Cast to match parameter dtypes.  Adam will internally promote
+        # to fp32 anyway; bf16 grads are fine.
+        dQ = dQ_fp32.to(Q.dtype)
+        dt = dt_fp32.to(t.dtype)
 
         return dQ, None, dt
 

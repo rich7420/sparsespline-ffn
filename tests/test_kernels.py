@@ -40,6 +40,107 @@ def test_kernel_imports():
 
 
 @cuda_required
+def test_b1_forward_matches_pytorch_fp32():
+    """Triton fwd kernel matches PyTorch lerp(Q[bin], Q[bin+1], t) at fp32."""
+    from sparsespline_ffn.kernels.triton_b1 import b1_forward
+
+    torch.manual_seed(10)
+    L, R_b = 21, 16
+    N, m = 1024, 768
+    Q = torch.randn(L, R_b, dtype=torch.float32, device="cuda")
+    bin_idx = torch.randint(0, L - 1, (N, m), dtype=torch.int64, device="cuda")
+    t = torch.rand(N, m, dtype=torch.float32, device="cuda")
+
+    Q0 = Q[bin_idx]
+    Q1 = Q[bin_idx + 1]
+    beta_ref = torch.lerp(Q0, Q1, t.unsqueeze(-1))
+    beta_kern = b1_forward(Q, bin_idx, t)
+
+    rel = (beta_ref - beta_kern).norm() / (beta_ref.norm() + 1e-12)
+    assert rel < 1e-6, f"fwd fp32 rel={rel.item():.3e}"
+    assert beta_kern.shape == beta_ref.shape
+
+
+@cuda_required
+def test_b1_backward_dq_dt_matches_reference():
+    """Fused kernel produces same dQ as separate kernel + same dt as PyTorch."""
+    from sparsespline_ffn.kernels.triton_b1 import (
+        b1_backward_dq, b1_backward_dq_dt,
+    )
+
+    torch.manual_seed(20)
+    L, R_b = 21, 16
+    N, m = 1024, 768
+    Q = torch.randn(L, R_b, dtype=torch.float32, device="cuda")
+    bin_idx = torch.randint(0, L - 1, (N, m), dtype=torch.int64, device="cuda")
+    t = torch.rand(N, m, dtype=torch.float32, device="cuda")
+    dbeta = torch.randn(N, m, R_b, dtype=torch.float32, device="cuda")
+
+    # Reference dt
+    Q0 = Q[bin_idx]
+    Q1 = Q[bin_idx + 1]
+    dt_ref = ((Q1 - Q0) * dbeta).sum(dim=-1)
+
+    # Reference dQ via the dQ-only kernel (already validated)
+    dQ_ref = b1_backward_dq(bin_idx, t, dbeta, L=L)
+
+    # Fused kernel
+    dQ_kern, dt_kern = b1_backward_dq_dt(Q, bin_idx, t, dbeta)
+
+    rel_dQ = (dQ_kern - dQ_ref).norm() / (dQ_ref.norm() + 1e-12)
+    rel_dt = (dt_kern - dt_ref).norm() / (dt_ref.norm() + 1e-12)
+    assert rel_dQ < 1e-5, f"fused dQ rel={rel_dQ.item():.3e}"
+    assert rel_dt < 1e-5, f"fused dt rel={rel_dt.item():.3e}"
+
+
+@cuda_required
+def test_b1_backward_dq_dt_bf16():
+    from sparsespline_ffn.kernels.triton_b1 import b1_backward_dq_dt
+
+    torch.manual_seed(21)
+    L, R_b = 21, 16
+    N, m = 512, 768
+    Q = torch.randn(L, R_b, dtype=torch.bfloat16, device="cuda")
+    bin_idx = torch.randint(0, L - 1, (N, m), dtype=torch.int64, device="cuda")
+    t = torch.rand(N, m, dtype=torch.bfloat16, device="cuda")
+    dbeta = torch.randn(N, m, R_b, dtype=torch.bfloat16, device="cuda")
+
+    # fp32 ground truth
+    Q_fp32 = Q.float()
+    Q0 = Q_fp32[bin_idx]
+    Q1 = Q_fp32[bin_idx + 1]
+    dt_truth = ((Q1 - Q0) * dbeta.float()).sum(dim=-1)
+
+    dQ_kern, dt_kern = b1_backward_dq_dt(Q, bin_idx, t, dbeta)
+
+    rel_dt = (dt_kern - dt_truth).norm() / (dt_truth.norm() + 1e-12)
+    assert rel_dt < 5e-3, f"fused dt bf16 rel={rel_dt.item():.3e}"
+
+
+@cuda_required
+def test_b1_forward_matches_pytorch_bf16():
+    from sparsespline_ffn.kernels.triton_b1 import b1_forward
+
+    torch.manual_seed(11)
+    L, R_b = 21, 16
+    N, m = 512, 768
+    Q = torch.randn(L, R_b, dtype=torch.bfloat16, device="cuda")
+    bin_idx = torch.randint(0, L - 1, (N, m), dtype=torch.int64, device="cuda")
+    t = torch.rand(N, m, dtype=torch.bfloat16, device="cuda")
+
+    # Compare to fp32-promoted reference (kernel internal accum is fp32).
+    Q0 = Q[bin_idx].float()
+    Q1 = Q[bin_idx + 1].float()
+    beta_ref = ((1.0 - t.float().unsqueeze(-1)) * Q0
+                + t.float().unsqueeze(-1) * Q1).to(torch.bfloat16)
+    beta_kern = b1_forward(Q, bin_idx, t)
+
+    rel = ((beta_ref.float() - beta_kern.float()).norm()
+           / (beta_ref.float().norm() + 1e-12))
+    assert rel < 5e-3, f"fwd bf16 rel={rel.item():.3e}"
+
+
+@cuda_required
 def test_single_bin_matches_index_add():
     """Smallest non-trivial: every token lands in bin=3, R_b=4."""
     from sparsespline_ffn.kernels import b1_backward_dq
