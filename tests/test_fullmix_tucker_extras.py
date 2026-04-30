@@ -26,31 +26,13 @@ import math
 import pytest
 import torch
 import torch.utils.checkpoint as ckpt
+from conftest import make_small_ffn as _make_small
 
 from sparsespline_ffn import FullMixTuckerConfig, FullMixTuckerFFN
 from sparsespline_ffn.tucker_init import (
     hosvd_warmstart_from_dense,
     variance_preserving_spline_coef_init,
 )
-
-
-def _make_small(**overrides) -> FullMixTuckerFFN:
-    cfg = FullMixTuckerConfig(
-        d=overrides.pop("d", 16),
-        m=overrides.pop("m", 16),
-        R_o=overrides.pop("R_o", 8),
-        R_i=overrides.pop("R_i", 8),
-        R_b=overrides.pop("R_b", 4),
-        G=overrides.pop("G", 6),
-        grid_lo=overrides.pop("grid_lo", -2.0),
-        grid_hi=overrides.pop("grid_hi", 2.0),
-        use_mixer=overrides.pop("use_mixer", True),
-        bias_in_mixer=overrides.pop("bias_in_mixer", False),
-        **overrides,
-    )
-    torch.manual_seed(0)
-    return FullMixTuckerFFN(cfg).to(torch.float32)
-
 
 # ---- A. HOSVD warm-start re-injection -----------------------------------
 

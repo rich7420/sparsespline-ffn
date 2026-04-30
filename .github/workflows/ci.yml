@@ -37,7 +37,20 @@ jobs:
         run: python -m ruff check --no-cache src tests examples benchmarks
 
       - name: Test
-        run: python -m pytest --cov=sparsespline_ffn --cov-report=term-missing
+        run: |
+          python -m pytest \
+            --cov=sparsespline_ffn \
+            --cov-report=term-missing \
+            --cov-report=xml \
+            --cov-fail-under=80
+
+      - name: Upload coverage XML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.python-version }}
+          path: coverage.xml
+          if-no-files-found: ignore
 
       - name: Build wheel
         run: python -m build

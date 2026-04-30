@@ -13,7 +13,10 @@ lint:
 	$(PYTHON) -m ruff check --no-cache src tests examples benchmarks
 
 test:
-	COVERAGE_FILE=$(COVERAGE_FILE) $(PYTHON) -m pytest --cov=sparsespline_ffn --cov-report=term-missing
+	COVERAGE_FILE=$(COVERAGE_FILE) $(PYTHON) -m pytest \
+	  --cov=sparsespline_ffn \
+	  --cov-report=term-missing \
+	  --cov-fail-under=80
 
 build:
 	$(PYTHON) -m build

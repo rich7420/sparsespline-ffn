@@ -28,30 +28,14 @@ import math
 
 import pytest
 import torch
+from conftest import capture_bin_frac
+from conftest import make_small_ffn as _make_small
+from conftest import make_stack as _stack_layers
+from conftest import pre_rmsnorm_stack_forward as _pre_rmsnorm_stack_forward
+from conftest import residual_stack_forward as _residual_stack_forward
 
 from sparsespline_ffn import FullMixTuckerConfig, FullMixTuckerFFN
 from sparsespline_ffn.tucker_init import hosvd_warmstart_from_dense
-
-# ---- Test fixtures -------------------------------------------------------
-
-
-def _make_small(use_mixer: bool = True, **overrides) -> FullMixTuckerFFN:
-    """A tiny config so the dense W reconstruction is feasible in fp32."""
-    cfg = FullMixTuckerConfig(
-        d=overrides.pop("d", 16),
-        m=overrides.pop("m", 16),
-        R_o=overrides.pop("R_o", 8),
-        R_i=overrides.pop("R_i", 8),
-        R_b=overrides.pop("R_b", 4),
-        G=overrides.pop("G", 6),
-        grid_lo=-2.0,
-        grid_hi=2.0,
-        use_mixer=use_mixer,
-        **overrides,
-    )
-    torch.manual_seed(0)
-    return FullMixTuckerFFN(cfg).to(torch.float32)
-
 
 # ---- 1. Equivalence: 5-stage matches direct dense Tucker contraction -----
 
@@ -326,15 +310,14 @@ def test_hosvd_warmstart_truncation_bounded_error():
 # ---- Bonus: equivalence under bf16 (loose tolerance) --------------------
 
 
+@pytest.mark.cuda
 def test_bf16_equivalence_within_kernel_tolerance():
     """Forward in bf16 must agree with fp32 within bf16's ~1e-3 tolerance.
 
     This is the contract that K.0.1 imposes on Phase 2 kernels.  The
     reference itself should already meet it (mostly via fp32 accumulation
-    inside einsum)."""
-    if not torch.cuda.is_available():
-        pytest.skip("bf16 best tested on CUDA; CPU bf16 path is fragile")
-
+    inside einsum).  Auto-skipped via conftest when CUDA is unavailable.
+    """
     torch.manual_seed(9)
     cfg = FullMixTuckerConfig(d=32, m=32, R_o=16, R_i=16, R_b=4, G=8)
     ffn_fp32 = FullMixTuckerFFN(cfg).cuda().to(torch.float32)
@@ -368,22 +351,6 @@ def test_bf16_equivalence_within_kernel_tolerance():
 # ===========================================================================
 
 
-def _capture_t(ffn: FullMixTuckerFFN):
-    """Wrap _bin_and_frac to capture (z, bin_idx, t) from the next forward."""
-    captured: dict = {}
-    orig = ffn._bin_and_frac
-
-    def spy(z):
-        bin_idx, t = orig(z)
-        captured["z"] = z.detach().clone()
-        captured["bin"] = bin_idx.detach().clone()
-        captured["t"] = t.detach().clone()
-        return bin_idx, t
-
-    ffn._bin_and_frac = spy  # type: ignore[method-assign]
-    return captured
-
-
 def test_t_distribution_is_uniform_under_gaussian_input():
     """The variance-preserving init relies on E[B0^2 + B1^2] = 2/3, which
     requires t ~ Uniform[0,1].  Verify empirically that t lies in [0,1] AND
@@ -392,10 +359,9 @@ def test_t_distribution_is_uniform_under_gaussian_input():
     cfg = FullMixTuckerConfig(d=128, m=128, R_o=64, R_i=64, R_b=8, G=20)
     torch.manual_seed(101)
     ffn = FullMixTuckerFFN(cfg)
-    captured = _capture_t(ffn)
 
     x = torch.randn(8192, cfg.d)
-    with torch.no_grad():
+    with capture_bin_frac(ffn) as captured, torch.no_grad():
         ffn(x)
 
     t = captured["t"]
@@ -466,10 +432,9 @@ def test_bin_coverage_at_unit_input():
     cfg = FullMixTuckerConfig(d=128, m=128, R_o=64, R_i=64, R_b=8, G=20)
     torch.manual_seed(104)
     ffn = FullMixTuckerFFN(cfg)
-    captured = _capture_t(ffn)
 
     x = torch.randn(512, cfg.d)
-    with torch.no_grad():
+    with capture_bin_frac(ffn) as captured, torch.no_grad():
         ffn(x)
 
     bins_touched = captured["bin"].unique().numel()
@@ -483,33 +448,6 @@ def test_bin_coverage_at_unit_input():
 # ===========================================================================
 # 9. Stacking / depth — F.5.1 cumulative subspace coverage, gradient flow
 # ===========================================================================
-
-
-def _stack_layers(K: int, **cfg_overrides) -> tuple[torch.nn.ModuleList, FullMixTuckerConfig]:
-    """Build K stacked FullMixTuckerFFN layers with shared config."""
-    cfg = FullMixTuckerConfig(
-        d=cfg_overrides.pop("d", 64),
-        m=cfg_overrides.pop("m", 64),
-        R_o=cfg_overrides.pop("R_o", 16),
-        R_i=cfg_overrides.pop("R_i", 16),
-        R_b=cfg_overrides.pop("R_b", 4),
-        G=cfg_overrides.pop("G", 12),
-        **cfg_overrides,
-    )
-    layers = torch.nn.ModuleList(
-        [FullMixTuckerFFN(cfg) for _ in range(K)]
-    )
-    return layers, cfg
-
-
-def _residual_stack_forward(
-    layers: torch.nn.ModuleList, x: torch.Tensor
-) -> torch.Tensor:
-    """Apply layers in residual fashion: x_{l+1} = x_l + FFN(x_l)."""
-    h = x
-    for ffn in layers:
-        h = h + ffn(h)
-    return h
 
 
 @pytest.mark.parametrize("K", [3, 6, 12])
@@ -588,18 +526,6 @@ def test_gradient_flow_through_K12_stack():
     assert max(first_layer_grad_norms) > 1e-6, (
         f"first-layer gradient vanished: max norm {max(first_layer_grad_norms):.2e}"
     )
-
-
-def _pre_rmsnorm_stack_forward(
-    layers: torch.nn.ModuleList, x: torch.Tensor, eps: float = 1e-6
-) -> torch.Tensor:
-    """Transformer-style: x_{l+1} = x_l + FFN(RMSNorm(x_l))."""
-    h = x
-    for ffn in layers:
-        rms = h.pow(2).mean(dim=-1, keepdim=True).add(eps).sqrt()
-        h_normed = h / rms
-        h = h + ffn(h_normed)
-    return h
 
 
 def test_pre_rmsnorm_stack_stable_activations_and_gradients():

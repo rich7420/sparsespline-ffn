@@ -18,8 +18,6 @@ import pytest
 import torch
 import torch.nn as nn
 
-from sparsespline_ffn import MLPFFN, FullMixTuckerFFN, build_ffn
-
 from integrations.nanochat.adapter import (
     replace_mlp_with_sparsespline,
     summarize_replacement,
@@ -31,7 +29,7 @@ from integrations.tiny_transformer import (
     TinyConfig,
     TinyTransformerLM,
 )
-
+from sparsespline_ffn import MLPFFN, FullMixTuckerFFN, build_ffn
 
 # ---- TinyTransformerLM: forward + loss with both FFN factories -----------
 

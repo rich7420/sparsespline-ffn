@@ -68,18 +68,34 @@ housing production code.
 
 Implemented:
 
-- `FullMixTuckerFFN`: five-stage PyTorch reference path;
-- `FullMixTuckerConfig`: validation for rank/grid/mixer choices;
-- `build_ffn`: MLP fallback plus replacement schedules;
-- HOSVD warm-start helpers;
-- CPU tests for shape, gradients, schedules, dense-equivalence, and packaging.
+- `FullMixTuckerFFN`: five-stage PyTorch reference path
+  (mixer → B1 spline lookup → V → core C → readout U·γ);
+- `FullMixTuckerConfig`: validation for rank/grid/mixer choices, including
+  the non-compressive `m >= d` mixer guard;
+- `build_ffn`: MLP fallback plus replacement schedules
+  (`all`, `every2`, `every4`, `early`, `late`, `late_quarter`, `none`);
+- HOSVD warm-start helpers (`hosvd_warmstart_from_dense`);
+- nanochat / nanoGPT adapter at `integrations.nanochat.adapter`
+  (`replace_mlp_with_sparsespline`, `summarize_replacement`);
+- tiny prototype transformer at `integrations.tiny_transformer` for plumbing
+  smoke tests;
+- benchmark suite covering FLOPs, activation memory, latency (fwd / fwd+bwd
+  split), parameter count, invariant audit at production scale, and quality
+  on synthetic regression / high-frequency / Jacobian / distillation /
+  convergence / R_o sweep / asymmetric-rank / placement-K / HOSVD warm-start /
+  mixer ablation / grid-resolution / init-sensitivity / subspace-diversity
+  workloads;
+- 128-test CPU+CUDA test suite covering shape, autograd, output-rank bound
+  (F.4.b), cumulative subspace coverage (F.5.1), variance-preserving init
+  (L.4), HOSVD round-trip and re-injection, distributional invariants,
+  K=12 stacking, asymmetric ranks, and `torch.utils.checkpoint` integration.
 
 Planned:
 
-- fused Triton forward path behind `use_kernel`;
+- fused Triton forward path behind `use_kernel` and matching backward
+  (FlashKAT-style coefficient-tiled gradient);
 - reference/kernel equivalence tests at fp32 and bf16 tolerances;
-- nanochat adapter package with no upstream fork required;
-- benchmark scripts for parameter count, activation memory, and step latency.
+- end-to-end nanochat training receipts published outside this package.
 
 ## Development
 
@@ -94,7 +110,8 @@ Or use the project targets:
 ```bash
 make install-dev
 make check
-PYTHONPATH=src python3 benchmarks/param_count.py
+python benchmarks/run_all.py             # full benchmark sweep
+python benchmarks/param_count.py          # quick analytical sanity
 ```
 
 The reference implementation is intentionally kept readable.  Do not remove it
