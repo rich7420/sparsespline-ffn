@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,7 +8,14 @@ version = "0.1.0"
 description = "SparseSpline-FFN: locally-supported spline FFN replacements for transformer MLP blocks"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Rich" },
+]
+maintainers = [
+    { name = "Rich" },
+]
 keywords = [
     "transformers",
     "ffn",
@@ -21,7 +28,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
@@ -32,6 +38,12 @@ classifiers = [
 dependencies = [
     "torch>=2.3",
 ]
+
+[project.urls]
+Homepage = "https://github.com/rich7420/sparsespline-ffn"
+Repository = "https://github.com/rich7420/sparsespline-ffn"
+Issues = "https://github.com/rich7420/sparsespline-ffn/issues"
+Changelog = "https://github.com/rich7420/sparsespline-ffn/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 cuda = [
@@ -60,7 +72,7 @@ sparsespline_ffn = ["py.typed"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-addopts = "-v --tb=short --strict-markers"
+addopts = "-v --tb=short --strict-markers -p no:cacheprovider"
 markers = [
     "cuda: requires CUDA GPU",
     "slow: long-running tests",

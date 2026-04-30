@@ -2,6 +2,7 @@ name: CI
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  COVERAGE_FILE: /tmp/sparsespline_ffn.coverage
 
 on:
   push:
@@ -36,7 +37,12 @@ jobs:
         run: python -m ruff check --no-cache src tests examples benchmarks
 
       - name: Test
-        run: python -m pytest
+        run: python -m pytest --cov=sparsespline_ffn --cov-report=term-missing
 
       - name: Build wheel
         run: python -m build
+
+      - name: Smoke test built wheel
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/sparsespline_ffn-*.whl
+          python -c "import sparsespline_ffn; print(sparsespline_ffn.__version__)"

@@ -25,6 +25,7 @@ venv/
 Thumbs.db
 
 # Experiment artifacts
+benchmark_runs/
 checkpoints/
 runs/
 wandb/
@@ -32,4 +33,3 @@ outputs/
 *.pt
 *.pth
 *.safetensors
-
