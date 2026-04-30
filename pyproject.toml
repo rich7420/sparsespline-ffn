@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparsespline-ffn"
+version = "0.1.0"
+description = "SparseSpline-FFN: locally-supported spline FFN replacements for transformer MLP blocks"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = [
+    "transformers",
+    "ffn",
+    "b-spline",
+    "tucker",
+    "pytorch",
+    "triton",
+    "language-models",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.3",
+]
+
+[project.optional-dependencies]
+cuda = [
+    "triton>=3.0; platform_system=='Linux'",
+]
+dev = [
+    "pytest>=8",
+    "pytest-cov",
+    "ruff>=0.5",
+    "build>=1.2",
+]
+bench = [
+    "numpy>=1.26",
+]
+all = [
+    "sparsespline-ffn[cuda,dev,bench]",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "cuda: requires CUDA GPU",
+    "slow: long-running tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.coverage.run]
+source = ["sparsespline_ffn"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+exclude_also = [
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
