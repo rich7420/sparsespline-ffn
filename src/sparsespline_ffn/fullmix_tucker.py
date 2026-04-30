@@ -211,9 +211,12 @@ class FullMixTuckerFFN(nn.Module):
         #   beta = (1 - t) * Q[bin] + t * Q[bin+1]
         bin_idx, t = self._bin_and_frac(z)  # both (N, m)
         if self.cfg.use_kernel and z.is_cuda:
+            # Triton path: bit-equivalent to form-B at bf16 (kernel consumes
+            # bin_idx/t produced by the form-B _bin_and_frac).
             from sparsespline_ffn.kernels.b1_autograd import B1Lookup
             beta = B1Lookup.apply(self.Q, bin_idx, t)  # (N, m, R_b)
         else:
+            # Form-B reference path (the permanent oracle).
             Q0 = self.Q[bin_idx]                # (N, m, R_b)
             Q1 = self.Q[bin_idx + 1]            # (N, m, R_b)
             beta = torch.lerp(Q0, Q1, t.unsqueeze(-1))  # (N, m, R_b)
