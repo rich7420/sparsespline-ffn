@@ -93,6 +93,9 @@ class FullMixTuckerConfig:
     grid_hi: float = 3.0
     use_mixer: bool = True
     bias_in_mixer: bool = False
+    # Route stage 2 through the Triton B1Lookup kernel.  Form-B reference is
+    # the permanent oracle; this is opt-in and falls back to form-B on CPU.
+    use_kernel: bool = False
 
     def __post_init__(self) -> None:
         if self.m < self.d:
@@ -128,6 +131,12 @@ class FullMixTuckerFFN(nn.Module):
     U : (d, R_o)          output-mode factor (the readout)
     gamma : (1,)          per-layer scalar gain
     """
+
+    # Class-level annotations narrow the `register_buffer` return type for
+    # static checkers; PyTorch types buffers as ``Tensor | Module`` which
+    # makes arithmetic on them fail mypy.
+    grid_lo: torch.Tensor
+    grid_hi: torch.Tensor
 
     def __init__(self, config: FullMixTuckerConfig) -> None:
         super().__init__()
@@ -201,9 +210,13 @@ class FullMixTuckerFFN(nn.Module):
         # For B1 only two basis are active per input scalar:
         #   beta = (1 - t) * Q[bin] + t * Q[bin+1]
         bin_idx, t = self._bin_and_frac(z)  # both (N, m)
-        Q0 = self.Q[bin_idx]                # (N, m, R_b)
-        Q1 = self.Q[bin_idx + 1]            # (N, m, R_b)
-        beta = torch.lerp(Q0, Q1, t.unsqueeze(-1))  # (N, m, R_b)
+        if self.cfg.use_kernel and z.is_cuda:
+            from sparsespline_ffn.kernels.b1_autograd import B1Lookup
+            beta = B1Lookup.apply(self.Q, bin_idx, t)  # (N, m, R_b)
+        else:
+            Q0 = self.Q[bin_idx]                # (N, m, R_b)
+            Q1 = self.Q[bin_idx + 1]            # (N, m, R_b)
+            beta = torch.lerp(Q0, Q1, t.unsqueeze(-1))  # (N, m, R_b)
 
         # Stage 3 — input-mode contraction: xi = V^T beta.  Output (N, R_i, R_b).
         xi = torch.einsum("nmc, mb -> nbc", beta, self.V)

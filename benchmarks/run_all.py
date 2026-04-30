@@ -25,31 +25,47 @@ REPO_ROOT = BENCH_DIR.parent
 # Cheap analytical benchmarks first, then quality benchmarks (training),
 # then system benchmarks (latency / memory).
 BENCHMARKS = [
-    # --- analytical / static ---
-    ("param_count",            []),
-    ("flops",                  []),
-    ("activation_memory",      []),
-    ("invariant_audit",        []),
+    # --- analytical / static (sub-second; safe for CI smoke) ---
+    ("param_count",             []),
+    ("flops",                   []),
+    ("activation_memory",       []),
+    ("invariant_audit",         []),
     # --- quality / training ---
-    ("quality_regression",     []),
-    ("quality_high_freq",      []),
-    ("quality_jacobian",       []),
-    ("quality_distill",        []),
-    ("quality_convergence",    []),
-    ("quality_rank_sweep",     []),     # F.4.b
+    ("quality_regression",      []),
+    ("quality_high_freq",       []),
+    ("quality_jacobian",        []),
+    ("quality_distill",         []),
+    ("quality_convergence",     []),
+    ("quality_rank_sweep",      []),    # F.4.b
     ("quality_asymmetric_rank", []),    # F.4.c Strategy A
-    ("quality_placement_K",    []),     # F.5.1
-    ("quality_warmstart",      []),     # L.4 HOSVD
-    ("quality_mixer_ablation", []),     # M.5
+    ("quality_placement_K",     []),    # F.5.1
+    ("quality_warmstart",       []),    # L.4 HOSVD
+    ("quality_mixer_ablation",  []),    # M.5
     ("quality_grid_resolution", []),    # E.2 / I.2 G sweep
+    ("mixer_width_sweep",       []),    # J.1.b m sweep
+    ("lm_endtoend_curve",       []),    # tiny LM CE curve
     # --- diagnostics ---
-    ("init_sensitivity",       []),     # L.4 sigma_c sweep
-    ("subspace_diversity",     []),     # F.5.1 caveat
+    ("init_sensitivity",        []),    # L.4 sigma_c sweep
+    ("subspace_diversity",      []),    # F.5.1 caveat
+    ("knot_utilization",        []),    # E.3 / L.4 dead-knot diag
+    ("long_step_stability",     []),    # late-stage divergence
     # --- system ---
-    ("latency",                ["--B", "4", "--T", "512",
-                                "--warmup", "5", "--iters", "20"]),
-    ("fwd_bwd_split",          ["--B", "4", "--T", "512",
-                                "--warmup", "5", "--iters", "20"]),
+    ("latency",                 ["--B", "4", "--T", "512",
+                                 "--warmup", "5", "--iters", "20"]),
+    ("fwd_bwd_split",           ["--B", "4", "--T", "512",
+                                 "--warmup", "5", "--iters", "20"]),
+    ("memory_checkpoint",       ["--B", "2", "--T", "256"]),
+    ("torch_compile_speedup",   ["--B", "2", "--T", "256",
+                                 "--warmup", "3", "--iters", "10"]),
+    ("numerical_drift",         []),                      # K.0.1 contract
+]
+
+# Benchmarks that are safe to run as a CI smoke check — must be sub-second
+# to a few seconds on CPU and have no external deps beyond torch.
+SMOKE_BENCHMARKS = [
+    "param_count",
+    "flops",
+    "activation_memory",
 ]
 
 
@@ -73,9 +89,16 @@ def main() -> int:
                     help="substrings; skip benchmarks whose name matches")
     ap.add_argument("--out-dir", default=None,
                     help="override output dir (default: benchmark_runs/<ts>)")
+    ap.add_argument("--smoke", action="store_true",
+                    help="only run the SMOKE_BENCHMARKS subset (CI-fast)")
     args = ap.parse_args()
 
-    selected = _filter(BENCHMARKS, args.only, args.skip)
+    if args.smoke:
+        selected = [
+            (n, a) for n, a in BENCHMARKS if n in SMOKE_BENCHMARKS
+        ]
+    else:
+        selected = _filter(BENCHMARKS, args.only, args.skip)
     if not selected:
         print("No benchmarks selected.")
         return 1

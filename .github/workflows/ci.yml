@@ -36,6 +36,9 @@ jobs:
       - name: Lint
         run: python -m ruff check --no-cache src tests examples benchmarks
 
+      - name: Type check
+        run: python -m mypy
+
       - name: Test
         run: |
           python -m pytest \
@@ -51,6 +54,9 @@ jobs:
           name: coverage-${{ matrix.python-version }}
           path: coverage.xml
           if-no-files-found: ignore
+
+      - name: Bench smoke
+        run: python benchmarks/run_all.py --smoke
 
       - name: Build wheel
         run: python -m build

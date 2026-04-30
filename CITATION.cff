@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use SparseSpline-FFN in academic work, please cite it as below."
+title: "SparseSpline-FFN: locally-supported B-spline FFN replacements for transformer MLP blocks"
+type: software
+version: 0.1.0
+date-released: "2026-05-01"
+license: MIT
+url: "https://github.com/rich7420/sparsespline-ffn"
+repository-code: "https://github.com/rich7420/sparsespline-ffn"
+abstract: >
+  SparseSpline-FFN is a transformer FFN replacement built around
+  locally-supported B1 spline activations and a Tucker-decomposed readout.
+  The package ships a permanent five-stage PyTorch reference (the FullMix-Tucker
+  module) plus integration helpers for nanoGPT/nanochat-style models.
+  Future fused Triton kernels live behind the same API and are validated
+  against the reference within bf16 tolerances.
+keywords:
+  - transformers
+  - feed-forward network
+  - b-spline
+  - tucker decomposition
+  - kolmogorov-arnold
+  - language models
+  - pytorch
+authors:
+  - given-names: Rich

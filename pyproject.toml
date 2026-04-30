@@ -53,6 +53,7 @@ dev = [
     "pytest>=8",
     "pytest-cov",
     "ruff>=0.5",
+    "mypy>=1.8",
     "build>=1.2",
     "pre-commit>=3.7",
 ]
@@ -84,7 +85,32 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
-ignore = ["E501"]
+# B009 / B010 (Replace [g/s]etattr with assignment) conflict with the
+# nn.Module attribute-typing workaround in `schedules.build_ffn`; keep
+# the setattr form so mypy's strict-Module typing does not flag the
+# metadata writes.
+ignore = ["E501", "B009", "B010"]
+
+[tool.ruff.lint.per-file-ignores]
+# Triton kernels intentionally use single-letter loop indices (l, k, n)
+# that mirror the math notation (L, K, N) in THEORY.md.
+"src/sparsespline_ffn/kernels/*.py" = ["E741"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src"]
+strict_optional = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+# We do not require fully-typed signatures (PyTorch's own types aren't strict
+# enough for that yet), but we do want module-level errors to surface so the
+# `py.typed` promise stays meaningful.
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = ["triton", "triton.*"]
+ignore_missing_imports = true
 
 [tool.coverage.run]
 source = ["sparsespline_ffn"]

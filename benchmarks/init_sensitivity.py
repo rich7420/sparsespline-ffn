@@ -21,7 +21,6 @@ import time
 import torch
 
 from sparsespline_ffn import FullMixTuckerConfig, FullMixTuckerFFN
-from sparsespline_ffn.tucker_init import variance_preserving_spline_coef_init
 
 
 def _device():

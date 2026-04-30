@@ -142,7 +142,7 @@ def main():
     else:
         print(f"  K=8 ({last[2]:.4e}) does not beat K=1 ({first[2]:.4e}) — "
               "could be saturated or bottlenecked elsewhere")
-    print(f"\n  U-subspace diversity (sigma_min of stacked U at end of training):")
+    print("\n  U-subspace diversity (sigma_min of stacked U at end of training):")
     for K, _b, _em, _es, sm, _sx, cond, _w in rows:
         flag = "ok" if sm > 1e-3 else "COLLAPSE"
         print(f"    K={K:>2}: sigma_min={sm:.4f}, cond={cond:.1f}  [{flag}]")

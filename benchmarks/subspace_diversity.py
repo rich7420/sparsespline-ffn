@@ -75,7 +75,7 @@ def main():
     print(f"device={device}, d={d}, K={K}, R_o={R_o}, steps={steps}")
     print(f"  per-layer rank covers {R_o}/{d} = {100 * R_o / d:.0f}% of d")
     print(f"  cumulative bound min(K*R_o, d) = {min(K * R_o, d)}")
-    print(f"  init: U has orthonormal columns (cond ~= 1.0 expected at step 0)")
+    print("  init: U has orthonormal columns (cond ~= 1.0 expected at step 0)")
     print("=" * 78)
 
     torch.manual_seed(0)
@@ -119,7 +119,7 @@ def main():
     init = rank_history[0]
     final = rank_history[-1]
     print(f"Wall: {elapsed:.1f}s")
-    print(f"\nDiagnostics:")
+    print("\nDiagnostics:")
     print(f"  step 0   : sigma_min={init[2]:.4f}, cond={init[3]:.2f}, "
           f"rank={init[4]}/{min(K * R_o, d)}")
     print(f"  step {final[0]:>3}: sigma_min={final[2]:.4f}, cond={final[3]:.2f}, "

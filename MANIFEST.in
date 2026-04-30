@@ -1,6 +1,7 @@
 include LICENSE
 include README.md
 include CHANGELOG.md
+include CITATION.cff
 include RELEASE.md
 include SECURITY.md
 include pyproject.toml

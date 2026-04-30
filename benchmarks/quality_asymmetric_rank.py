@@ -79,7 +79,7 @@ def main():
     print("=" * 78)
     print("Quality benchmark: F.4.c asymmetric Tucker rank")
     print(f"device={device}, dtype={dtype}, d={d}, steps={steps}, G={G}")
-    print(f"target = rank_rich (8 distinct nonlinear output channels)")
+    print("target = rank_rich (8 distinct nonlinear output channels)")
     print("=" * 78)
     print(f"\n{'config':<14} {'R_o':>4} {'R_i':>4} {'R_b':>4} "
           f"{'params':>10} {'eval_mean':>14} {'eval_std':>12} {'wall(s)':>10}")

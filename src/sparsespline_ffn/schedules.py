@@ -136,21 +136,26 @@ def build_ffn(
     ffn_type_key = ffn_type.lower()
     if ffn_type_key not in VALID_FFN_TYPES:
         raise ValueError(f"unknown ffn_type: {ffn_type!r}")
+    # nn.Module.__setattr__ is typed as accepting ``Tensor | Module`` only,
+    # so plain attribute assignment of strings/ints fails mypy.  Route
+    # metadata through ``setattr`` to bypass the descriptor typing.
+    # Ruff B009 ("replace setattr with assignment") is silenced via
+    # pyproject.toml's [tool.ruff.lint] ignore list.
     if ffn_type_key == "mlp":
         module: nn.Module = MLPFFN(d=d, mlp_ratio=mlp_ratio, activation=activation, bias=bias)
-        module.ffn_type_effective = "mlp"
+        setattr(module, "ffn_type_effective", "mlp")
     elif should_replace_layer(layer_idx, num_layers, schedule):
         module = build_fullmix_tucker_ffn(d=d, **fullmix_kwargs)
-        module.ffn_type_effective = "fullmix_tucker"
-        module.is_sparsespline_replacement = True
+        setattr(module, "ffn_type_effective", "fullmix_tucker")
+        setattr(module, "is_sparsespline_replacement", True)
     else:
         module = MLPFFN(d=d, mlp_ratio=mlp_ratio, activation=activation, bias=bias)
-        module.ffn_type_effective = "mlp"
-        module.is_sparsespline_replacement = False
-        module.fallback_from = ffn_type_key
+        setattr(module, "ffn_type_effective", "mlp")
+        setattr(module, "is_sparsespline_replacement", False)
+        setattr(module, "fallback_from", ffn_type_key)
 
-    module.ffn_type_requested = ffn_type
-    module.schedule = schedule.lower()
-    module.layer_idx = layer_idx
-    module.num_layers = num_layers
+    setattr(module, "ffn_type_requested", ffn_type)
+    setattr(module, "schedule", schedule.lower())
+    setattr(module, "layer_idx", layer_idx)
+    setattr(module, "num_layers", num_layers)
     return module
