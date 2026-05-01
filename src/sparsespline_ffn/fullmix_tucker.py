@@ -103,6 +103,12 @@ class FullMixTuckerConfig:
     #                   (use this in production training where you do NOT
     #                   want to silently lose the speedup).
     use_kernel: bool | str = False
+    # Fold V (m, R_i) and C (R_o, R_i, R_b) into a single (m, R_b, R_o)
+    # operator W and replace the two-step  beta -> xi -> eta  einsum chain
+    # with one GEMM.  Pure PyTorch, autograd-safe.  Per-step W cost is small
+    # (R_o*R_i*R_b*m flops) but eliminates one cuBLAS launch + the (N,R_i,R_b)
+    # intermediate.  Form-B numerics: equivalent up to fp32 reduction order.
+    use_fused_vc: bool = False
 
     def __post_init__(self) -> None:
         if self.m < self.d:
@@ -236,11 +242,22 @@ class FullMixTuckerFFN(nn.Module):
             Q1 = self.Q[bin_idx + 1]            # (N, m, R_b)
             beta = torch.lerp(Q0, Q1, t.unsqueeze(-1))  # (N, m, R_b)
 
-        # Stage 3 — input-mode contraction: xi = V^T beta.  Output (N, R_i, R_b).
-        xi = torch.einsum("nmc, mb -> nbc", beta, self.V)
-
-        # Stage 4 — core contraction: eta = C : xi.  Output (N, R_o).
-        eta = torch.einsum("nbc, abc -> na", xi, self.C)
+        # Stages 3+4 — input-mode contraction (V) followed by core (C).
+        # Default path: two einsums (cuBLAS bmm + small tensor contraction).
+        # Fused path: precompute W = V·C once per forward, single GEMM.
+        if self.cfg.use_fused_vc:
+            # W[m, c, a] = sum_b V[m, b] * C[a, b, c]
+            #            -> shape (m, R_b, R_o), recomputed per forward.
+            # Then: eta[n, a] = sum_{m, c} beta[n, m, c] * W[m, c, a]
+            # which factors as one GEMM via reshape: (N, m*R_b) @ (m*R_b, R_o).
+            W = torch.einsum("mb, abc -> mca", self.V, self.C)
+            N = beta.shape[0]
+            eta = beta.reshape(N, -1) @ W.reshape(-1, self.cfg.R_o)
+        else:
+            # Stage 3 — input-mode contraction: xi = V^T beta.  Output (N, R_i, R_b).
+            xi = torch.einsum("nmc, mb -> nbc", beta, self.V)
+            # Stage 4 — core contraction: eta = C : xi.  Output (N, R_o).
+            eta = torch.einsum("nbc, abc -> na", xi, self.C)
 
         # Stage 5 — readout: y = gamma * U eta.  Output (N, d).
         y_flat = (eta @ self.U.t()) * self.gamma

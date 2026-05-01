@@ -36,3 +36,8 @@ outputs/
 
 # Vendored copy of nanochat (kept locally, not committed)
 nanochat/
+
+# Local-only working notes: results logs and in-flight redesign drafts.
+# Promote a specific file to the tree once it is ready to publish.
+docs/RESULTS_*.md
+docs/THEORY_v7_*.md
