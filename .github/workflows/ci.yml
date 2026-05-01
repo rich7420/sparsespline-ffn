@@ -47,6 +47,13 @@ jobs:
             --cov-report=xml \
             --cov-fail-under=80
 
+      - name: Doctest
+        run: |
+          python -m pytest --doctest-modules src/sparsespline_ffn \
+            --ignore=src/sparsespline_ffn/kernels \
+            --ignore=src/sparsespline_ffn/__main__.py \
+            -p no:cacheprovider
+
       - name: Upload coverage XML
         if: always()
         uses: actions/upload-artifact@v4

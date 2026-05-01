@@ -57,7 +57,19 @@ class MLPFFN(nn.Module):
 
 
 def should_replace_layer(layer_idx: int, num_layers: int, schedule: str = "all") -> bool:
-    """Return whether a zero-based transformer layer should use SparseSpline-FFN."""
+    """Return whether a zero-based transformer layer should use SparseSpline-FFN.
+
+    Examples
+    --------
+    >>> [should_replace_layer(i, 12, "late") for i in range(12)]
+    [False, False, False, False, False, False, True, True, True, True, True, True]
+    >>> [should_replace_layer(i, 8, "every2") for i in range(8)]
+    [True, False, True, False, True, False, True, False]
+    >>> should_replace_layer(0, 4, "none")
+    False
+    >>> should_replace_layer(0, 4, "all")
+    True
+    """
     if num_layers <= 0:
         raise ValueError(f"num_layers must be positive, got {num_layers}")
     if layer_idx < 0 or layer_idx >= num_layers:
@@ -97,8 +109,18 @@ def build_fullmix_tucker_ffn(
     grid_hi: float = 3.0,
     use_mixer: bool = True,
     bias_in_mixer: bool = False,
+    use_kernel: bool | str = False,
 ) -> FullMixTuckerFFN:
-    """Construct the reference FullMix-Tucker SparseSpline-FFN layer."""
+    """Construct the reference FullMix-Tucker SparseSpline-FFN layer.
+
+    ``use_kernel`` follows the tri-state semantics defined on
+    :class:`FullMixTuckerConfig`:
+
+      - ``False``     → form-B reference only (default).
+      - ``True``      → prefer Triton kernel; silent fallback on CPU /
+                        no-Triton.
+      - ``"required"`` → demand kernel; raise if it cannot run.
+    """
     if m is None:
         m = d
     cfg = FullMixTuckerConfig(
@@ -112,6 +134,7 @@ def build_fullmix_tucker_ffn(
         grid_hi=grid_hi,
         use_mixer=use_mixer,
         bias_in_mixer=bias_in_mixer,
+        use_kernel=use_kernel,
     )
     return FullMixTuckerFFN(cfg)
 

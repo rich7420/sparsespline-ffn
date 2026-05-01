@@ -27,6 +27,26 @@ if torch.cuda.is_available():
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
 
+
+def is_kernel_available() -> bool:
+    """Return True iff the optional Triton kernel can run on this machine.
+
+    Both conditions must hold:
+
+      - PyTorch reports CUDA available (``torch.cuda.is_available()``);
+      - the ``triton`` package is importable (``HAS_TRITON``).
+
+    Use this at the top of training scripts to decide whether to pass
+    ``use_kernel=True`` to ``build_ffn`` / ``FullMixTuckerConfig``.  When
+    this returns False, the form-B reference path is the only option and
+    the call is identical except slower.
+
+    ``HAS_TRITON`` reports just the import; ``is_kernel_available`` adds
+    the CUDA check, which is the actual runtime requirement.
+    """
+    return bool(HAS_TRITON and torch.cuda.is_available())
+
+
 __all__ = [
     "FullMixTuckerConfig",
     "FullMixTuckerFFN",
@@ -36,6 +56,7 @@ __all__ = [
     "build_ffn",
     "build_fullmix_tucker_ffn",
     "hosvd_warmstart_from_dense",
+    "is_kernel_available",
     "should_replace_layer",
 ]
 if HAS_TRITON:

@@ -10,6 +10,10 @@ python3 -m pytest \
     --cov=sparsespline_ffn \
     --cov-report=term-missing \
     --cov-fail-under=80
+python3 -m pytest --doctest-modules src/sparsespline_ffn \
+    --ignore=src/sparsespline_ffn/kernels \
+    --ignore=src/sparsespline_ffn/__main__.py \
+    -p no:cacheprovider
 python3 benchmarks/run_all.py --smoke
 python3 -m build
 python3 -m pip install --force-reinstall --no-deps dist/sparsespline_ffn-*.whl

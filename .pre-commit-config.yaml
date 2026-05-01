@@ -6,6 +6,18 @@ repos:
         args: [--fix]
       - id: ruff-format
 
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        # Use the package config (pyproject.toml [tool.mypy] / files=src).
+        # We pass an empty positional arg so mypy doesn't receive the
+        # changed-files list from pre-commit (we want it to use `files=`
+        # and run on the whole package, identical to `make typecheck`).
+        args: ["src"]
+        pass_filenames: false
+        additional_dependencies: ["torch>=2.3"]
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:

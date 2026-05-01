@@ -93,9 +93,16 @@ class FullMixTuckerConfig:
     grid_hi: float = 3.0
     use_mixer: bool = True
     bias_in_mixer: bool = False
-    # Route stage 2 through the Triton B1Lookup kernel.  Form-B reference is
-    # the permanent oracle; this is opt-in and falls back to form-B on CPU.
-    use_kernel: bool = False
+    # Route stage 2 through the Triton B1Lookup kernel.  Form-B is the
+    # permanent oracle; the kernel only changes wall-clock, never numerics
+    # within tolerance.  Tri-state semantics:
+    #   False        -> form-B reference only (default).
+    #   True         -> prefer kernel; silently fall back to form-B when
+    #                   CUDA or Triton is unavailable.
+    #   "required"   -> demand kernel; raise RuntimeError if unavailable
+    #                   (use this in production training where you do NOT
+    #                   want to silently lose the speedup).
+    use_kernel: bool | str = False
 
     def __post_init__(self) -> None:
         if self.m < self.d:
@@ -107,6 +114,14 @@ class FullMixTuckerConfig:
             raise ValueError(f"G={self.G} too small; need at least 2 intervals")
         if self.grid_hi <= self.grid_lo:
             raise ValueError(f"grid_hi ({self.grid_hi}) <= grid_lo ({self.grid_lo})")
+        if not (
+            isinstance(self.use_kernel, bool)
+            or self.use_kernel == "required"
+        ):
+            raise ValueError(
+                f"use_kernel must be bool or the string 'required', "
+                f"got {self.use_kernel!r}"
+            )
 
 
 class FullMixTuckerFFN(nn.Module):
@@ -210,10 +225,10 @@ class FullMixTuckerFFN(nn.Module):
         # For B1 only two basis are active per input scalar:
         #   beta = (1 - t) * Q[bin] + t * Q[bin+1]
         bin_idx, t = self._bin_and_frac(z)  # both (N, m)
-        if self.cfg.use_kernel and z.is_cuda:
-            # Triton path: bit-equivalent to form-B at bf16 (kernel consumes
-            # bin_idx/t produced by the form-B _bin_and_frac).
-            from sparsespline_ffn.kernels.b1_autograd import B1Lookup
+        if self._will_use_kernel(z):
+            # Triton path: matches form-B within the documented tolerance
+            # (fp32 ~1e-5, bf16 ~5e-3).  The form-B _bin_and_frac feeds it.
+            from sparsespline_ffn.kernels import B1Lookup
             beta = B1Lookup.apply(self.Q, bin_idx, t)  # (N, m, R_b)
         else:
             # Form-B reference path (the permanent oracle).
@@ -251,6 +266,61 @@ class FullMixTuckerFFN(nn.Module):
         # frac = u - bin_idx (cast back to z's dtype to keep autograd clean)
         frac = (u - bin_idx.to(u.dtype)).clamp_(min=0.0, max=1.0)
         return bin_idx, frac
+
+    # ------------------------------------------------------------------
+    # Kernel-path resolution — public so users can introspect
+    # ------------------------------------------------------------------
+
+    def _will_use_kernel(self, z: torch.Tensor) -> bool:
+        """Decide whether this forward will route through the Triton kernel.
+
+        Tri-state semantics for ``cfg.use_kernel``:
+
+          - ``False``      → never use kernel (form-B only).
+          - ``True``       → prefer kernel; fall back silently to form-B
+                             when CUDA or Triton is unavailable.
+          - ``"required"`` → demand kernel; raise RuntimeError if it
+                             cannot run for the given input.
+        """
+        setting = self.cfg.use_kernel
+        if setting is False:
+            return False
+
+        if not z.is_cuda:
+            if setting == "required":
+                raise RuntimeError(
+                    "FullMixTuckerConfig(use_kernel='required') but inputs "
+                    "are not on CUDA; the Triton kernel only runs on CUDA. "
+                    "Move the model and inputs to CUDA, or pass "
+                    "use_kernel=True for graceful fallback to form-B."
+                )
+            return False
+
+        # On CUDA: check Triton.
+        from sparsespline_ffn.kernels import HAS_TRITON
+        if not HAS_TRITON:
+            if setting == "required":
+                raise RuntimeError(
+                    "FullMixTuckerConfig(use_kernel='required') but Triton "
+                    "is not installed.  Install with "
+                    "`pip install sparsespline-ffn[cuda]`, or pass "
+                    "use_kernel=True for graceful fallback to form-B."
+                )
+            return False
+        return True
+
+    def kernel_will_run(self, x: torch.Tensor) -> bool:
+        """Public introspection: would ``self.forward(x)`` use the kernel?
+
+        Useful in training loops for logging which path is in use.  Mirrors
+        the same checks that ``forward`` performs but does not run anything
+        nor raise (treats ``"required"`` failures as ``False`` here, since
+        this is a passive query).
+        """
+        try:
+            return self._will_use_kernel(x)
+        except RuntimeError:
+            return False
 
     # ------------------------------------------------------------------
     # Diagnostics — used by tests and by training loops to verify F.4.b

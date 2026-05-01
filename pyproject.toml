@@ -95,6 +95,13 @@ ignore = ["E501", "B009", "B010"]
 # Triton kernels intentionally use single-letter loop indices (l, k, n)
 # that mirror the math notation (L, K, N) in THEORY.md.
 "src/sparsespline_ffn/kernels/*.py" = ["E741"]
+# Kernel correctness/audit benchmarks use compact ; / inline style
+# deliberately (PASS/FAIL one-liners, conditional skips around
+# torch.cuda checks).  These are diagnostic scripts, not library code.
+"benchmarks/kernel_audit.py" = ["E702", "E402", "B007", "I001"]
+# Kernel tests use in-function imports to skip safely when Triton is
+# absent; their multi-line import style is intentional.
+"tests/test_kernels.py" = ["I001"]
 
 [tool.mypy]
 python_version = "3.10"

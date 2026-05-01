@@ -50,6 +50,75 @@ ffn = build_ffn(
 )
 ```
 
+## Using the Triton kernel
+
+The PyTorch reference (`use_kernel=False`, default) is the permanent oracle —
+correct everywhere, slow on backward.  The optional Triton kernel
+accelerates the B1-spline lookup and its backward dQ scatter; it must
+match the reference within fp32 1e-5 / bf16 5e-3 (the K.0.1 contract).
+
+Install with the optional `[cuda]` extras to bring in Triton:
+
+```bash
+python -m pip install -e ".[dev,cuda]"
+```
+
+Opt in via `use_kernel`, which has tri-state semantics:
+
+| value         | behavior                                                         |
+|---------------|------------------------------------------------------------------|
+| `False`       | reference path always (default).                                 |
+| `True`        | prefer kernel; **silent fallback** to reference on CPU / no-Triton.|
+| `"required"`  | demand kernel; **raise RuntimeError** if it cannot run.           |
+
+```python
+from sparsespline_ffn import (
+    FullMixTuckerConfig, FullMixTuckerFFN,
+    build_ffn, is_kernel_available,
+)
+
+if is_kernel_available():
+    cfg = FullMixTuckerConfig(d=768, m=768, R_o=96, R_i=96, R_b=16, G=20,
+                              use_kernel=True)
+else:
+    cfg = FullMixTuckerConfig(d=768, m=768, R_o=96, R_i=96, R_b=16, G=20)
+
+ffn = FullMixTuckerFFN(cfg)
+# At forward time you can introspect the actual path:
+#   ffn.kernel_will_run(x)  -> True iff the Triton path will be taken
+```
+
+Use `"required"` in production training where you do **not** want to
+silently lose the speedup if Triton is missing or the model is on CPU:
+
+```python
+ffn = build_ffn(
+    ffn_type="fullmix_tucker", d=768, layer_idx=6, num_layers=12,
+    schedule="late", R_o=96, R_i=96, R_b=16, G=20,
+    use_kernel="required",
+)
+```
+
+Saving / loading checkpoints does not depend on the kernel — `state_dict`
+contains parameters only, so a model trained with `use_kernel=True` can
+be loaded into a layer with `use_kernel=False` and vice versa without
+any conversion.
+
+## CLI: `python -m sparsespline_ffn`
+
+A small diagnostic CLI is provided for sanity-checking installs, bug
+reports, and capacity planning.  Three subcommands:
+
+```bash
+python -m sparsespline_ffn               # version + runtime + kernel availability
+python -m sparsespline_ffn check-kernel  # actually runs the kernel end-to-end
+python -m sparsespline_ffn config --d 768 --R_o 96 --R_i 96 --R_b 16
+                                          # prints parameter / MAC counts vs MLP
+```
+
+`check-kernel` exits 0 if the Triton path runs end-to-end on this machine
+and 1 otherwise — useful in CI and bug reports.
+
 ## Recommended Project Boundary
 
 This repository should own:

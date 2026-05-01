@@ -1,4 +1,4 @@
-.PHONY: install install-dev lint typecheck test build smoke-dist check bench bench-smoke clean clean-runs
+.PHONY: install install-dev lint typecheck test doctest build smoke-dist check bench bench-smoke clean clean-runs
 
 PYTHON ?= python3
 COVERAGE_FILE ?= /tmp/sparsespline_ffn.coverage
@@ -21,6 +21,14 @@ test:
 	  --cov-report=term-missing \
 	  --cov-fail-under=80
 
+# Doctests live in module docstrings.  ``kernels/`` is excluded because it
+# depends on Triton being installed (collection imports the module).
+doctest:
+	$(PYTHON) -m pytest --doctest-modules src/sparsespline_ffn \
+	  --ignore=src/sparsespline_ffn/kernels \
+	  --ignore=src/sparsespline_ffn/__main__.py \
+	  -p no:cacheprovider
+
 build:
 	$(PYTHON) -m build
 
@@ -34,7 +42,7 @@ bench:
 bench-smoke:
 	$(PYTHON) benchmarks/run_all.py --smoke
 
-check: lint typecheck test bench-smoke smoke-dist
+check: lint typecheck test doctest bench-smoke smoke-dist
 
 clean:
 	rm -rf build dist *.egg-info src/*.egg-info .pytest_cache .ruff_cache htmlcov .coverage coverage.xml

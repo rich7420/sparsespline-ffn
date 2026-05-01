@@ -1,0 +1,23 @@
+# GitHub CODEOWNERS — auto-request review on PRs touching these paths.
+#
+# This file is best-effort: GitHub uses the LAST matching pattern, so
+# more specific rules go below the fallback.
+
+# Default owner for everything in the repo.
+*                                       @rich7420
+
+# Library surface — any change here ships to users.
+/src/sparsespline_ffn/                  @rich7420
+/src/sparsespline_ffn/kernels/          @rich7420
+
+# Theory + architecture docs (treat as load-bearing).
+/docs/                                  @rich7420
+
+# Public-API tests pin the user contract; review carefully.
+/tests/test_kernel_api.py               @rich7420
+/tests/test_integrations.py             @rich7420
+
+# CI / packaging plumbing.
+/.github/                               @rich7420
+/pyproject.toml                         @rich7420
+/Makefile                               @rich7420
