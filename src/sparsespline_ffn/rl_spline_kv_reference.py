@@ -45,6 +45,8 @@ class RLSplineKVConfig:
     use_kernel: bool = False               # B2 only: route through FlashSplineFeature
                                             # kernel — saves ~600 MB/layer activations
     bwd_kernel: str = "triton"             # "triton" | "hopper_cuda" | "wgmma_cuda"
+    fwd_kernel: str = "auto"               # "auto" (CUDA when eligible) | "triton" | "wgmma_cuda"
+    no_base: bool = False                  # Plan A: drop ReLU² base, pure-spline FFN
 
     def __post_init__(self) -> None:
         if self.G < 2:
@@ -212,7 +214,10 @@ class RLSplineKVReference(nn.Module):
 
         self.K = nn.Linear(d, h, bias=cfg.bias)
         self.C = nn.Parameter(torch.empty(h, L, cfg.r))
-        self.W_out = nn.Linear(h + cfg.r, d, bias=cfg.bias)
+        # Plan A: when no_base=True, W_out only receives the spline residual
+        # (no [a; λδ] cat), so its input dim is r, not h+r.
+        wout_in = cfg.r if cfg.no_base else (h + cfg.r)
+        self.W_out = nn.Linear(wout_in, d, bias=cfg.bias)
 
         self.register_buffer("grid_lo_buf", torch.tensor(float(cfg.grid_lo)))
         self.register_buffer("grid_hi_buf", torch.tensor(float(cfg.grid_hi)))
@@ -224,16 +229,24 @@ class RLSplineKVReference(nn.Module):
         self._init_parameters()
 
     def _init_parameters(self) -> None:
-        """v7 §R.5 init: K Kaiming, W_out Xavier-like, C zero."""
+        """v7 §R.5 init: K Kaiming, W_out Xavier-like, C zero (or non-zero)."""
         d = self.cfg.d
-        # nanochat-style sqrt(3/d) uniform for both linears
+        # nanochat-style sqrt(3/d) uniform
         s_in = (3.0 / d) ** 0.5
-        s_h = (3.0 / (self.h + self.cfg.r)) ** 0.5
+        wout_in = self.cfg.r if self.cfg.no_base else (self.h + self.cfg.r)
+        s_h = (3.0 / wout_in) ** 0.5
         nn.init.uniform_(self.K.weight, -s_in, s_in)
-        # W_out: Xavier-style with non-zero spline columns (so gradient
-        # flows into C from step 0 — see v7 §R.5).
         nn.init.uniform_(self.W_out.weight, -s_h, s_h)
-        # C: zero init for soft cold-start (delta=0 at step 0 but dC nonzero)
+        # C: zero init for soft cold-start (delta=0 at step 0 but dC nonzero
+        # through W_out_d gradient — works for BOTH with-base and no_base):
+        #   no_base zero-C cold-start:
+        #     y = W_out_d @ (λ·0) = 0  at step 1
+        #     dL/dy != 0 (from MSE/CE loss)
+        #     dL/dδ = W_out_d^T @ dL/dy != 0  (W_out_d random init)
+        #     dL/dC[j,b,r] = B_b(z_j) * dL/dδ[r] != 0  → C learns from step 1
+        #     dL/dW_out_d = δ^T @ dL/dy = 0 at step 1, but unblocks at step 2
+        #   So zero-C is correct for no_base too — earlier code force-non-zero
+        #   was based on a wrong analysis (Plan A Fix 1).
         if self.cfg.init_C_zero:
             with torch.no_grad():
                 self.C.zero_()
@@ -248,7 +261,22 @@ class RLSplineKVReference(nn.Module):
         x_flat = x.reshape(-1, d)
 
         z = self.K(x_flat)                              # [N, h]
-        if (self.cfg.use_kernel and self.cfg.spline_order == 2
+        if self.cfg.no_base:
+            # Plan A — pure-spline FFN.  W_out is Linear(r, d).
+            from sparsespline_ffn.kernels.flash_spline_feature_autograd import (
+                FlashSplineDelta as _FD,
+            )
+            if self.cfg.spline_order != 2:
+                raise NotImplementedError("no_base currently requires spline_order=2")
+            delta = _FD.apply(
+                z, self.C,
+                float(self.cfg.grid_lo), float(self.cfg.grid_hi),
+                int(self.cfg.G), float(self.cfg.lambda_scale),
+                self.cfg.bwd_kernel,
+            )                                           # [N, r]
+            f = delta                                   # alias for diag below
+            y = self.W_out(delta)                       # [N, d]
+        elif (self.cfg.use_kernel and self.cfg.spline_order == 2
                 and z.is_cuda):
             from sparsespline_ffn.kernels.flash_spline_feature_autograd import (
                 FlashSplineFeature as _FF,
@@ -259,7 +287,9 @@ class RLSplineKVReference(nn.Module):
                 int(self.cfg.G), self.cfg.activation,
                 float(self.cfg.lambda_scale), True,
                 self.cfg.bwd_kernel,
+                getattr(self.cfg, "fwd_kernel", "auto"),  # default = native CUDA
             )                                           # [N, h+r]
+            y = self.W_out(f)                           # [N, d]
         else:
             f = flash_spline_feature_reference(
                 z, self.C,
@@ -270,27 +300,40 @@ class RLSplineKVReference(nn.Module):
                 lambda_scale=float(self.cfg.lambda_scale),
                 spline_order=int(self.cfg.spline_order),
             )                                           # [N, h+r]
-        y = self.W_out(f)                               # [N, d]
+            y = self.W_out(f)                           # [N, d]
         # Stash diagnostics (no grad path) — used by training loop hooks.
         if not self.training or self._diag_enabled:
             with torch.no_grad():
-                base = f[:, : self.h].float()
-                delta = f[:, self.h:].float()
                 G = int(self.cfg.G)
-                # ρ_δ = RMS(W_δ · λδ) / RMS(W_a · a)  — v7 §R.1.4 metric.
-                # Split W_out along input axis: cols [:h] = W_a, [h:] = W_δ.
-                W_a = self.W_out.weight[:, :self.h].float()
-                W_d = self.W_out.weight[:, self.h:].float()
-                ya = base @ W_a.T            # [N, d]
-                yd = delta @ W_d.T           # [N, d] (delta already includes λ)
-                rms_a = float(ya.pow(2).mean().sqrt().item())
-                rms_d = float(yd.pow(2).mean().sqrt().item())
-                # W_out grad split: cols [:h] = W_a, [h:] = W_δ
-                W_out_grad = self.W_out.weight.grad
-                w_a_grad_norm = (W_out_grad[:, :self.h].detach().norm().item()
-                                 if W_out_grad is not None else 0.0)
-                w_d_grad_norm = (W_out_grad[:, self.h:].detach().norm().item()
-                                 if W_out_grad is not None else 0.0)
+                if self.cfg.no_base:
+                    # Plan A — no base path; f is delta [N, r] only.
+                    base = torch.zeros_like(f[:, :0])
+                    delta = f.float()
+                    W_d = self.W_out.weight.float()         # [d, r]
+                    rms_a = 0.0
+                    yd = delta @ W_d.T
+                    rms_d = float(yd.pow(2).mean().sqrt().item())
+                    W_out_grad = self.W_out.weight.grad
+                    w_a_grad_norm = 0.0
+                    w_d_grad_norm = (W_out_grad.detach().norm().item()
+                                     if W_out_grad is not None else 0.0)
+                else:
+                    base = f[:, : self.h].float()
+                    delta = f[:, self.h:].float()
+                    # ρ_δ = RMS(W_δ · λδ) / RMS(W_a · a)  — v7 §R.1.4 metric.
+                    # Split W_out along input axis: cols [:h] = W_a, [h:] = W_δ.
+                    W_a = self.W_out.weight[:, :self.h].float()
+                    W_d = self.W_out.weight[:, self.h:].float()
+                    ya = base @ W_a.T            # [N, d]
+                    yd = delta @ W_d.T           # [N, d] (delta already includes λ)
+                    rms_a = float(ya.pow(2).mean().sqrt().item())
+                    rms_d = float(yd.pow(2).mean().sqrt().item())
+                    # W_out grad split: cols [:h] = W_a, [h:] = W_δ
+                    W_out_grad = self.W_out.weight.grad
+                    w_a_grad_norm = (W_out_grad[:, :self.h].detach().norm().item()
+                                     if W_out_grad is not None else 0.0)
+                    w_d_grad_norm = (W_out_grad[:, self.h:].detach().norm().item()
+                                     if W_out_grad is not None else 0.0)
                 self._diag = {
                     "C_norm":    float(self.C.detach().norm().item()),
                     "C_grad_norm": float(self.C.grad.detach().norm().item())
@@ -307,16 +350,18 @@ class RLSplineKVReference(nn.Module):
                 bin_idx, _, in_range_mask = _bin_diag(
                     z, float(self.cfg.grid_lo), float(self.cfg.grid_hi), G,
                 )
-                hist = torch.bincount(bin_idx.flatten(), minlength=G).float()
+                valid_bins = bin_idx[in_range_mask & torch.isfinite(z)]
+                valid_bins = valid_bins[(valid_bins >= 0) & (valid_bins < G)]
+                hist = torch.bincount(valid_bins.flatten(), minlength=G).float()
                 p = hist / hist.sum().clamp_min(1.0)
                 entropy = -(p * (p + 1e-12).log()).sum().item()
                 edge_count = (
-                    (bin_idx == 0).sum().item()
-                    + (bin_idx == G - 1).sum().item()
+                    (valid_bins == 0).sum().item()
+                    + (valid_bins == G - 1).sum().item()
                 )
                 self._diag["bin_entropy"] = float(entropy)
                 self._diag["bin_entropy_norm"] = float(entropy / max(1e-9, math.log(G)))
-                self._diag["edge_bin_frac"] = float(edge_count) / max(1, bin_idx.numel())
+                self._diag["edge_bin_frac"] = float(edge_count) / max(1, valid_bins.numel())
                 self._diag["active_frac"] = float(in_range_mask.float().mean().item())
         return y.reshape(original_shape)
 

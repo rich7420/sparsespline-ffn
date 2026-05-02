@@ -17,6 +17,7 @@ _EXT_V1 = None
 _EXT_V2 = None
 _EXT_V3 = None
 _EXT_V4 = None  # wgmma — sm_90 only
+_EXT_FWD = None  # native CUDA forward (sm_80+)
 
 
 def _load(name: str, source: str):
@@ -125,7 +126,9 @@ def spline_kv_bwd_wmma_cuda(z, C, g_delta, grid_lo, grid_hi, G):
     return dC, dz
 
 
-def spline_kv_bwd_wgmma_cuda(z, C, g_delta, grid_lo, grid_hi, G):
+def spline_kv_bwd_wgmma_cuda(z, C, g_delta, grid_lo, grid_hi, G,
+                             g_a=None, activation: str = "relu_sq",
+                             fused_post: bool = False):
     """v4 Hopper-only: wgmma m64n32k16 + cp.async + no-SMEM-dC."""
     if not (z.is_cuda and C.is_cuda and g_delta.is_cuda):
         raise RuntimeError("CUDA-only")
@@ -135,12 +138,95 @@ def spline_kv_bwd_wgmma_cuda(z, C, g_delta, grid_lo, grid_hi, G):
     if H_C != H or L != G + 2:
         raise ValueError("shape mismatch")
     scale = G / (grid_hi - grid_lo)
+    if fused_post:
+        if g_a is None:
+            raise ValueError("fused_post requires g_a")
+        if activation not in {"relu_sq", "identity"}:
+            raise ValueError(f"unsupported fused activation: {activation}")
+        if g_a.dtype != torch.bfloat16:
+            g_a = g_a.to(torch.bfloat16)
+        g_a = g_a.contiguous()
+        activation_id = 0 if activation == "relu_sq" else 2
+        return get_ext_v4().spline_kv_bwd_wgmma_cuda_fused(
+            z, C, g_delta, g_a, float(grid_lo), float(scale), activation_id
+        )
     dC = torch.zeros((H, L, R), device=z.device, dtype=torch.float32)
     dz = torch.zeros((N, H), device=z.device, dtype=torch.float32)
     get_ext_v4().spline_kv_bwd_wgmma_cuda(
         z, C, g_delta, dC, dz, float(grid_lo), float(scale)
     )
     return dC, dz
+
+
+def get_ext_fwd():
+    """Native CUDA forward (sm_80+, scalar atomic-add v4 port)."""
+    global _EXT_FWD
+    if _EXT_FWD is None:
+        _EXT_FWD = _load("spline_kv_fwd_cuda_ext", "spline_kv_fwd.cu")
+    return _EXT_FWD
+
+
+def spline_kv_fwd_cuda(z, C, grid_lo, grid_hi, G,
+                        activation: str = "relu_sq",
+                        lambda_scale: float = 1.0):
+    """Native CUDA forward — port of triton flash_spline_feature v4.
+
+    Returns f [N, h+r] bf16, with f[:, :h] = activation(z) and
+    f[:, h:h+r] = lambda * delta(z, C). Internally uses cudaMemsetAsync to
+    init the fp32 atomic accumulator so the call is CUDA-Graph-safe.
+    """
+    if not (z.is_cuda and C.is_cuda):
+        raise RuntimeError("CUDA-only")
+    if z.dtype != torch.bfloat16:
+        z = z.to(torch.bfloat16)
+    if C.dtype != torch.bfloat16:
+        C = C.to(torch.bfloat16)
+    z = z.contiguous(); C = C.contiguous()
+    N, H = z.shape
+    H_C, L, R = C.shape
+    if H_C != H or L != G + 2:
+        raise ValueError(f"shape mismatch: z={tuple(z.shape)} C={tuple(C.shape)} G={G}")
+    if activation not in {"relu_sq", "identity"}:
+        raise ValueError(f"unsupported activation: {activation}")
+    activation_id = 0 if activation == "relu_sq" else 2
+    scale = G / (grid_hi - grid_lo)
+    return get_ext_fwd().spline_kv_fwd_cuda(
+        z, C, float(grid_lo), float(scale), float(lambda_scale),
+        int(activation_id),
+    )
+
+
+def spline_kv_fwd_fused_cuda(z, C, W_out, grid_lo, grid_hi, G,
+                              activation: str = "relu_sq",
+                              lambda_scale: float = 1.0):
+    """Fused forward + W_out matmul.
+
+    Returns y = a @ W_out_a^T + lambda * delta @ W_out_d^T  [N, d_out].
+    Eliminates the [N, h+r] f tensor materialization.
+    """
+    if not (z.is_cuda and C.is_cuda and W_out.is_cuda):
+        raise RuntimeError("CUDA-only")
+    if z.dtype != torch.bfloat16:
+        z = z.to(torch.bfloat16)
+    if C.dtype != torch.bfloat16:
+        C = C.to(torch.bfloat16)
+    if W_out.dtype != torch.bfloat16:
+        W_out = W_out.to(torch.bfloat16)
+    z = z.contiguous(); C = C.contiguous(); W_out = W_out.contiguous()
+    N, H = z.shape
+    H_C, L, R = C.shape
+    if H_C != H or L != G + 2:
+        raise ValueError(f"shape mismatch: z={tuple(z.shape)} C={tuple(C.shape)} G={G}")
+    if W_out.shape[1] != H + R:
+        raise ValueError(f"W_out cols {W_out.shape[1]} != H+R={H+R}")
+    if activation not in {"relu_sq", "identity"}:
+        raise ValueError(f"unsupported activation: {activation}")
+    activation_id = 0 if activation == "relu_sq" else 2
+    scale = G / (grid_hi - grid_lo)
+    return get_ext_fwd().spline_kv_fwd_fused_cuda(
+        z, C, W_out, float(grid_lo), float(scale), float(lambda_scale),
+        int(activation_id),
+    )
 
 
 def spline_kv_bwd_hopper_cuda(z, C, g_delta, grid_lo, grid_hi, G):
@@ -166,8 +252,11 @@ __all__ = [
     "spline_kv_bwd_wmma_cuda",
     "spline_kv_bwd_hopper_cuda",
     "spline_kv_bwd_wgmma_cuda",
+    "spline_kv_fwd_cuda",
+    "spline_kv_fwd_fused_cuda",
     "get_ext_v1",
     "get_ext_v2",
     "get_ext_v3",
     "get_ext_v4",
+    "get_ext_fwd",
 ]

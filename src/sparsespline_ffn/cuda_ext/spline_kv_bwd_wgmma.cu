@@ -25,6 +25,8 @@
 #include <cuda_bf16.h>
 #include <torch/extension.h>
 #include <c10/cuda/CUDAException.h>
+#include <c10/cuda/CUDAStream.h>
+#include <vector>
 
 namespace {
 
@@ -400,13 +402,45 @@ spline_kv_bwd_wgmma_kernel(
     }
 }
 
+__global__ void spline_kv_bwd_postprocess_kernel(
+    const __nv_bfloat16* __restrict__ z,
+    const __nv_bfloat16* __restrict__ g_a,
+    const float* __restrict__ dC_accum,
+    const float* __restrict__ dz_spline,
+    __nv_bfloat16* __restrict__ dC_out,
+    __nv_bfloat16* __restrict__ dz_out,
+    const int total_dz,
+    const int total_dC,
+    const int activation
+) {
+    const int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx < total_dC) {
+        dC_out[idx] = f2bf(dC_accum[idx]);
+    }
+    if (idx < total_dz) {
+        const float z_val = bf2f(z[idx]);
+        const float g_val = bf2f(g_a[idx]);
+        __nv_bfloat16 phi_prime_bf;
+        if (activation == 0) {          // relu_sq
+            phi_prime_bf = f2bf((z_val > 0.0f) ? (2.0f * z_val) : 0.0f);
+        } else if (activation == 2) {   // identity
+            phi_prime_bf = f2bf(1.0f);
+        } else {
+            phi_prime_bf = f2bf(1.0f);
+        }
+        const __nv_bfloat16 dz_base_bf = f2bf(g_val * bf2f(phi_prime_bf));
+        dz_out[idx] = f2bf(bf2f(dz_base_bf) + dz_spline[idx]);
+    }
+}
+
 #define LAUNCH_BWD_WGMMA(BN, BH, LP, RR) \
     do { \
         const int blocks_n = (N + (BN) - 1) / (BN); \
         const int blocks_h = (H + (BH) - 1) / (BH); \
         dim3 grid(blocks_n, blocks_h, 1); \
         dim3 block(128, 1, 1); \
-        spline_kv_bwd_wgmma_kernel<BN, BH, LP, RR><<<grid, block>>>( \
+        auto stream = c10::cuda::getCurrentCUDAStream(); \
+        spline_kv_bwd_wgmma_kernel<BN, BH, LP, RR><<<grid, block, 0, stream>>>( \
             (const __nv_bfloat16*)z_ptr, \
             (const __nv_bfloat16*)C_ptr, \
             (const __nv_bfloat16*)g_delta_ptr, \
@@ -445,18 +479,102 @@ void spline_kv_bwd_wgmma_cuda(
     // Production shapes — L_PAD chosen so M=BH*L_PAD is multiple of 64.
     //   L=16 → L_PAD=16, M=128 (BH=8); 128/64=2 m-tiles
     //   L=22 → L_PAD=24, M=192 (BH=8); 192/64=3 m-tiles
+    //   L=32 → L_PAD=32, M=256 (BH=8); 256/64=4 m-tiles
+    //
+    // Round 3 reverted: BN=256 hurt due to occupancy drop (1 block/SM at
+    // 124 KB SMEM).  Round 3 result: 18.3s vs baseline 17.20s — atomic
+    // contention reduction not worth occupancy loss.  Keep BN=128.
     if (R == 32 && L == 22) {
-        LAUNCH_BWD_WGMMA(64, 8, 24, 32);
+        LAUNCH_BWD_WGMMA(128, 8, 24, 32);
     } else if (R == 32 && L == 16) {
-        LAUNCH_BWD_WGMMA(64, 8, 16, 32);
+        LAUNCH_BWD_WGMMA(128, 8, 16, 32);
+    } else if (R == 32 && L == 32) {
+        LAUNCH_BWD_WGMMA(128, 8, 32, 32);
     } else if (R == 64 && L == 22) {
-        LAUNCH_BWD_WGMMA(64, 8, 24, 64);
+        LAUNCH_BWD_WGMMA(128, 8, 24, 64);
     } else if (R == 64 && L == 16) {
-        LAUNCH_BWD_WGMMA(64, 8, 16, 64);
+        LAUNCH_BWD_WGMMA(128, 8, 16, 64);
+    } else if (R == 64 && L == 32) {
+        LAUNCH_BWD_WGMMA(128, 8, 32, 64);
     } else {
         TORCH_CHECK(false, "unsupported (R, L) — extend dispatch");
     }
     C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+
+std::vector<torch::Tensor> spline_kv_bwd_wgmma_cuda_fused(
+    const torch::Tensor& z,
+    const torch::Tensor& C,
+    const torch::Tensor& g_delta,
+    const torch::Tensor& g_a,
+    double grid_lo,
+    double scale,
+    int64_t activation
+) {
+    TORCH_CHECK(z.is_cuda() && C.is_cuda() && g_delta.is_cuda() && g_a.is_cuda());
+    TORCH_CHECK(z.dtype() == torch::kBFloat16
+                && C.dtype() == torch::kBFloat16
+                && g_delta.dtype() == torch::kBFloat16
+                && g_a.dtype() == torch::kBFloat16);
+    TORCH_CHECK(z.is_contiguous() && C.is_contiguous()
+                && g_delta.is_contiguous() && g_a.is_contiguous());
+
+    const int N = z.size(0);
+    const int H = z.size(1);
+    const int L = C.size(1);
+    const int R = C.size(2);
+    TORCH_CHECK(g_a.size(0) == N && g_a.size(1) == H);
+
+    auto accum_opts = torch::TensorOptions().device(z.device()).dtype(torch::kFloat32);
+    auto out_opts = torch::TensorOptions().device(z.device()).dtype(torch::kBFloat16);
+    torch::Tensor dC_accum = torch::zeros({H, L, R}, accum_opts);
+    torch::Tensor dz_accum = torch::zeros({N, H}, accum_opts);
+    torch::Tensor dC_out = torch::empty({H, L, R}, out_opts);
+    torch::Tensor dz_out = torch::empty({N, H}, out_opts);
+
+    void* z_ptr       = z.data_ptr();
+    void* C_ptr       = C.data_ptr();
+    void* g_delta_ptr = g_delta.data_ptr();
+    float* dC_ptr     = dC_accum.data_ptr<float>();
+    float* dz_ptr     = dz_accum.data_ptr<float>();
+
+    // BN=128 across all configs (Round 3 BN=256 reverted — occupancy loss
+    // outweighed atomic-contention reduction benefit).
+    if (R == 32 && L == 22) {
+        LAUNCH_BWD_WGMMA(128, 8, 24, 32);
+    } else if (R == 32 && L == 16) {
+        LAUNCH_BWD_WGMMA(128, 8, 16, 32);
+    } else if (R == 32 && L == 32) {
+        LAUNCH_BWD_WGMMA(128, 8, 32, 32);
+    } else if (R == 64 && L == 22) {
+        LAUNCH_BWD_WGMMA(128, 8, 24, 64);
+    } else if (R == 64 && L == 16) {
+        LAUNCH_BWD_WGMMA(128, 8, 16, 64);
+    } else if (R == 64 && L == 32) {
+        LAUNCH_BWD_WGMMA(128, 8, 32, 64);
+    } else {
+        TORCH_CHECK(false, "unsupported (R, L) — extend dispatch");
+    }
+
+    const int total_dz = N * H;
+    const int total_dC = H * L * R;
+    const int total = total_dz > total_dC ? total_dz : total_dC;
+    const int threads = 256;
+    const int blocks = (total + threads - 1) / threads;
+    auto post_stream = c10::cuda::getCurrentCUDAStream();
+    spline_kv_bwd_postprocess_kernel<<<blocks, threads, 0, post_stream>>>(
+        (const __nv_bfloat16*)z.data_ptr(),
+        (const __nv_bfloat16*)g_a.data_ptr(),
+        dC_accum.data_ptr<float>(),
+        dz_accum.data_ptr<float>(),
+        (__nv_bfloat16*)dC_out.data_ptr(),
+        (__nv_bfloat16*)dz_out.data_ptr(),
+        total_dz,
+        total_dC,
+        (int)activation
+    );
+    C10_CUDA_KERNEL_LAUNCH_CHECK();
+    return {dC_out, dz_out};
 }
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
@@ -465,4 +583,8 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
           py::arg("z"), py::arg("C"), py::arg("g_delta"),
           py::arg("dC"), py::arg("dz"),
           py::arg("grid_lo"), py::arg("scale"));
+    m.def("spline_kv_bwd_wgmma_cuda_fused", &spline_kv_bwd_wgmma_cuda_fused,
+          "FlashSplineFeature backward fused postprocess (Hopper wgmma + cp.async)",
+          py::arg("z"), py::arg("C"), py::arg("g_delta"), py::arg("g_a"),
+          py::arg("grid_lo"), py::arg("scale"), py::arg("activation"));
 }

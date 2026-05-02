@@ -369,6 +369,67 @@ def flash_spline_delta_forward_v4(
     return delta
 
 
+# -----------------------------------------------------------------------
+# Fused multiply-and-cast pack kernel (Plan A Round 1).
+# Replaces `(delta_fp32 * lambda_scale).to(bf16)` two-launch sequence with
+# one Triton kernel: reads fp32, multiplies, casts, writes bf16.
+# -----------------------------------------------------------------------
+@triton.jit
+def _pack_with_lambda_cast_v1(
+    src_fp32_ptr, dst_bf16_ptr, lambda_scale, total_elems,
+    BLOCK: tl.constexpr,
+):
+    pid = tl.program_id(0)
+    offs = pid * BLOCK + tl.arange(0, BLOCK)
+    mask = offs < total_elems
+    val = tl.load(src_fp32_ptr + offs, mask=mask, other=0.0)
+    val = val * lambda_scale
+    tl.store(dst_bf16_ptr + offs, val.to(tl.bfloat16), mask=mask)
+
+
+def flash_spline_delta_forward_v4_packed(
+    z: torch.Tensor, C: torch.Tensor,
+    grid_lo: float, grid_hi: float, G: int,
+    lambda_scale: float = 1.0,
+) -> torch.Tensor:
+    """Plan A Round 1: v4 delta + fused pack (multiply * lambda + cast bf16)
+    in one Triton kernel.  Returns bf16 [N, r] directly — no Python-side
+    multiply + cast needed, saves 1 kernel launch per layer.
+    """
+    if not z.is_cuda or not C.is_cuda:
+        raise RuntimeError("flash_spline_delta_forward_v4_packed needs CUDA tensors")
+    N, h = z.shape
+    h_C, L, r = C.shape
+    if h != h_C or L != G + 2:
+        raise ValueError("shape mismatch")
+    z_c = z.contiguous(); C_c = C.contiguous()
+    # fp32 scratch — atomic_add accumulator
+    delta_fp32 = torch.zeros((N, r), device=z.device, dtype=torch.float32)
+    # bf16 final output
+    delta_bf16 = torch.empty((N, r), device=z.device, dtype=torch.bfloat16)
+
+    BLOCK_R = max(16, triton.next_power_of_2(r))
+    scale_val = G / (grid_hi - grid_lo)
+    grid = lambda meta: (triton.cdiv(N, meta["BLOCK_N"]),
+                         triton.cdiv(r, BLOCK_R),
+                         triton.cdiv(h, meta["BLOCK_H"]))
+    _flash_spline_feature_delta_fwd_v4[grid](
+        z_c, C_c, delta_fp32,
+        float(grid_lo), float(scale_val), float(G),
+        N, h, r, L,
+        BLOCK_R=BLOCK_R,
+    )
+
+    total = N * r
+    PACK_BLOCK = 1024
+    pack_grid = (triton.cdiv(total, PACK_BLOCK),)
+    _pack_with_lambda_cast_v1[pack_grid](
+        delta_fp32, delta_bf16, float(lambda_scale), total,
+        BLOCK=PACK_BLOCK,
+    )
+    return delta_bf16
+
+
 @triton.autotune(configs=_autotune_fwd_v4_configs(), key=["N", "h", "r", "L"])
 @triton.jit
 def _flash_spline_feature_delta_fwd_v5(

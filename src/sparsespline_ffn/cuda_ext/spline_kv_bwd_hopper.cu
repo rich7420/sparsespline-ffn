@@ -19,6 +19,7 @@
 #include <mma.h>
 #include <torch/extension.h>
 #include <c10/cuda/CUDAException.h>
+#include <c10/cuda/CUDAStream.h>
 
 using namespace nvcuda;
 
@@ -304,7 +305,8 @@ spline_kv_bwd_hopper_kernel(
         const int blocks_h = (H + (BH) - 1) / (BH); \
         dim3 grid(blocks_n, blocks_h, 1); \
         dim3 block(128, 1, 1); \
-        spline_kv_bwd_hopper_kernel<BN, BH, LP, RR><<<grid, block>>>( \
+        auto stream = c10::cuda::getCurrentCUDAStream(); \
+        spline_kv_bwd_hopper_kernel<BN, BH, LP, RR><<<grid, block, 0, stream>>>( \
             (const __nv_bfloat16*)z_ptr, \
             (const __nv_bfloat16*)C_ptr, \
             (const __nv_bfloat16*)g_delta_ptr, \
