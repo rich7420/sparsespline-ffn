@@ -1,0 +1,306 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-1YIOU3DFU3TPCSQUvdjdU0
+Building image im-LjdHezvQbNjLjxfdCJyj8I
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 839.13ms
+
+Built image im-LjdHezvQbNjLjxfdCJyj8I in 4.42s
+
+
+Building image im-WbI0gU3Kn6dw1Q45dQp9Mf
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-slqm8l66/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 688.73ms
+
+Built image im-WbI0gU3Kn6dw1Q45dQp9Mf in 9.60s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+├── 🔨 Created function run_d20_1gpu.
+└── 🔨 Created function run_d20_8gpu.
+[launcher] mode=rlkv_pilot_1B_diag  run_tag=rlkv_pilot_1B_diag_runA_grid5_lwarmup  ffn_type=rl_kv_b2
+[launcher] base_train.py args: ['--depth=20', '--device-batch-size=32', '--total-batch-size=524288', '--max-seq-len=2048', '--eval-tokens=10485760', '--run=dummy', '--model-tag=rlkv_pilot_1B_diag_runA_grid5_lwarmup', '--ffn-type', 'rl_kv_b2', '--rlkv-h-ratio', '2.0', '--rlkv-r', '32', '--rlkv-L', '22', '--rlkv-fwd-kernel', 'v11_cuda', '--rlkv-bwd-kernel', 'triton', '--rlkv-grid-lo', '-5.0', '--rlkv-grid-hi', '5.0', '--rlkv-lambda-warmup-steps', '1000', '--rlkv-lambda-warmup-lo', '0.25', '--c-lr', '0.02', '--c-weight-decay', '0.0', '--device-batch-size=16', '--num-iterations=1900', '--eval-every=200', '--core-metric-every=1000', '--core-metric-max-per-task=50', '--save-every=-1', '--rlkv-diagnostics-every=200']
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[launcher] CMD: torchrun --standalone --nproc_per_node=8 -m scripts.base_train -- --depth=20 --device-batch-size=32 --total-batch-size=524288 --max-seq-len=2048 --eval-tokens=10485760 --run=dummy --model-tag=rlkv_pilot_1B_diag_runA_grid5_lwarmup --ffn-type rl_kv_b2 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-L 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0 --device-batch-size=16 --num-iterations=1900 --eval-every=200 --core-metric-every=1000 --core-metric-max-per-task=50 --save-every=-1 --rlkv-diagnostics-every=200
+[launcher] cwd=/repo/nanochat  num_gpus=8
+
+                                                       █████                █████
+                                                      ░░███                ░░███
+     ████████    ██████   ████████    ██████   ██████  ░███████    ██████  ███████
+    ░░███░░███  ░░░░░███ ░░███░░███  ███░░███ ███░░███ ░███░░███  ░░░░░███░░░███░
+     ░███ ░███   ███████  ░███ ░███ ░███ ░███░███ ░░░  ░███ ░███   ███████  ░███
+     ░███ ░███  ███░░███  ░███ ░███ ░███ ░███░███  ███ ░███ ░███  ███░░███  ░███ ███
+     ████ █████░░████████ ████ █████░░██████ ░░██████  ████ █████░░███████  ░░█████
+    ░░░░ ░░░░░  ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░░░░   ░░░░░
+    
+Autodetected device type: cuda
+2026-05-03 12:26:42,123 - nanochat.common - [32m[1mINFO[0m - Distributed world size: 8
+GPU: NVIDIA H200 | Peak FLOPS (BF16): 9.89e+14
+COMPUTE_DTYPE: torch.bfloat16 (auto-detected: CUDA SM 90 (bf16 supported))
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: Flash Attention 3 not available, using PyTorch SDPA fallback
+WARNING: Training will be less efficient without FA3
+WARNING: SDPA has no support for sliding window attention (window_pattern='SSSL'). Your GPU utilization will be terrible.
+WARNING: Recommend using --window-pattern L for full context attention without alternating sliding window patterns.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Vocab size: 32,768
+Model config:
+{
+  "sequence_len": 2048,
+  "vocab_size": 32768,
+  "n_layer": 20,
+  "n_head": 10,
+  "n_kv_head": 10,
+  "n_embd": 1280,
+  "window_pattern": "SSSL",
+  "ffn_type": "rl_kv_b2",
+  "rlkv_h_ratio": 2.0,
+  "rlkv_r": 32,
+  "rlkv_L": 22,
+  "rlkv_grid_lo": -5.0,
+  "rlkv_grid_hi": 5.0,
+  "rlkv_lambda_scale": 1.0,
+  "rlkv_lambda_warmup_steps": 1000,
+  "rlkv_lambda_warmup_lo": 0.25,
+  "rlkv_fwd_kernel": "v11_cuda",
+  "rlkv_bwd_kernel": "triton"
+}
+[RL-KV] ffn_type=rl_kv_b2  h_ratio=2.0  r=32  L=22  grid=[-5.0,5.0]  lambda_scale=1.0  λ_warmup=0.25->1.0 over 1000 steps
+[RL-KV] kernels: fwd=v11_cuda  bwd=triton
+[RL-KV] C optimizer: AdamW  c_lr=0.02  c_weight_decay=0.0
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank7]:   File "<frozen runpy>", line 88, in _run_code
+[rank7]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank7]:     model.init_weights() # 3) All tensors get initialized
+[rank7]:     ^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank7]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank7]:                            ^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank7]:     raise AttributeError(
+[rank7]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank6]:   File "<frozen runpy>", line 88, in _run_code
+[rank6]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank6]:     model.init_weights() # 3) All tensors get initialized
+[rank6]:     ^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank6]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank6]:                            ^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank6]:     raise AttributeError(
+[rank6]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank0]:   File "<frozen runpy>", line 88, in _run_code
+[rank0]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank0]:     model.init_weights() # 3) All tensors get initialized
+[rank0]:     ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank0]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank0]:                            ^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank0]:     raise AttributeError(
+[rank0]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank3]:   File "<frozen runpy>", line 88, in _run_code
+[rank3]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank3]:     model.init_weights() # 3) All tensors get initialized
+[rank3]:     ^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank3]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank3]:                            ^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank3]:     raise AttributeError(
+[rank3]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank4]:   File "<frozen runpy>", line 88, in _run_code
+[rank4]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank4]:     model.init_weights() # 3) All tensors get initialized
+[rank4]:     ^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank4]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank4]:                            ^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank4]:     raise AttributeError(
+[rank4]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank5]:   File "<frozen runpy>", line 88, in _run_code
+[rank5]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank5]:     model.init_weights() # 3) All tensors get initialized
+[rank5]:     ^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank5]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank5]:                            ^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank5]:     raise AttributeError(
+[rank5]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank2]:   File "<frozen runpy>", line 88, in _run_code
+[rank2]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank2]:     model.init_weights() # 3) All tensors get initialized
+[rank2]:     ^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank2]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank2]:                            ^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank2]:     raise AttributeError(
+[rank2]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank1]:   File "<frozen runpy>", line 88, in _run_code
+[rank1]:   File "/repo/nanochat/scripts/base_train.py", line 214, in <module>
+[rank1]:     model.init_weights() # 3) All tensors get initialized
+[rank1]:     ^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/repo/nanochat/nanochat/gpt.py", line 508, in init_weights
+[rank1]:     torch.nn.init.uniform_(block.mlp.K.weight, -s * 0.4, s * 0.4)
+[rank1]:                            ^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+[rank1]:     raise AttributeError(
+[rank1]: AttributeError: 'RLKVFFN' object has no attribute 'K'
+[rank0]:[W503 12:26:42.330363017 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W0503 12:26:44.228000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 41 closing signal SIGTERM
+W0503 12:26:44.230000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 42 closing signal SIGTERM
+W0503 12:26:44.231000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 43 closing signal SIGTERM
+W0503 12:26:44.232000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 44 closing signal SIGTERM
+W0503 12:26:44.233000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 45 closing signal SIGTERM
+W0503 12:26:44.234000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 46 closing signal SIGTERM
+W0503 12:26:44.235000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:908] Sending process 47 closing signal SIGTERM
+E0503 12:26:45.344000 28 site-packages/torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 0 (pid: 40) of binary: /usr/local/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "/usr/local/lib/python3.12/site-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+scripts.base_train FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-05-03_12:26:44
+  host      : localhost
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 40)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[launcher] result: {'rc': 1, 'num_gpus': 8}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-1YIOU3DFU3TPCSQUvdjdU0

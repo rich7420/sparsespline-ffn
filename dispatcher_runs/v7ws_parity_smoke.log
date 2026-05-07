@@ -1,0 +1,216 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-ORtQtv1eBntKF5LNlCz3Ot
+Building image im-JHw3SQppbOpaCD8VWpkADl
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 880.30ms
+
+Built image im-JHw3SQppbOpaCD8VWpkADl in 4.03s
+
+
+Building image im-wp108dpXa7ToBXEv6e6rfq
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-2nqdtaak/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 975.84ms
+
+Built image im-wp108dpXa7ToBXEv6e6rfq in 9.01s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_parity.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_parity.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  v7ws (warp-spec) parity vs v5 — N=2048, H=64
+========================================================================
+Compiling spline_kv_bwd_v7ws_cute.cu ...
+[1/2] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output spline_kv_bwd_v7ws_cute.cuda.o.d -DTORCH_EXTENSION_NAME=spline_kv_bwd_v7ws_cute_ext -DTORCH_API_INCLUDE_EXTENSION_H -I/opt/cutlass/include -I/opt/cutlass/tools/util/include -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda --expt-relaxed-constexpr -Xptxas=-v -lineinfo -DCUTE_USE_PACKED_TUPLE=1 -c /repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_v7ws_cute.cu -o spline_kv_bwd_v7ws_cute.cuda.o 
+FAILED: [code=2] spline_kv_bwd_v7ws_cute.cuda.o 
+/usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output spline_kv_bwd_v7ws_cute.cuda.o.d -DTORCH_EXTENSION_NAME=spline_kv_bwd_v7ws_cute_ext -DTORCH_API_INCLUDE_EXTENSION_H -I/opt/cutlass/include -I/opt/cutlass/tools/util/include -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda --expt-relaxed-constexpr -Xptxas=-v -lineinfo -DCUTE_USE_PACKED_TUPLE=1 -c /repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_v7ws_cute.cu -o spline_kv_bwd_v7ws_cute.cuda.o 
+/repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_v7ws_cute.cu(160): error: identifier "canonical_warp_group_idx" is undefined
+      const int wg_idx = canonical_warp_group_idx();
+                         ^
+
+/repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_v7ws_cute.cu(161): error: identifier "canonical_warp_idx_sync" is undefined
+      const int warp_idx = canonical_warp_idx_sync();
+                           ^
+
+2 errors detected in the compilation of "/repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_v7ws_cute.cu".
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2597, in _run_ninja_build
+    subprocess.run(
+  File "/usr/local/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v']' returned non-zero exit status 2.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 947, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 172, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 225, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/modal_h100_v7ws_cute_parity.py", line 52, in run_parity
+    ext_v7ws = load(
+               ^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 1692, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2134, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2286, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2614, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'spline_kv_bwd_v7ws_cute_ext'
+Stopping app - uncaught exception raised locally: RuntimeError("Error building extension 'spline_kv_bwd_v7ws_cute_ext'").
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_parity.py:12 │
+│ 3 in main                                                                    │
+│                                                                              │
+│   122 def main(n: int = 2048, h: int = 64, l: int = 22, r: int = 32):        │
+│ ❱ 123 │   out = run_parity.remote(N=n, H=h, L=l, R=r)                        │
+│   124 │   if not out.get("passed"):                                          │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ wrapped                                                                      │
+│                                                                              │
+│    45 │   │   await self.hydrate()                                           │
+│ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
+│    47                                                                        │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ in remote                                                                    │
+│                                                                              │
+│   1766 │   │                                                                 │
+│ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
+│   1768                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ in _call_function                                                            │
+│                                                                              │
+│   1710 │   │                                                                 │
+│ ❱ 1711 │   │   return await invocation.run_function()                        │
+│   1712                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ in run_function                                                              │
+│                                                                              │
+│    292 │   │   │   item = await self._get_single_output()                    │
+│ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
+│    294                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ ls.py:527 in _process_result                                                 │
+│                                                                              │
+│   526 │   │   │                                                              │
+│ ❱ 527 │   │   │   raise exc_with_hints(exc)                                  │
+│   528                                                                        │
+│                                                                              │
+│     ...Remote call to Modal Function (ta-01KQQ69XZCA1NF909YGAFK16KG)...      │
+│                                                                              │
+│ /root/modal_h100_v7ws_cute_parity.py:52 in run_parity                        │
+│                                                                              │
+│ ❱ 52 ext_v7ws = load(                                                        │
+│                                                                              │
+│                                                                              │
+│ /usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py:1692 in │
+│ load                                                                         │
+│                                                                              │
+│ ❱ 1692 return _jit_compile(                                                  │
+│                                                                              │
+│                                                                              │
+│ /usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py:2134 in │
+│ _jit_compile                                                                 │
+│                                                                              │
+│ ❱ 2134 _write_ninja_file_and_build_library(                                  │
+│                                                                              │
+│                                                                              │
+│ /usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py:2286 in │
+│ _write_ninja_file_and_build_library                                          │
+│                                                                              │
+│ ❱ 2286 _run_ninja_build(                                                     │
+│                                                                              │
+│                                                                              │
+│ /usr/local/lib/python3.12/site-packages/torch/utils/cpp_extension.py:2614 in │
+│ _run_ninja_build                                                             │
+│                                                                              │
+│ ❱ 2614 raise RuntimeError(message) from e                                    │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: Error building extension 'spline_kv_bwd_v7ws_cute_ext'

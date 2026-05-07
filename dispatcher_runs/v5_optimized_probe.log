@@ -1,0 +1,152 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-JzPhRnr7pEnFZk85YCNSWB
+Building image im-NOLa5hqUJVJAo7rdvMotC4
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 1.21s
+
+Built image im-NOLa5hqUJVJAo7rdvMotC4 in 5.80s
+
+
+Building image im-VCsNGNg0ruufUlQuZ04yXS
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-ygczkk4e/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 730.64ms
+
+Built image im-VCsNGNg0ruufUlQuZ04yXS in 8.08s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_production_prob
+│   e.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_probe.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  Parity @ N=65536  (v5 vs v1 — production microbatch)
+========================================================================
+  shapes: z=(65536, 2560), C=(2560, 22, 32), g=(65536, 32)
+  dtypes: z=torch.bfloat16, C=torch.bfloat16, g=torch.bfloat16
+  v5 OK: dC=(2560, 22, 32), dz=(65536, 2560)
+  dC_v5_vs_v1         : signed=-4.566e-05 max_abs=5.509e-01 max_rel=4.154e-03 mean_abs=3.292e-02
+  dz_v5_vs_v1         : signed=+5.838e-14 max_abs=9.537e-07 max_rel=1.169e-07 mean_abs=5.462e-11
+  → no_nan_inf:           True
+  → dC max_rel ≤ 5e-3:    True
+  → dz max_rel ≤ 5e-3:    True
+  → PARITY:               True
+
+========================================================================
+  Speed bench @ N=65536
+========================================================================
+  v5     :  13.560 ms/call
+  v1     :  38.558 ms/call  (v5 is 2.84× v1)
+  triton :  14.024 ms/call  (v5 is 1.03× triton)
+
+
+FINAL JSON:
+{
+  "parity_n65536": {
+    "dC_v5_vs_v1": {
+      "label": "dC v5 vs v1",
+      "max_abs_err": 0.5508575439453125,
+      "max_rel_err": 0.004154039006350068,
+      "mean_abs_err": 0.03291793912649155,
+      "mean_signed_err": -4.565711788018234e-05,
+      "ref_max": 132.60769653320312,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "dz_v5_vs_v1": {
+      "label": "dz v5 vs v1",
+      "max_abs_err": 9.5367431640625e-07,
+      "max_rel_err": 1.1687570664541792e-07,
+      "mean_abs_err": 5.461536778383902e-11,
+      "mean_signed_err": 5.838440896108882e-14,
+      "ref_max": 8.159730911254883,
+      "has_nan": false,
+      "has_inf": false
+    }
+  },
+  "parity_pass": true,
+  "speed_n65536": {
+    "N": 65536,
+    "v5_ms_per_call": 13.5600341796875,
+    "v1_ms_per_call": 38.55788330078125,
+    "triton_ms_per_call": 14.0236279296875,
+    "v5_speedup_vs_v1": 2.843494550960626,
+    "v5_speedup_vs_triton": 1.034188243470245
+  },
+  "all_pass": true
+}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-JzPhRnr7pEnFZk85YCNSWB

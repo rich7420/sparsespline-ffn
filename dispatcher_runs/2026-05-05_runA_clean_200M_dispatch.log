@@ -1,0 +1,7 @@
+Run A clean 200M rerun
+  run_tag : runA_clean_200M_seed0
+  execute : True
+  CMD     : modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2 --run-tag runA_clean_200M_seed0 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
+  log     : /home/rich-wsl/sparsespline-ffn/dispatcher_runs/runA_clean_200M_seed0.log
+
+rc=0  dt=45.5 min

@@ -1,0 +1,240 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-RIjMdHn6NuIHOrG4E7TRB5
+Building image im-Zwd4EIHP9mZCbWBYVgVuon
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 897.48ms
+
+Built image im-Zwd4EIHP9mZCbWBYVgVuon in 4.58s
+
+
+Building image im-KoE7XspQo4TYV59yyoCbB3
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-xefvg2va/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 608.90ms
+
+Built image im-KoE7XspQo4TYV59yyoCbB3 in 8.46s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_n_scaling.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_probe.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  N =   1024  (chunks_per_block =   2, previously supported)
+========================================================================
+  dC_v1_vs_ref          : signed=+1.194e-06 max_abs=2.605e-02 max_rel=1.714e-03
+  dC_v5_vs_ref          : signed=-1.631e-06 max_abs=3.289e-02 max_rel=2.164e-03
+  dz_v1_vs_ref          : signed=+9.137e-12 max_abs=1.907e-06 max_rel=2.807e-07
+  dz_v5_vs_ref          : signed=+8.854e-12 max_abs=1.907e-06 max_rel=2.807e-07
+  dC_v5_vs_v1           : signed=-2.824e-06 max_abs=4.659e-02 max_rel=3.066e-03
+  → pass_dC_no_regression: True
+  → pass_dz_no_regression: True
+  → pass_no_nan_inf:       True
+  → OVERALL:               True
+
+========================================================================
+  N =   2048  (chunks_per_block =   4, previously supported)
+========================================================================
+  dC_v1_vs_ref          : signed=-6.751e-06 max_abs=3.690e-02 max_rel=1.682e-03
+  dC_v5_vs_ref          : signed=+1.955e-08 max_abs=6.355e-02 max_rel=2.897e-03
+  dz_v1_vs_ref          : signed=+9.843e-12 max_abs=2.384e-06 max_rel=2.937e-07
+  dz_v5_vs_ref          : signed=+9.589e-12 max_abs=2.384e-06 max_rel=2.937e-07
+  dC_v5_vs_v1           : signed=+6.771e-06 max_abs=8.512e-02 max_rel=3.878e-03
+  → pass_dC_no_regression: False
+  → pass_dz_no_regression: True
+  → pass_no_nan_inf:       True
+  → OVERALL:               False
+
+========================================================================
+  N =   4096  (chunks_per_block =   8, previously supported)
+========================================================================
+  dC_v1_vs_ref          : signed=+1.067e-05 max_abs=5.382e-02 max_rel=1.575e-03
+  dC_v5_vs_ref          : signed=+5.019e-07 max_abs=7.653e-02 max_rel=2.239e-03
+  dz_v1_vs_ref          : signed=-3.508e-11 max_abs=2.384e-06 max_rel=3.009e-07
+  dz_v5_vs_ref          : signed=-3.514e-11 max_abs=2.384e-06 max_rel=3.009e-07
+  dC_v5_vs_v1           : signed=-1.016e-05 max_abs=9.619e-02 max_rel=2.814e-03
+  → pass_dC_no_regression: True
+  → pass_dz_no_regression: True
+  → pass_no_nan_inf:       True
+  → OVERALL:               True
+
+========================================================================
+  N =   8192  (chunks_per_block =  16, PREVIOUSLY REJECTED)
+========================================================================
+  dC_v1_vs_ref          : signed=+8.297e-06 max_abs=7.293e-02 max_rel=1.595e-03
+  dC_v5_vs_ref          : signed=-6.260e-06 max_abs=1.258e-01 max_rel=2.750e-03
+  dz_v1_vs_ref          : signed=+1.098e-12 max_abs=2.384e-06 max_rel=3.098e-07
+  dz_v5_vs_ref          : signed=+7.771e-13 max_abs=2.384e-06 max_rel=3.098e-07
+  dC_v5_vs_v1           : signed=-1.456e-05 max_abs=1.544e-01 max_rel=3.375e-03
+  → pass_dC_no_regression: False
+  → pass_dz_no_regression: True
+  → pass_no_nan_inf:       True
+  → OVERALL:               False
+
+========================================================================
+  N =  16384  (chunks_per_block =  32, PREVIOUSLY REJECTED)
+========================================================================
+  dC_v1_vs_ref          : signed=-5.840e-06 max_abs=1.154e-01 max_rel=1.893e-03
+  dC_v5_vs_ref          : signed=+8.039e-06 max_abs=1.319e-01 max_rel=2.165e-03
+  dz_v1_vs_ref          : signed=-4.407e-11 max_abs=2.384e-06 max_rel=3.116e-07
+  dz_v5_vs_ref          : signed=-4.427e-11 max_abs=2.384e-06 max_rel=3.116e-07
+  dC_v5_vs_v1           : signed=+1.388e-05 max_abs=1.992e-01 max_rel=3.271e-03
+  → pass_dC_no_regression: True
+  → pass_dz_no_regression: True
+  → pass_no_nan_inf:       True
+  → OVERALL:               True
+
+========================================================================
+  N =  65536  (chunks_per_block = 128, PREVIOUSLY REJECTED)
+========================================================================
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 947, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 172, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 225, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/modal_h100_bwd_v5_n_scaling.py", line 109, in run_probe
+    f = flash_spline_feature_reference(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/repo/src/sparsespline_ffn/rl_spline_kv_reference.py", line 198, in flash_spline_feature_reference
+    (B0.unsqueeze(-1) * C0)
+     ~~~~~~~~~~~~~~~~~^~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 4.02 GiB is free. Process 1 has 75.15 GiB memory in use. Of the allocated memory 73.07 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Stopping app - uncaught exception raised locally: OutOfMemoryError('CUDA out of memory. Tried to allocate 20.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 4.02 GiB is free. Process 1 has 75.15 GiB memory in use. Of the allocated memory 73.07 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)').
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_n_scaling.py:27 │
+│ 0 in main                                                                    │
+│                                                                              │
+│   269 def main():                                                            │
+│ ❱ 270 │   out = run_probe.remote()                                           │
+│   271 │   if not out["all_pass"]:                                            │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ wrapped                                                                      │
+│                                                                              │
+│    45 │   │   await self.hydrate()                                           │
+│ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
+│    47                                                                        │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ in remote                                                                    │
+│                                                                              │
+│   1766 │   │                                                                 │
+│ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
+│   1768                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ in _call_function                                                            │
+│                                                                              │
+│   1710 │   │                                                                 │
+│ ❱ 1711 │   │   return await invocation.run_function()                        │
+│   1712                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ in run_function                                                              │
+│                                                                              │
+│    292 │   │   │   item = await self._get_single_output()                    │
+│ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
+│    294                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ ls.py:527 in _process_result                                                 │
+│                                                                              │
+│   526 │   │   │                                                              │
+│ ❱ 527 │   │   │   raise exc_with_hints(exc)                                  │
+│   528                                                                        │
+│                                                                              │
+│     ...Remote call to Modal Function (ta-01KQNX1QBEP74RG9G4M6N5EQGG)...      │
+│                                                                              │
+│ /root/modal_h100_bwd_v5_n_scaling.py:109 in run_probe                        │
+│                                                                              │
+│ ❱ 109 f = flash_spline_feature_reference(                                    │
+│                                                                              │
+│                                                                              │
+│ /repo/src/sparsespline_ffn/rl_spline_kv_reference.py:198 in                  │
+│ flash_spline_feature_reference                                               │
+│                                                                              │
+│ ❱ 198 (B0.unsqueeze(-1) * C0)                                                │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 GiB. GPU 0 has a 
+total capacity of 79.18 GiB of which 4.02 GiB is free. Process 1 has 75.15 GiB 
+memory in use. Of the allocated memory 73.07 GiB is allocated by PyTorch, and 
+1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated 
+memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to 
+avoid fragmentation.  See documentation for Memory Management  
+(https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

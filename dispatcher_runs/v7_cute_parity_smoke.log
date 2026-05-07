@@ -1,0 +1,6 @@
+Usage: modal run benchmarks/modal_h100_v7_cute_parity.py::main 
+           [OPTIONS]
+Try 'modal run benchmarks/modal_h100_v7_cute_parity.py::main -h' for help.
+╭─ Error ──────────────────────────────────────────────────────────────────────╮
+│ No such option: --n (Possible options: --L, --N, --R)                        │
+╰──────────────────────────────────────────────────────────────────────────────╯

@@ -1,0 +1,414 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-5DTog1TM0DE8jnephI01vY
+Building image im-cgnGwqW6QmEnWHLgABpEJg
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 863.38ms
+
+Built image im-cgnGwqW6QmEnWHLgABpEJg in 4.48s
+
+
+Building image im-CsS4bB2rfF6DFNRCUDoDkH
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-_boxf_gb/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 614.47ms
+
+Built image im-CsS4bB2rfF6DFNRCUDoDkH in 9.25s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+├── 🔨 Created function run_d20_1gpu.
+└── 🔨 Created function run_d20_8gpu.
+[launcher] mode=smoke_b  run_tag=rlkv_d20_smoke_b  ffn_type=rl_kv_b2
+[launcher] base_train.py args: ['--depth=20', '--device-batch-size=32', '--total-batch-size=524288', '--max-seq-len=2048', '--eval-tokens=10485760', '--run=dummy', '--model-tag=rlkv_d20_smoke_b', '--ffn-type', 'rl_kv_b2', '--rlkv-h-ratio', '2.0', '--rlkv-r', '32', '--rlkv-L', '22', '--rlkv-fwd-kernel', 'v11_cuda', '--rlkv-bwd-kernel', 'triton', '--c-lr', '0.02', '--c-weight-decay', '0.0', '--device-batch-size=16', '--num-iterations=100', '--eval-every=50', '--core-metric-every=100', '--core-metric-max-per-task=50', '--save-every=50']
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[launcher] CMD: torchrun --standalone --nproc_per_node=8 -m scripts.base_train -- --depth=20 --device-batch-size=32 --total-batch-size=524288 --max-seq-len=2048 --eval-tokens=10485760 --run=dummy --model-tag=rlkv_d20_smoke_b --ffn-type rl_kv_b2 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-L 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --c-lr 0.02 --c-weight-decay 0.0 --device-batch-size=16 --num-iterations=100 --eval-every=50 --core-metric-every=100 --core-metric-max-per-task=50 --save-every=50
+[launcher] cwd=/repo/nanochat  num_gpus=8
+
+                                                       █████                █████
+                                                      ░░███                ░░███
+     ████████    ██████   ████████    ██████   ██████  ░███████    ██████  ███████
+    ░░███░░███  ░░░░░███ ░░███░░███  ███░░███ ███░░███ ░███░░███  ░░░░░███░░░███░
+     ░███ ░███   ███████  ░███ ░███ ░███ ░███░███ ░░░  ░███ ░███   ███████  ░███
+     ░███ ░███  ███░░███  ░███ ░███ ░███ ░███░███  ███ ░███ ░███  ███░░███  ░███ ███
+     ████ █████░░████████ ████ █████░░██████ ░░██████  ████ █████░░███████  ░░█████
+    ░░░░ ░░░░░  ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░░░░   ░░░░░
+    
+Autodetected device type: cuda
+2026-05-03 03:24:11,313 - nanochat.common - [32m[1mINFO[0m - Distributed world size: 8
+GPU: NVIDIA H100 80GB HBM3 | Peak FLOPS (BF16): 9.89e+14
+COMPUTE_DTYPE: torch.bfloat16 (auto-detected: CUDA SM 90 (bf16 supported))
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: Flash Attention 3 not available, using PyTorch SDPA fallback
+WARNING: Training will be less efficient without FA3
+WARNING: SDPA has no support for sliding window attention (window_pattern='SSSL'). Your GPU utilization will be terrible.
+WARNING: Recommend using --window-pattern L for full context attention without alternating sliding window patterns.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Vocab size: 32,768
+Model config:
+{
+  "sequence_len": 2048,
+  "vocab_size": 32768,
+  "n_layer": 20,
+  "n_head": 10,
+  "n_kv_head": 10,
+  "n_embd": 1280,
+  "window_pattern": "SSSL",
+  "ffn_type": "rl_kv_b2",
+  "rlkv_h_ratio": 2.0,
+  "rlkv_r": 32,
+  "rlkv_L": 22,
+  "rlkv_grid_lo": -3.0,
+  "rlkv_grid_hi": 3.0,
+  "rlkv_lambda_scale": 1.0,
+  "rlkv_fwd_kernel": "v11_cuda",
+  "rlkv_bwd_kernel": "triton"
+}
+[RL-KV] ffn_type=rl_kv_b2  h_ratio=2.0  r=32  L=22  grid=[-3.0,3.0]  lambda_scale=1.0
+[RL-KV] kernels: fwd=v11_cuda  bwd=triton
+[RL-KV] C optimizer: AdamW  c_lr=0.02  c_weight_decay=0.0
+Parameter counts:
+wte                     : 41,943,040
+value_embeds            : 419,430,400
+lm_head                 : 41,943,040
+transformer_matrices    : 299,009,200
+scalars                 : 66
+total                   : 802,325,746
+Estimated FLOPs per token: 2.320965e+09
+Scaling weight decay from 0.280000 to 0.078066 for depth 20
+Scaling the LR for the AdamW parameters ∝1/√(1280/768) = 0.774597
+RL-KV: routing 20 C tensor(s) to AdamW with c_lr=0.015492  c_weight_decay=0.0
+Using user-provided number of iterations: 100
+Total number of training tokens: 52,428,800
+Tokens : Scaling params ratio: 0.15
+Total training FLOPs estimate: 1.216854e+17
+Tokens / micro-batch / rank: 16 x 2048 = 32,768
+Tokens / micro-batch: 262,144
+Total batch size 524,288 => gradient accumulation steps: 2
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+/usr/local/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `spline_kv_fwd_v11_ext.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1.spline_kv_fwd_v11_cuda.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+Step 00000 | Validation bpb: 3.161808
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+step 00000/00100 (0.00%) | loss: 10.398149 | lrm: 0.03 | dt: 557717.05ms | tok/sec: 940 | bf16_mfu: 0.03 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+/repo/src/sparsespline_ffn/kernels/flash_spline_feature_autograd.py:167: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more information. (Triggered internally at /pytorch/build/aten/src/ATen/core/TensorBody.h:489.)
+  and C.grad is not None
+step 00001/00100 (1.00%) | loss: 10.379640 | lrm: 0.05 | dt: 998.25ms | tok/sec: 525,206 | bf16_mfu: 15.41 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00002/00100 (2.00%) | loss: 10.330423 | lrm: 0.07 | dt: 955.63ms | tok/sec: 548,631 | bf16_mfu: 16.09 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00003/00100 (3.00%) | loss: 10.210718 | lrm: 0.10 | dt: 952.60ms | tok/sec: 550,378 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00004/00100 (4.00%) | loss: 9.996747 | lrm: 0.12 | dt: 951.82ms | tok/sec: 550,825 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00005/00100 (5.00%) | loss: 9.712877 | lrm: 0.15 | dt: 950.59ms | tok/sec: 551,536 | bf16_mfu: 16.18 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00006/00100 (6.00%) | loss: 9.422665 | lrm: 0.17 | dt: 949.43ms | tok/sec: 552,215 | bf16_mfu: 16.20 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00007/00100 (7.00%) | loss: 9.154191 | lrm: 0.20 | dt: 947.42ms | tok/sec: 553,384 | bf16_mfu: 16.23 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00008/00100 (8.00%) | loss: 8.934612 | lrm: 0.23 | dt: 946.71ms | tok/sec: 553,799 | bf16_mfu: 16.25 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00009/00100 (9.00%) | loss: 8.770339 | lrm: 0.25 | dt: 946.86ms | tok/sec: 553,713 | bf16_mfu: 16.24 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+step 00010/00100 (10.00%) | loss: 8.640935 | lrm: 0.28 | dt: 947.25ms | tok/sec: 553,482 | bf16_mfu: 16.24 | epoch: 1 pq: 0 rg: 16 | total time: 0.00m
+step 00011/00100 (11.00%) | loss: 8.529344 | lrm: 0.30 | dt: 947.35ms | tok/sec: 553,423 | bf16_mfu: 16.23 | epoch: 1 pq: 0 rg: 16 | total time: 0.02m | eta: 1.4m
+step 00012/00100 (12.00%) | loss: 8.412489 | lrm: 0.33 | dt: 947.63ms | tok/sec: 553,262 | bf16_mfu: 16.23 | epoch: 1 pq: 0 rg: 16 | total time: 0.03m | eta: 1.4m
+step 00013/00100 (13.00%) | loss: 8.294198 | lrm: 0.35 | dt: 948.36ms | tok/sec: 552,838 | bf16_mfu: 16.22 | epoch: 1 pq: 0 rg: 16 | total time: 0.05m | eta: 1.4m
+step 00014/00100 (14.00%) | loss: 8.188833 | lrm: 0.38 | dt: 949.44ms | tok/sec: 552,205 | bf16_mfu: 16.20 | epoch: 1 pq: 0 rg: 16 | total time: 0.06m | eta: 1.4m
+step 00015/00100 (15.00%) | loss: 8.075869 | lrm: 0.40 | dt: 950.30ms | tok/sec: 551,708 | bf16_mfu: 16.18 | epoch: 1 pq: 0 rg: 16 | total time: 0.08m | eta: 1.3m
+step 00016/00100 (16.00%) | loss: 7.946329 | lrm: 0.42 | dt: 951.20ms | tok/sec: 551,185 | bf16_mfu: 16.17 | epoch: 1 pq: 0 rg: 16 | total time: 0.09m | eta: 1.3m
+step 00017/00100 (17.00%) | loss: 7.795746 | lrm: 0.45 | dt: 952.07ms | tok/sec: 550,683 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 16 | total time: 0.11m | eta: 1.3m
+step 00018/00100 (18.00%) | loss: 7.658470 | lrm: 0.47 | dt: 952.93ms | tok/sec: 550,185 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 24 | total time: 0.13m | eta: 1.3m
+step 00019/00100 (19.00%) | loss: 7.511530 | lrm: 0.50 | dt: 953.57ms | tok/sec: 549,814 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 24 | total time: 0.14m | eta: 1.3m
+step 00020/00100 (20.00%) | loss: 7.378047 | lrm: 0.53 | dt: 953.37ms | tok/sec: 549,931 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 24 | total time: 0.16m | eta: 1.3m
+step 00021/00100 (21.00%) | loss: 7.255061 | lrm: 0.55 | dt: 953.47ms | tok/sec: 549,871 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 24 | total time: 0.17m | eta: 1.3m
+step 00022/00100 (22.00%) | loss: 7.148135 | lrm: 0.57 | dt: 953.40ms | tok/sec: 549,915 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 24 | total time: 0.19m | eta: 1.2m
+step 00023/00100 (23.00%) | loss: 7.058689 | lrm: 0.60 | dt: 953.57ms | tok/sec: 549,818 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 24 | total time: 0.21m | eta: 1.2m
+step 00024/00100 (24.00%) | loss: 6.957902 | lrm: 0.62 | dt: 953.31ms | tok/sec: 549,967 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 24 | total time: 0.22m | eta: 1.2m
+step 00025/00100 (25.00%) | loss: 6.873293 | lrm: 0.65 | dt: 954.13ms | tok/sec: 549,494 | bf16_mfu: 16.12 | epoch: 1 pq: 0 rg: 24 | total time: 0.24m | eta: 1.2m
+step 00026/00100 (26.00%) | loss: 6.790638 | lrm: 0.68 | dt: 954.02ms | tok/sec: 549,555 | bf16_mfu: 16.12 | epoch: 1 pq: 0 rg: 32 | total time: 0.25m | eta: 1.2m
+step 00027/00100 (27.00%) | loss: 6.709933 | lrm: 0.70 | dt: 953.72ms | tok/sec: 549,726 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 32 | total time: 0.27m | eta: 1.2m
+step 00028/00100 (28.00%) | loss: 6.642178 | lrm: 0.72 | dt: 951.22ms | tok/sec: 551,177 | bf16_mfu: 16.17 | epoch: 1 pq: 0 rg: 32 | total time: 0.29m | eta: 1.1m
+step 00029/00100 (29.00%) | loss: 6.569234 | lrm: 0.75 | dt: 952.04ms | tok/sec: 550,697 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 32 | total time: 0.30m | eta: 1.1m
+step 00030/00100 (30.00%) | loss: 6.499606 | lrm: 0.78 | dt: 952.14ms | tok/sec: 550,638 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 32 | total time: 0.32m | eta: 1.1m
+step 00031/00100 (31.00%) | loss: 6.435024 | lrm: 0.80 | dt: 953.11ms | tok/sec: 550,082 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 32 | total time: 0.33m | eta: 1.1m
+step 00032/00100 (32.00%) | loss: 6.379043 | lrm: 0.82 | dt: 952.53ms | tok/sec: 550,418 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 32 | total time: 0.35m | eta: 1.1m
+step 00033/00100 (33.00%) | loss: 6.321230 | lrm: 0.85 | dt: 952.49ms | tok/sec: 550,439 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 32 | total time: 0.36m | eta: 1.1m
+step 00034/00100 (34.00%) | loss: 6.266343 | lrm: 0.88 | dt: 953.12ms | tok/sec: 550,072 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 40 | total time: 0.38m | eta: 1.0m
+step 00035/00100 (35.00%) | loss: 6.226268 | lrm: 0.90 | dt: 951.98ms | tok/sec: 550,735 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 40 | total time: 0.40m | eta: 1.0m
+step 00036/00100 (36.00%) | loss: 6.190954 | lrm: 0.93 | dt: 952.07ms | tok/sec: 550,684 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 40 | total time: 0.41m | eta: 1.0m
+step 00037/00100 (37.00%) | loss: 6.138762 | lrm: 0.95 | dt: 952.50ms | tok/sec: 550,434 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 40 | total time: 0.43m | eta: 1.0m
+step 00038/00100 (38.00%) | loss: 6.103523 | lrm: 0.97 | dt: 952.58ms | tok/sec: 550,384 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 40 | total time: 0.44m | eta: 1.0m
+step 00039/00100 (39.00%) | loss: 6.078204 | lrm: 1.00 | dt: 952.25ms | tok/sec: 550,578 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 40 | total time: 0.46m | eta: 1.0m
+step 00040/00100 (40.00%) | loss: 6.046547 | lrm: 0.93 | dt: 951.24ms | tok/sec: 551,161 | bf16_mfu: 16.17 | epoch: 1 pq: 0 rg: 40 | total time: 0.48m | eta: 1.0m
+step 00041/00100 (41.00%) | loss: 6.028636 | lrm: 0.91 | dt: 951.85ms | tok/sec: 550,807 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 40 | total time: 0.49m | eta: 0.9m
+step 00042/00100 (42.00%) | loss: 6.007507 | lrm: 0.90 | dt: 951.87ms | tok/sec: 550,799 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 48 | total time: 0.51m | eta: 0.9m
+step 00043/00100 (43.00%) | loss: 5.984949 | lrm: 0.88 | dt: 952.73ms | tok/sec: 550,297 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 48 | total time: 0.52m | eta: 0.9m
+step 00044/00100 (44.00%) | loss: 5.971625 | lrm: 0.87 | dt: 952.64ms | tok/sec: 550,352 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 48 | total time: 0.54m | eta: 0.9m
+step 00045/00100 (45.00%) | loss: 5.946554 | lrm: 0.85 | dt: 953.14ms | tok/sec: 550,066 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 48 | total time: 0.56m | eta: 0.9m
+step 00046/00100 (46.00%) | loss: 5.913803 | lrm: 0.84 | dt: 952.39ms | tok/sec: 550,498 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 48 | total time: 0.57m | eta: 0.9m
+step 00047/00100 (47.00%) | loss: 5.884628 | lrm: 0.82 | dt: 952.60ms | tok/sec: 550,377 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 48 | total time: 0.59m | eta: 0.8m
+step 00048/00100 (48.00%) | loss: 5.863046 | lrm: 0.81 | dt: 953.50ms | tok/sec: 549,858 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 48 | total time: 0.60m | eta: 0.8m
+step 00049/00100 (49.00%) | loss: 5.844808 | lrm: 0.80 | dt: 952.32ms | tok/sec: 550,536 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 56 | total time: 0.62m | eta: 0.8m
+Step 00050 | Validation bpb: 1.706985
+2026-05-03 03:35:59,144 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank5.pt
+2026-05-03 03:35:59,146 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank3.pt
+2026-05-03 03:35:59,153 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank1.pt
+2026-05-03 03:35:59,198 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank7.pt
+2026-05-03 03:35:59,232 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank2.pt
+2026-05-03 03:35:59,246 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank4.pt
+2026-05-03 03:35:59,252 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank6.pt
+2026-05-03 03:36:04,052 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved model parameters to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/model_000050.pt
+2026-05-03 03:36:04,054 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved metadata to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/meta_000050.json
+2026-05-03 03:36:04,985 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000050_rank0.pt
+step 00050/00100 (50.00%) | loss: 5.816317 | lrm: 0.78 | dt: 951.61ms | tok/sec: 550,948 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 56 | total time: 0.63m | eta: 0.8m
+step 00051/00100 (51.00%) | loss: 5.793128 | lrm: 0.77 | dt: 954.04ms | tok/sec: 549,543 | bf16_mfu: 16.12 | epoch: 1 pq: 0 rg: 56 | total time: 0.65m | eta: 0.8m
+step 00052/00100 (52.00%) | loss: 5.772308 | lrm: 0.75 | dt: 954.46ms | tok/sec: 549,301 | bf16_mfu: 16.11 | epoch: 1 pq: 0 rg: 56 | total time: 0.67m | eta: 0.8m
+step 00053/00100 (53.00%) | loss: 5.744198 | lrm: 0.74 | dt: 954.62ms | tok/sec: 549,214 | bf16_mfu: 16.11 | epoch: 1 pq: 0 rg: 56 | total time: 0.68m | eta: 0.7m
+step 00054/00100 (54.00%) | loss: 5.726584 | lrm: 0.72 | dt: 954.71ms | tok/sec: 549,158 | bf16_mfu: 16.11 | epoch: 1 pq: 0 rg: 56 | total time: 0.70m | eta: 0.7m
+step 00055/00100 (55.00%) | loss: 5.701065 | lrm: 0.71 | dt: 953.68ms | tok/sec: 549,754 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 56 | total time: 0.71m | eta: 0.7m
+step 00056/00100 (56.00%) | loss: 5.678092 | lrm: 0.69 | dt: 952.51ms | tok/sec: 550,425 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 56 | total time: 0.73m | eta: 0.7m
+step 00057/00100 (57.00%) | loss: 5.676365 | lrm: 0.68 | dt: 952.92ms | tok/sec: 550,192 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 64 | total time: 0.75m | eta: 0.7m
+step 00058/00100 (58.00%) | loss: 5.662753 | lrm: 0.66 | dt: 952.76ms | tok/sec: 550,281 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 64 | total time: 0.76m | eta: 0.7m
+step 00059/00100 (59.00%) | loss: 5.651916 | lrm: 0.65 | dt: 952.45ms | tok/sec: 550,464 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 64 | total time: 0.78m | eta: 0.7m
+step 00060/00100 (60.00%) | loss: 5.637132 | lrm: 0.63 | dt: 952.79ms | tok/sec: 550,268 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 64 | total time: 0.79m | eta: 0.6m
+step 00061/00100 (61.00%) | loss: 5.604297 | lrm: 0.62 | dt: 953.71ms | tok/sec: 549,735 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 64 | total time: 0.81m | eta: 0.6m
+step 00062/00100 (62.00%) | loss: 5.583446 | lrm: 0.61 | dt: 953.30ms | tok/sec: 549,973 | bf16_mfu: 16.13 | epoch: 1 pq: 0 rg: 64 | total time: 0.83m | eta: 0.6m
+step 00063/00100 (63.00%) | loss: 5.571139 | lrm: 0.59 | dt: 956.03ms | tok/sec: 548,403 | bf16_mfu: 16.09 | epoch: 1 pq: 0 rg: 64 | total time: 0.84m | eta: 0.6m
+step 00064/00100 (64.00%) | loss: 5.544908 | lrm: 0.58 | dt: 956.42ms | tok/sec: 548,178 | bf16_mfu: 16.08 | epoch: 1 pq: 0 rg: 72 | total time: 0.86m | eta: 0.6m
+step 00065/00100 (65.00%) | loss: 5.530757 | lrm: 0.56 | dt: 954.21ms | tok/sec: 549,448 | bf16_mfu: 16.12 | epoch: 1 pq: 0 rg: 72 | total time: 0.87m | eta: 0.6m
+step 00066/00100 (66.00%) | loss: 5.530680 | lrm: 0.55 | dt: 952.39ms | tok/sec: 550,495 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 72 | total time: 0.89m | eta: 0.5m
+step 00067/00100 (67.00%) | loss: 5.512494 | lrm: 0.53 | dt: 951.86ms | tok/sec: 550,801 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 72 | total time: 0.90m | eta: 0.5m
+step 00068/00100 (68.00%) | loss: 5.491626 | lrm: 0.52 | dt: 952.85ms | tok/sec: 550,233 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 72 | total time: 0.92m | eta: 0.5m
+step 00069/00100 (69.00%) | loss: 5.471545 | lrm: 0.50 | dt: 952.70ms | tok/sec: 550,319 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 72 | total time: 0.94m | eta: 0.5m
+step 00070/00100 (70.00%) | loss: 5.450629 | lrm: 0.49 | dt: 952.11ms | tok/sec: 550,659 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 72 | total time: 0.95m | eta: 0.5m
+step 00071/00100 (71.00%) | loss: 5.423136 | lrm: 0.47 | dt: 952.37ms | tok/sec: 550,508 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 72 | total time: 0.97m | eta: 0.5m
+step 00072/00100 (72.00%) | loss: 5.409775 | lrm: 0.46 | dt: 970.38ms | tok/sec: 540,291 | bf16_mfu: 15.85 | epoch: 1 pq: 0 rg: 80 | total time: 0.98m | eta: 0.4m
+step 00073/00100 (73.00%) | loss: 5.396745 | lrm: 0.44 | dt: 951.79ms | tok/sec: 550,842 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 80 | total time: 1.00m | eta: 0.4m
+step 00074/00100 (74.00%) | loss: 5.379543 | lrm: 0.43 | dt: 951.73ms | tok/sec: 550,876 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 80 | total time: 1.02m | eta: 0.4m
+step 00075/00100 (75.00%) | loss: 5.368170 | lrm: 0.42 | dt: 951.86ms | tok/sec: 550,803 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 80 | total time: 1.03m | eta: 0.4m
+step 00076/00100 (76.00%) | loss: 5.351416 | lrm: 0.40 | dt: 952.71ms | tok/sec: 550,313 | bf16_mfu: 16.14 | epoch: 1 pq: 0 rg: 80 | total time: 1.05m | eta: 0.4m
+step 00077/00100 (77.00%) | loss: 5.347424 | lrm: 0.39 | dt: 952.55ms | tok/sec: 550,401 | bf16_mfu: 16.15 | epoch: 1 pq: 0 rg: 80 | total time: 1.06m | eta: 0.4m
+step 00078/00100 (78.00%) | loss: 5.347183 | lrm: 0.37 | dt: 951.98ms | tok/sec: 550,732 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 80 | total time: 1.08m | eta: 0.3m
+step 00079/00100 (79.00%) | loss: 5.335024 | lrm: 0.36 | dt: 951.74ms | tok/sec: 550,870 | bf16_mfu: 16.16 | epoch: 1 pq: 0 rg: 80 | total time: 1.10m | eta: 0.3m
+step 00080/00100 (80.00%) | loss: 5.325305 | lrm: 0.34 | dt: 952.37ms | tok/sec: 550,509 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 0 | total time: 1.11m | eta: 0.3m
+step 00081/00100 (81.00%) | loss: 5.319023 | lrm: 0.33 | dt: 952.01ms | tok/sec: 550,715 | bf16_mfu: 16.16 | epoch: 1 pq: 1 rg: 0 | total time: 1.13m | eta: 0.3m
+step 00082/00100 (82.00%) | loss: 5.307565 | lrm: 0.31 | dt: 952.59ms | tok/sec: 550,380 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 0 | total time: 1.14m | eta: 0.3m
+step 00083/00100 (83.00%) | loss: 5.283375 | lrm: 0.30 | dt: 951.71ms | tok/sec: 550,888 | bf16_mfu: 16.16 | epoch: 1 pq: 1 rg: 0 | total time: 1.16m | eta: 0.3m
+step 00084/00100 (84.00%) | loss: 5.267415 | lrm: 0.28 | dt: 952.07ms | tok/sec: 550,682 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 0 | total time: 1.18m | eta: 0.3m
+step 00085/00100 (85.00%) | loss: 5.252617 | lrm: 0.27 | dt: 952.13ms | tok/sec: 550,645 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 0 | total time: 1.19m | eta: 0.2m
+step 00086/00100 (86.00%) | loss: 5.246182 | lrm: 0.25 | dt: 951.92ms | tok/sec: 550,771 | bf16_mfu: 16.16 | epoch: 1 pq: 1 rg: 0 | total time: 1.21m | eta: 0.2m
+step 00087/00100 (87.00%) | loss: 5.234390 | lrm: 0.24 | dt: 952.06ms | tok/sec: 550,689 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 8 | total time: 1.22m | eta: 0.2m
+step 00088/00100 (88.00%) | loss: 5.229089 | lrm: 0.23 | dt: 953.13ms | tok/sec: 550,067 | bf16_mfu: 16.14 | epoch: 1 pq: 1 rg: 8 | total time: 1.24m | eta: 0.2m
+step 00089/00100 (89.00%) | loss: 5.212375 | lrm: 0.21 | dt: 952.07ms | tok/sec: 550,679 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 8 | total time: 1.25m | eta: 0.2m
+step 00090/00100 (90.00%) | loss: 5.205147 | lrm: 0.20 | dt: 953.15ms | tok/sec: 550,056 | bf16_mfu: 16.14 | epoch: 1 pq: 1 rg: 8 | total time: 1.27m | eta: 0.2m
+step 00091/00100 (91.00%) | loss: 5.202549 | lrm: 0.18 | dt: 952.68ms | tok/sec: 550,332 | bf16_mfu: 16.14 | epoch: 1 pq: 1 rg: 8 | total time: 1.29m | eta: 0.1m
+step 00092/00100 (92.00%) | loss: 5.196029 | lrm: 0.17 | dt: 951.50ms | tok/sec: 551,013 | bf16_mfu: 16.16 | epoch: 1 pq: 1 rg: 8 | total time: 1.30m | eta: 0.1m
+step 00093/00100 (93.00%) | loss: 5.178339 | lrm: 0.15 | dt: 952.41ms | tok/sec: 550,484 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 8 | total time: 1.32m | eta: 0.1m
+step 00094/00100 (94.00%) | loss: 5.168893 | lrm: 0.14 | dt: 952.11ms | tok/sec: 550,658 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 16 | total time: 1.33m | eta: 0.1m
+step 00095/00100 (95.00%) | loss: 5.157057 | lrm: 0.12 | dt: 951.41ms | tok/sec: 551,062 | bf16_mfu: 16.17 | epoch: 1 pq: 1 rg: 16 | total time: 1.35m | eta: 0.1m
+step 00096/00100 (96.00%) | loss: 5.154551 | lrm: 0.11 | dt: 951.71ms | tok/sec: 550,890 | bf16_mfu: 16.16 | epoch: 1 pq: 1 rg: 16 | total time: 1.37m | eta: 0.1m
+step 00097/00100 (97.00%) | loss: 5.139303 | lrm: 0.09 | dt: 952.28ms | tok/sec: 550,558 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 16 | total time: 1.38m | eta: 0.0m
+step 00098/00100 (98.00%) | loss: 5.131947 | lrm: 0.08 | dt: 952.11ms | tok/sec: 550,661 | bf16_mfu: 16.15 | epoch: 1 pq: 1 rg: 16 | total time: 1.40m | eta: 0.0m
+step 00099/00100 (99.00%) | loss: 5.116970 | lrm: 0.06 | dt: 953.01ms | tok/sec: 550,140 | bf16_mfu: 16.14 | epoch: 1 pq: 1 rg: 16 | total time: 1.41m | eta: 0.0m
+Step 00100 | Validation bpb: 1.533610
+Evaluating: hellaswag_zeroshot (0-shot, type: multiple_choice)... accuracy: 0.2000 | centered: -0.0667 | time: 3.85s
+Evaluating: jeopardy (10-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 3.54s
+Evaluating: bigbench_qa_wikidata (10-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 3.53s
+Evaluating: arc_easy (10-shot, type: multiple_choice)... accuracy: 0.3000 | centered: 0.0667 | time: 3.50s
+Evaluating: arc_challenge (10-shot, type: multiple_choice)... accuracy: 0.1800 | centered: -0.0933 | time: 4.16s
+Evaluating: copa (0-shot, type: multiple_choice)... accuracy: 0.4600 | centered: -0.0800 | time: 2.94s
+Evaluating: commonsense_qa (10-shot, type: multiple_choice)... accuracy: 0.1200 | centered: -0.1000 | time: 4.09s
+Evaluating: piqa (10-shot, type: multiple_choice)... accuracy: 0.5400 | centered: 0.0800 | time: 4.79s
+Evaluating: openbook_qa (0-shot, type: multiple_choice)... accuracy: 0.2600 | centered: 0.0133 | time: 3.22s
+Evaluating: lambada_openai (0-shot, type: language_modeling)... accuracy: 0.0200 | centered: 0.0200 | time: 3.43s
+Evaluating: hellaswag (10-shot, type: multiple_choice)... accuracy: 0.2000 | centered: -0.0667 | time: 8.54s
+Evaluating: winograd (0-shot, type: schema)... accuracy: 0.5600 | centered: 0.1200 | time: 2.92s
+Evaluating: winogrande (0-shot, type: schema)... accuracy: 0.6400 | centered: 0.2800 | time: 2.91s
+Evaluating: bigbench_dyck_languages (10-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 5.09s
+Evaluating: agi_eval_lsat_ar (3-shot, type: multiple_choice)... accuracy: 0.2200 | centered: 0.0250 | time: 9.08s
+Evaluating: bigbench_cs_algorithms (10-shot, type: language_modeling)... accuracy: 0.0400 | centered: 0.0400 | time: 6.44s
+Evaluating: bigbench_operators (10-shot, type: language_modeling)... accuracy: 0.1000 | centered: 0.1000 | time: 3.42s
+Evaluating: bigbench_repeat_copy_logic (10-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 1.96s
+Evaluating: squad (10-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 7.48s
+Evaluating: coqa (0-shot, type: language_modeling)... accuracy: 0.0000 | centered: 0.0000 | time: 6.59s
+Evaluating: boolq (10-shot, type: multiple_choice)... accuracy: 0.3800 | centered: -0.6316 | time: 7.06s
+Evaluating: bigbench_language_identification (10-shot, type: multiple_choice)... accuracy: 0.2800 | centered: 0.2079 | time: 7.72s
+Step 00100 | CORE metric: -0.0039
+2026-05-03 03:38:45,907 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank5.pt
+2026-05-03 03:38:45,908 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank1.pt
+2026-05-03 03:38:45,912 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank6.pt
+2026-05-03 03:38:45,919 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank7.pt
+2026-05-03 03:38:45,920 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank4.pt
+2026-05-03 03:38:46,014 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank3.pt
+2026-05-03 03:38:46,015 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank2.pt
+<|bos|>The capital of France is the most common of the world of the world of the world of the world of
+<|bos|>The chemical symbol of gold is a common form of a chemical reaction, which is a chemical reaction, and the
+<|bos|>If yesterday was Friday, then tomorrow will be a great way to get a lot of time, it is a great way to
+<|bos|>The opposite of hot is the most common of the most common of the most common of the most common of
+<|bos|>The planets of the solar system are: the same time, the most common of the most common of the most common of
+<|bos|>My favorite color is a great way to make a sense of the color of the color of the color
+<|bos|>If 5*x + 3 = 13, then x is 1. 1. 2. 2. 2. 
+2026-05-03 03:39:18,033 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved model parameters to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/model_000100.pt
+2026-05-03 03:39:18,035 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved metadata to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/meta_000100.json
+2026-05-03 03:39:18,893 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Saved optimizer state to: /data/nanochat/base_checkpoints/rlkv_d20_smoke_b/optim_000100_rank0.pt
+Peak memory usage: 50012.98MiB
+Total training time: 1.41m
+Minimum validation bpb: 1.533610
+[launcher] result: {'rc': 0, 'num_gpus': 8}
+Stopping app - local entrypoint completed.
+[modal-client] 2026-05-03T11:39:32+0800 Timed out waiting for final app logs.
+✓ App completed. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-5DTog1TM0DE8jnephI01vY

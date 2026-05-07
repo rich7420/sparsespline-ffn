@@ -72,7 +72,7 @@ def _train_cell(
     cell: str, steps: int, mb: int, seq_len: int, peak_lr: float,
     warmup_steps: int, eval_every: int, eval_batches: int,
     checkpoint_every: int, diag_every: int, use_kernel: bool,
-    cuda_graph: bool, tag: str = "",
+    cuda_graph: bool, tag: str = "", seed: int = 0,
 ) -> str:
     import json
     import os
@@ -94,6 +94,7 @@ def _train_cell(
         "--checkpoint-every", str(checkpoint_every),
         "--diag-every", str(diag_every),
         "--dump-json", out_json,
+        "--seed", str(seed),
     ]
     if use_kernel:
         cmd.append("--use-kernel")
@@ -130,7 +131,7 @@ def _train_cell(
 
 @app.function(
     gpu="H100",
-    timeout=3600 * 2,  # 2 hr safety margin
+    timeout=3600 * 4,  # 4 hr safety margin (800M at h_ratio=2 needs >2h with stable kernels)
     volumes={"/data": DATA_VOLUME},
 )
 def run_train(
@@ -147,17 +148,18 @@ def run_train(
     use_kernel: bool = True,
     cuda_graph: bool = False,
     tag: str = "",
+    seed: int = 0,
 ) -> str:
     return _train_cell(
         cell, steps, mb, seq_len, peak_lr, warmup_steps,
         eval_every, eval_batches, checkpoint_every, diag_every, use_kernel,
-        cuda_graph=cuda_graph, tag=tag,
+        cuda_graph=cuda_graph, tag=tag, seed=seed,
     )
 
 
 @app.function(
     gpu="H100",
-    timeout=3600 * 2,
+    timeout=3600 * 4,
     volumes={"/data": DATA_VOLUME},
 )
 def run_smoke_suite(
@@ -487,6 +489,7 @@ def main(
     tag: str = "",
     suite: bool = False,
     all12: bool = False,
+    seed: int = 0,
 ) -> None:
     if suite:
         print(f"Launching 500-step suite on H100  ({steps} steps, B={mb} T={seq_len}, "
@@ -508,6 +511,6 @@ def main(
         warmup_steps=warmup_steps, eval_every=eval_every,
         eval_batches=eval_batches, checkpoint_every=checkpoint_every,
         diag_every=diag_every, use_kernel=use_kernel,
-        cuda_graph=cuda_graph, tag=tag,
+        cuda_graph=cuda_graph, tag=tag, seed=seed,
     )
     print(out)

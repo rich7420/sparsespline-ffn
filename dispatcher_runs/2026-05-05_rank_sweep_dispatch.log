@@ -1,0 +1,37 @@
+Rank sweep — 5 cells
+  prefix    : rank_sweep_200M
+  execute   : True
+  cells     : ['mlp', 'r16', 'r32', 'r64', 'r128']
+
+[mlp]  MLP V2 baseline (zero-rank reference)
+[mlp]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type mlp --run-tag rank_sweep_200M_mlp
+[mlp]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/rank_sweep_200M_mlp.log
+[mlp]  rc=0  dt=36.0 min
+
+[r16]  late33, r=16 (constrained)
+[r16]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late33 --run-tag rank_sweep_200M_r16 --rlkv-h-ratio 2.0 --rlkv-r 16 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
+[r16]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/rank_sweep_200M_r16.log
+[r16]  rc=0  dt=2.0 min
+
+[r32]  late33, r=32 (matches Run C)
+[r32]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late33 --run-tag rank_sweep_200M_r32 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
+[r32]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/rank_sweep_200M_r32.log
+[r32]  rc=0  dt=41.0 min
+
+[r64]  late33, r=64 (uplift?)
+[r64]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late33 --run-tag rank_sweep_200M_r64 --rlkv-h-ratio 2.0 --rlkv-r 64 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
+[r64]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/rank_sweep_200M_r64.log
+[r64]  rc=0  dt=53.5 min
+
+[r128]  late33, r=128 (capacity test)
+[r128]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late33 --run-tag rank_sweep_200M_r128 --rlkv-h-ratio 2.0 --rlkv-r 128 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
+[r128]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/rank_sweep_200M_r128.log
+[r128]  rc=0  dt=1.6 min
+
+--- Sweep summary ---
+  mlp    MLP baseline        rc=0
+  r16    r=16                rc=0
+  r32    r=32                rc=0
+  r64    r=64                rc=0
+  r128   r=128               rc=0
+  total wallclock: 134.1 min

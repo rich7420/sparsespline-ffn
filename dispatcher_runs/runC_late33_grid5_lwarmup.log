@@ -1,0 +1,10 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-G5KM9Z8EFWOSGjNQzAmiTd
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+├── 🔨 Created function run_d20_1gpu.
+└── 🔨 Created function run_d20_8gpu.
+[launcher] mode=rlkv_pilot_1B_diag  run_tag=rlkv_pilot_1B_diag_runC_late33_grid5_lwarmup  ffn_type=rl_kv_b2_late33
+[launcher] base_train.py args: ['--depth=20', '--device-batch-size=32', '--total-batch-size=524288', '--max-seq-len=2048', '--eval-tokens=10485760', '--run=dummy', '--model-tag=rlkv_pilot_1B_diag_runC_late33_grid5_lwarmup', '--ffn-type', 'rl_kv_b2_late33', '--rlkv-h-ratio', '2.0', '--rlkv-r', '32', '--rlkv-L', '22', '--rlkv-fwd-kernel', 'v11_cuda', '--rlkv-bwd-kernel', 'triton', '--rlkv-grid-lo', '-5.0', '--rlkv-grid-hi', '5.0', '--rlkv-lambda-warmup-steps', '1000', '--rlkv-lambda-warmup-lo', '0.25', '--c-lr', '0.02', '--c-weight-decay', '0.0', '--device-batch-size=16', '--num-iterations=1900', '--eval-every=200', '--core-metric-every=1000', '--core-metric-max-per-task=50', '--save-every=-1', '--rlkv-diagnostics-every=200']

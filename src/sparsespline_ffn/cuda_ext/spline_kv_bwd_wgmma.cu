@@ -484,6 +484,9 @@ void spline_kv_bwd_wgmma_cuda(
     // Round 3 reverted: BN=256 hurt due to occupancy drop (1 block/SM at
     // 124 KB SMEM).  Round 3 result: 18.3s vs baseline 17.20s — atomic
     // contention reduction not worth occupancy loss.  Keep BN=128.
+    // BN=128 (3.B.1 — verified marginally faster vs BN=64 in graph mode at
+    // r=32 cells: -4% wall.  Re-applied after BN=64 ablation showed BN=128
+    // was actually the better choice).
     if (R == 32 && L == 22) {
         LAUNCH_BWD_WGMMA(128, 8, 24, 32);
     } else if (R == 32 && L == 16) {
@@ -540,6 +543,9 @@ std::vector<torch::Tensor> spline_kv_bwd_wgmma_cuda_fused(
 
     // BN=128 across all configs (Round 3 BN=256 reverted — occupancy loss
     // outweighed atomic-contention reduction benefit).
+    // BN=128 (3.B.1 — verified marginally faster vs BN=64 in graph mode at
+    // r=32 cells: -4% wall.  Re-applied after BN=64 ablation showed BN=128
+    // was actually the better choice).
     if (R == 32 && L == 22) {
         LAUNCH_BWD_WGMMA(128, 8, 24, 32);
     } else if (R == 32 && L == 16) {

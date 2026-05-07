@@ -1,0 +1,60 @@
+VALID_SMOKE_PRODUCTION_PATH
+
+run-tag : rlkv_d20_smoke_b
+modal   : bask3mn0v
+date    : 2026-05-03
+
+What this validates
+-------------------
+- v11 fwd CUDA + Triton bwd kernels run at production microbatch
+  (N = device_batch × seq_len = 16 × 2048 = 32 768 per rank)
+- DDP across 8 × H100 SXM
+- C tensor optimizer routing (20 C tensors → AdamW c_lr=0.02
+  effective 0.015492 after batch-size and dmodel scaling)
+- Checkpoint save (model_000050.pt, model_000100.pt)
+- Loss decreases monotonically (step 0: 10.40, step 99: 5.12)
+- Val bpb decreases (3.16 → 1.71 @ step 50 → 1.53 @ step 100)
+- Peak memory 50.0 GB / rank (well within 80 GB H100, room for r64)
+
+What this does NOT validate
+---------------------------
+- Quality (only 100 steps ≈ 52M tokens — far short of paper run)
+- Resume / DDP state load (Smoke C handles that next)
+- Diagnostics (active_frac, bin_entropy_norm, delta/base contribution
+  ratio — diagnostics hook still pending)
+- Throughput vs MLP (grad_accum=2 lowers MFU; this comparison
+  needs a controlled bench, not a 100-step smoke)
+
+Memory / batch sizing decision
+------------------------------
+RL-KV at device_batch=32 OOM'd on 8×H100 because the autograd graph
+saves z[N=65536, h=2560] bf16 ≈ 320 MB / layer × 20 layers = 6.4 GB
+extra activation retention vs MLP. With cross-entropy logits taking
+8 GiB fp32 [N, V] at the very end of forward, the last-straw
+allocation pushes peak past 80 GB. Halving device_batch (16) +
+doubling grad_accum (2) keeps total_batch=524288 unchanged, halves
+per-rank activation retention to ~3.2 GB, and lands peak at 50 GB.
+Per-step gradient is mathematically identical to the unfused full
+batch (modulo accumulation order which is irrelevant for AdamW/Muon).
+
+Throughput observation
+----------------------
+~550 k tok/s aggregate at MFU 16.15%. The MFU drop vs MLP
+V2 (37-38%) is expected: RL-KV's spline-bwd kernel adds work that
+isn't on the GEMM peak path, AND grad_accum=2 halves compute density
+per step. The relevant comparison is per-token wall not per-step MFU.
+
+Next steps
+----------
+1. Smoke C : resume from step 50 → step 150, validate state continuity
+2. Pilot grid (1B): r32/r64 × c_lr=0.02/0.06 against same-step MLP V2
+3. Pilot 2B finalist on top 1-2 cells
+4. Full RL-KV d20 with selected config (token-budget locked at 16 600
+   iter per plan §18)
+
+Artifacts
+---------
+- training log : dispatcher_runs/rlkv_d20_smoke_b.log
+- manifest     : dispatcher_runs/rlkv_d20_smoke_b.manifest.json
+- checkpoints  : <volume>/nanochat/base_checkpoints/rlkv_d20_smoke_b/
+                   model_000050.pt, model_000100.pt

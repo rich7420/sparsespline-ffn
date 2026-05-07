@@ -1,0 +1,95 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-ky7U1bDhKPakZZtfU72zgT
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7_cute_parity.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_parity.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  v7 CuTe parity vs v5 — N=32768, H=2560, L=22, R=32
+========================================================================
+Compiling spline_kv_bwd_v7_cute.cu ...
+[1/2] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output spline_kv_bwd_v7_cute.cuda.o.d -DTORCH_EXTENSION_NAME=spline_kv_bwd_v7_cute_ext -DTORCH_API_INCLUDE_EXTENSION_H -I/opt/cutlass/include -I/opt/cutlass/tools/util/include -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda --expt-relaxed-constexpr -Xptxas=-v -lineinfo -DCUTE_USE_PACKED_TUPLE=1 -c /repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_v7_cute.cu -o spline_kv_bwd_v7_cute.cuda.o 
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN12v7_cute_impl28spline_kv_bwd_v7_cute_kernelILi128ELi8ELi24ELi32ELi4EN4cute9TiledCopyINS1_9Copy_AtomIJNS1_11Copy_TraitsINS1_13SM90_TMA_LOADEJNS1_1CILi65536EEENS1_12AuxTmaParamsINS1_5tupleIJNS1_11ScaledBasisINS6_ILi1EEELi0EEENSA_ISB_Li1EEEEEERKNS1_6LayoutINS9_IJNS6_ILi32EEENS6_ILi128EEEEEESE_EERKNS1_7SwizzleILi2ELi4ELi3EEEEEEEEN7cutlass6half_tEEEENSF_INS9_IJSB_NS9_IJNS6_ILi4096EEEEEEEEENS9_IJNS6_ILi0EEENS9_IJSB_EEEEEEEESI_EEEEvPK13__nv_bfloat1614CUtensorMap_stT4_PfS18_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN12v7_cute_impl28spline_kv_bwd_v7_cute_kernelILi128ELi8ELi24ELi32ELi4EN4cute9TiledCopyINS1_9Copy_AtomIJNS1_11Copy_TraitsINS1_13SM90_TMA_LOADEJNS1_1CILi65536EEENS1_12AuxTmaParamsINS1_5tupleIJNS1_11ScaledBasisINS6_ILi1EEELi0EEENSA_ISB_Li1EEEEEERKNS1_6LayoutINS9_IJNS6_ILi32EEENS6_ILi128EEEEEESE_EERKNS1_7SwizzleILi2ELi4ELi3EEEEEEEEN7cutlass6half_tEEEENSF_INS9_IJSB_NS9_IJNS6_ILi4096EEEEEEEEENS9_IJNS6_ILi0EEENS9_IJSB_EEEEEEEESI_EEEEvPK13__nv_bfloat1614CUtensorMap_stT4_PfS18_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 1 barriers, 13312 bytes smem
+ptxas info    : Compiling entry function '_ZN12v7_cute_impl30spline_kv_bwd_v7_reduce_kernelEPKfP13__nv_bfloat16iiii' for 'sm_90a'
+ptxas info    : Function properties for _ZN12v7_cute_impl30spline_kv_bwd_v7_reduce_kernelEPKfP13__nv_bfloat16iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers
+[2/2] c++ spline_kv_bwd_v7_cute.cuda.o -shared -lcuda -L/usr/local/lib/python3.12/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o spline_kv_bwd_v7_cute_ext.so
+v7 compile OK.
+Running v5 ref bwd ...
+[1/2] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output spline_kv_bwd_wgmma_v5.cuda.o.d -DTORCH_EXTENSION_NAME=spline_kv_bwd_wgmma_v5_ext -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda -Xptxas=-v -lineinfo -c /repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_wgmma_v5.cu -o spline_kv_bwd_wgmma_v5.cuda.o 
+/repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_wgmma_v5.cu(94): warning #177-D: function "<unnamed>::cp_async_wait_all" was declared but never referenced
+                            void cp_async_wait_all() {
+                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ptxas info    : 10 bytes gmem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi64ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi64ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 152 registers, used 1 barriers, 122880 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi32ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi32ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 118 registers, used 1 barriers, 106496 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi16ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi16ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 80 registers, used 1 barriers, 65536 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, used 1 barriers, 86016 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0630spline_kv_bwd_v5_reduce_kernelEPKfP13__nv_bfloat16iiii' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0630spline_kv_bwd_v5_reduce_kernelEPKfP13__nv_bfloat16iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers
+[2/2] c++ spline_kv_bwd_wgmma_v5.cuda.o -shared -L/usr/local/lib/python3.12/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o spline_kv_bwd_wgmma_v5_ext.so
+Running v7 cute bwd ...
+
+  dC : v5_max=140.0000  v7_max=140.0000
+       max_abs_err=0.000000  max_rel_err=0.000000
+  dz : v5_max=7.9708  v7_max=7.9708
+       max_abs_err=0.000000  max_rel_err=0.000000
+  passed: YES
+
+
+FINAL JSON:
+{
+  "dC_max_abs": 0.0,
+  "dC_mean_abs": 0.0,
+  "dC_v5_max": 140.0,
+  "dC_v7_max": 140.0,
+  "dz_max_abs": 0.0,
+  "dz_mean_abs": 0.0,
+  "dz_v5_max": 7.9708147048950195,
+  "dz_v7_max": 7.9708147048950195,
+  "dC_max_rel": 0.0,
+  "dz_max_rel": 0.0,
+  "passed": true
+}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-ky7U1bDhKPakZZtfU72zgT

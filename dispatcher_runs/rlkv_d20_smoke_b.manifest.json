@@ -1,0 +1,107 @@
+{
+  "run_tag": "rlkv_d20_smoke_b",
+  "modal_task_id": "bask3mn0v",
+  "status": "VALID_SMOKE_PRODUCTION_PATH",
+  "status_reason": "100-step end-to-end validation of the RL-KV d20 training pipeline at production batch on 8×H100. Confirms: (1) v11 fwd CUDA + Triton bwd kernels work at production microbatch (N = device_batch × seq_len = 16 × 2048 = 32 768 per rank); (2) DDP across 8 ranks; (3) C tensor optimizer routing (20 C tensors → AdamW with c_lr=0.02); (4) checkpoint save/load schema; (5) loss decreases monotonically (10.40 → 5.12); (6) val bpb decreases (3.16 → 1.71 → 1.53). NOT a quality result — only 100 steps, ~52M tokens. Quality assessment defers to pilot grid + full d20.",
+  "date": "2026-05-03",
+  "wall_minutes": 1.41,
+
+  "hardware": {
+    "platform": "Modal",
+    "gpu": "H100 SXM 80GB",
+    "num_gpus": 8
+  },
+
+  "model": {
+    "depth": 20,
+    "vocab_size": 32768,
+    "params_total_trainable": 802325746,
+    "params_breakdown": {
+      "wte": 41943040,
+      "value_embeds": 419430400,
+      "lm_head": 41943040,
+      "transformer_matrices": 299009200,
+      "scalars": 66
+    },
+    "params_scaling": "transformer_matrices + lm_head ≈ 340.95 M",
+    "ffn_type": "rl_kv_b2",
+    "rlkv_h_ratio": 2.0,
+    "rlkv_r": 32,
+    "rlkv_L": 22,
+    "rlkv_grid": [-3.0, 3.0],
+    "rlkv_lambda_scale": 1.0,
+    "rlkv_fwd_kernel": "v11_cuda",
+    "rlkv_bwd_kernel": "triton",
+    "C_tensor_count": 20,
+    "C_optimizer": "AdamW",
+    "c_lr_config": 0.02,
+    "c_lr_effective": 0.015492
+  },
+
+  "training": {
+    "num_iterations": 100,
+    "device_batch_size": 16,
+    "device_batch_note": "halved from 32 (MLP default) — RL-KV's autograd graph saves z[N,h] bf16 ≈ 320 MB/layer × 20 layers = 6.4 GB extra activation retention vs MLP, which makes the cross-entropy 8 GiB fp32 logits the OOM trigger at batch=32. Halving microbatch keeps total batch identical via grad_accum=2.",
+    "grad_accum_steps": 2,
+    "total_batch_size_tokens": 524288,
+    "max_seq_len": 2048,
+    "tokens_per_microbatch_per_rank": 32768,
+    "total_training_tokens": 52428800,
+    "eval_tokens": 10485760,
+    "eval_every": 50,
+    "core_metric_every": 100,
+    "core_metric_max_per_task": 50,
+    "save_every": 50
+  },
+
+  "results": {
+    "step_0_val_bpb": 3.161808,
+    "step_50_val_bpb": 1.706985,
+    "step_100_val_bpb": 1.533610,
+    "step_100_core_at_50": -0.0039,
+    "step_100_core_note": "noise — only 100 steps trained; CORE@50 needs more training",
+    "final_train_loss": 5.116970,
+    "throughput_tok_per_sec_steady": 550000,
+    "bf16_mfu_steady_pct": 16.15,
+    "mfu_note": "MFU is reduced vs MLP baseline because grad_accum=2 halves the effective compute density per step",
+    "peak_memory_per_rank_gb": 50.01
+  },
+
+  "checkpoints": {
+    "modal_volume_path": "/data/nanochat/base_checkpoints/rlkv_d20_smoke_b/",
+    "saved_at_steps": [50, 100],
+    "model_files": ["model_000050.pt", "model_000100.pt"]
+  },
+
+  "command": {
+    "torchrun": "torchrun --standalone --nproc_per_node=8 -m scripts.base_train --",
+    "args": [
+      "--depth=20",
+      "--total-batch-size=524288",
+      "--max-seq-len=2048",
+      "--eval-tokens=10485760",
+      "--run=dummy",
+      "--model-tag=rlkv_d20_smoke_b",
+      "--ffn-type", "rl_kv_b2",
+      "--rlkv-h-ratio", "2.0",
+      "--rlkv-r", "32",
+      "--rlkv-L", "22",
+      "--rlkv-fwd-kernel", "v11_cuda",
+      "--rlkv-bwd-kernel", "triton",
+      "--c-lr", "0.02",
+      "--c-weight-decay", "0.0",
+      "--device-batch-size=16",
+      "--num-iterations=100",
+      "--eval-every=50",
+      "--core-metric-every=100",
+      "--core-metric-max-per-task=50",
+      "--save-every=50"
+    ],
+    "launcher": "benchmarks/modal_h100_nanochat_d20.py::main --mode smoke_b --ffn-type rl_kv_b2 --run-tag rlkv_d20_smoke_b"
+  },
+
+  "artifacts": {
+    "training_log_local": "dispatcher_runs/rlkv_d20_smoke_b.log",
+    "next_step": "Smoke C resume from step 50 → step 150 to validate checkpoint reload + DDP resume + C optimizer state continuity"
+  }
+}

@@ -1,0 +1,177 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-oVnoqcpHSVZiGtXyBJZ4ho
+Building image im-kP1jk6tgOPzlO2FZr110N5
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 548.41ms
+
+Built image im-kP1jk6tgOPzlO2FZr110N5 in 3.57s
+
+
+Building image im-5RVAyUQeH0X3avvexFl5Wq
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-rx3n_gmt/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 618.85ms
+
+Built image im-5RVAyUQeH0X3avvexFl5Wq in 6.57s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_parity_h100.
+[c1] dispatching to H100 (filter=<all>) ...
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[c1] CMD: /usr/local/bin/python -u -m pytest /repo/tests/test_rlkv_kernel_parity.py -v --tb=short -s --timeout=300 --color=no
+============================= test session starts ==============================
+platform linux -- Python 3.12.1, pytest-9.0.3, pluggy-1.6.0 -- /usr/local/bin/python
+rootdir: /repo
+configfile: pyproject.toml
+plugins: anyio-4.13.0, timeout-2.4.0
+timeout: 300.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 57 items
+
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N64_h64_r8_L8-dtype0] PASSED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N64_h64_r8_L8-dtype1] PASSED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N256_h128_r16_L16-dtype0] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N256_h128_r16_L16-dtype1] PASSED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N1024_h256_r32_L22-dtype0] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N1024_h256_r32_L22-dtype1] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N4096_h256_r32_L22-dtype0] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N4096_h256_r32_L22-dtype1] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N64_h64_r8_L8-v10_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N64_h64_r8_L8-v11_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N256_h128_r16_L16-v10_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N256_h128_r16_L16-v11_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N1024_h256_r32_L22-v10_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N1024_h256_r32_L22-v11_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N4096_h256_r32_L22-v10_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N4096_h256_r32_L22-v11_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N32768_h2560_r32_L22-v10_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N32768_h2560_r32_L22-v11_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N16384_h1280_r32_L22-v10_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N16384_h1280_r32_L22-v11_cuda] FAILED
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N64_h64_r8_L8-dtype0] FAILED
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N64_h64_r8_L8-dtype1] FAILED
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N256_h128_r16_L16-dtype0] FAILED
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N256_h128_r16_L16-dtype1] FAILED
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N1024_h256_r32_L22-dtype0] FAILED
+Task's current input(s) ["in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0"] cancelled because: Task's current input in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0 hit its timeout of 3600s
+[modal-client] 2026-05-06T10:24:26+0000 Received a cancellation signal while processing input ('in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0',)
+[modal-client] 2026-05-06T10:24:26+0000 Successfully canceled input ('in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0',)
+Stopping app - uncaught exception raised locally: FunctionTimeoutError("Task's current input in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0 hit its timeout of 3600s").
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py:14 │
+│ 1 in main                                                                    │
+│                                                                              │
+│   140 │   │     flush=True)                                                  │
+│ ❱ 141 │   result = run_parity_h100.remote(pytest_filter=pytest_filter)       │
+│   142                                                                        │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ wrapped                                                                      │
+│                                                                              │
+│    45 │   │   await self.hydrate()                                           │
+│ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
+│    47                                                                        │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ in remote                                                                    │
+│                                                                              │
+│   1766 │   │                                                                 │
+│ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
+│   1768                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ in _call_function                                                            │
+│                                                                              │
+│   1710 │   │                                                                 │
+│ ❱ 1711 │   │   return await invocation.run_function()                        │
+│   1712                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ in run_function                                                              │
+│                                                                              │
+│    292 │   │   │   item = await self._get_single_output()                    │
+│ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
+│    294                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ ls.py:489 in _process_result                                                 │
+│                                                                              │
+│   488 │   if result.status == api_pb2.GenericResult.GENERIC_STATUS_TIMEOUT:  │
+│ ❱ 489 │   │   raise FunctionTimeoutError(result.exception)                   │
+│   490 │   elif result.status == api_pb2.GenericResult.GENERIC_STATUS_INTERNA │
+╰──────────────────────────────────────────────────────────────────────────────╯
+FunctionTimeoutError: Task's current input 
+in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0 hit its timeout of 3600s

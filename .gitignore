@@ -9,6 +9,9 @@ htmlcov/
 build/
 dist/
 
+# paper
+docs/neurips_templates/
+docs/paper/
 # Environments
 .venv/
 venv/

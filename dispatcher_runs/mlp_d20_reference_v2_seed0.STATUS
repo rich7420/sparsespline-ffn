@@ -1,0 +1,54 @@
+VALID_BASELINE_MONITORING_EVAL
+
+run-tag : mlp_d20_reference_v2_seed0
+modal   : bky8upso6 / ap-WtMYB6VZROhG3bTM4XLAGe
+date    : 2026-05-03
+
+Monitoring metrics (in-loop, --eval-tokens=10485760, CORE@50)
+-------------------------------------------------------------
+Final val bpb         : 0.7102
+Last-5 val bpb mean   : 0.7122  (steps 15 750..16 600, range 0.0046)
+Final CORE@50         : 0.2589
+Final train loss      : 2.376
+Monotone violations   : 0 / 68 raw eval points
+
+Run config
+----------
+Final step    : 16 600 / 16 600
+Wall          : 141 min on 8×H100
+Data pass     : ~0.69× of 240-shard corpus (no wrap, <1 epoch)
+Throughput    : 1.03 M tok/s steady, BF16 MFU ~37.5 %
+
+Status reason
+-------------
+Valid full-data d20 training baseline. Training and final eval ran
+to completion. Modal local entrypoint reported exit-1 because the
+post-train report.json could not be written (psutil missing in image,
+since patched). The crash is cosmetic relative to the training run.
+
+The 0.7102 / 0.2589 figures here are MONITORING numbers from the
+in-loop eval and CORE@50, not the paper-final numbers. To promote to
+VALID_BASELINE_FINAL_EVAL, run a post-hoc:
+    base_loss   on the full validation shard
+    base_eval   --core-metric-max-per-task=500
+against model_016600.pt, then refresh the headline numbers.
+
+Checkpoint caveat
+-----------------
+- model_016600.pt           ✅ present, usable for eval / inference
+- optim_016600_rank{1..7}   ✅ present (7 of 8)
+- optim_016600_rank0        ❌ not flushed before psutil crash
+- meta_016600.json          ❌ not flushed before psutil crash
+- model_016000.pt + optim_016000_rank{0..7}: full snapshot, last
+  cleanly resumable point.
+
+Resume from step 16 600 is broken; resume from step 16 000 is intact.
+Eval / inference from model_016600.pt is unaffected.
+
+Artifacts
+---------
+- model      : <volume>/nanochat/base_checkpoints/mlp_d20_reference_v2_seed0/model_016600.pt
+- training log : dispatcher_runs/mlp_d20_reference_v2_seed0.log
+- manifest   : dispatcher_runs/mlp_d20_reference_v2_seed0.manifest.json
+- results    : docs/RESULTS_2026-05-03_mlp_d20_baseline.md
+- memory     : ~/.claude/projects/-home-rich-wsl-pal-kan/memory/project_mlp_d20_baseline.md

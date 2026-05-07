@@ -1,0 +1,253 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-TdPGao7wb3Q27MjNePqyq7
+Building image im-9IJmKsGJu41eJWVddSje5K
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 758.85ms
+
+Built image im-9IJmKsGJu41eJWVddSje5K in 3.75s
+
+
+Building image im-WkYNdvVerQXlJp01QCvGMr
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-m6r8v_bf/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 629.25ms
+
+Built image im-WkYNdvVerQXlJp01QCvGMr in 8.69s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_wgmma_tma_microtest.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_probe.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  v6.1b — TMA → WGMMA m64n32k16 descriptor probe
+  Shape: A[64, 16] × B[16, 32] = D[64, 32]
+  D_ref stats: max_abs=4.3579  mean_abs=0.7487
+========================================================================
+
+--- variant 0: TMA-A + TMA-B (no swizzle), naive row-major LBO/SBO ---
+[1/2] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output wgmma_tma_test.cuda.o.d -DTORCH_EXTENSION_NAME=wgmma_tma_test_ext -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda -Xptxas=-v -lineinfo -c /repo/src/sparsespline_ffn/cuda_ext/wgmma_tma_test.cu -o wgmma_tma_test.cuda.o 
+ptxas info    : 10 bytes gmem
+ptxas info    : Compiling entry function '_ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi5EEEv14CUtensorMap_stS1_PK6__halfPfPS2_' for 'sm_90a'
+ptxas info    : Function properties for _ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi5EEEv14CUtensorMap_stS1_PK6__halfPfPS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, used 1 barriers, 3080 bytes smem
+ptxas info    : Compiling entry function '_ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi4EEEv14CUtensorMap_stS1_PK6__halfPfPS2_' for 'sm_90a'
+ptxas info    : Function properties for _ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi4EEEv14CUtensorMap_stS1_PK6__halfPfPS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, used 1 barriers, 3080 bytes smem
+ptxas info    : Compiling entry function '_ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi3EEEv14CUtensorMap_stS1_PK6__halfPfPS2_' for 'sm_90a'
+ptxas info    : Function properties for _ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi3EEEv14CUtensorMap_stS1_PK6__halfPfPS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, used 1 barriers, 3080 bytes smem
+ptxas info    : Compiling entry function '_ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi2EEEv14CUtensorMap_stS1_PK6__halfPfPS2_' for 'sm_90a'
+ptxas info    : Function properties for _ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi2EEEv14CUtensorMap_stS1_PK6__halfPfPS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, used 1 barriers, 3080 bytes smem
+ptxas info    : Compiling entry function '_ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi1EEEv14CUtensorMap_stS1_PK6__halfPfPS2_' for 'sm_90a'
+ptxas info    : Function properties for _ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi1EEEv14CUtensorMap_stS1_PK6__halfPfPS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, used 1 barriers, 3080 bytes smem
+ptxas info    : Compiling entry function '_ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi0EEEv14CUtensorMap_stS1_PK6__halfPfPS2_' for 'sm_90a'
+ptxas info    : Function properties for _ZN50_GLOBAL__N__be594924_17_wgmma_tma_test_cu_0c91ec3921wgmma_tma_test_kernelILi0EEEv14CUtensorMap_stS1_PK6__halfPfPS2_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, used 1 barriers, 3080 bytes smem
+[2/2] c++ wgmma_tma_test.cuda.o -shared -lcuda -L/usr/local/lib/python3.12/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o wgmma_tma_test_ext.so
+  D       : max_abs=1.8488
+  D_ref   : max_abs=4.3579
+  err     : max_abs=6.2067  max_rel=1.4242  mean_abs=0.9389
+  passed  : NO
+
+  D[:4, :4]:
+  [[ 0.06862547 -0.10105778 -0.75346303  0.36515915]
+ [ 0.03325499 -0.03487498  0.5717489   0.4870186 ]
+ [-1.2074169   0.14208084  0.64725745  0.7672039 ]
+ [ 0.23336235  0.60668904 -0.58148247 -0.24436069]]
+
+  D_ref[:4, :4]:
+  [[-0.88093704  0.87730384 -0.6833889   0.61618525]
+ [-0.62964344 -1.2693315   1.2575148  -0.6134248 ]
+ [-0.6748277  -0.6412669   1.6733276   0.40043914]
+ [ 0.7814096  -0.29372284  0.9794108   0.13992253]]
+
+--- variant 1: TMA-A + TMA-B (no swizzle), v5 core-major LBO/SBO ---
+  D       : max_abs=4.0015
+  D_ref   : max_abs=4.3579
+  err     : max_abs=5.2265  max_rel=1.1993  mean_abs=1.0387
+  passed  : NO
+
+  D[:4, :4]:
+  [[ 0.28088313 -0.24813397 -0.75351876 -0.79191583]
+ [ 1.5521816   0.6119807  -1.032385    0.09843528]
+ [-1.9626853   0.13881    -0.89987755  1.2932882 ]
+ [ 0.4776004   2.1622999  -2.0575628   0.30462527]]
+
+  D_ref[:4, :4]:
+  [[-0.88093704  0.87730384 -0.6833889   0.61618525]
+ [-0.62964344 -1.2693315   1.2575148  -0.6134248 ]
+ [-0.6748277  -0.6412669   1.6733276   0.40043914]
+ [ 0.7814096  -0.29372284  0.9794108   0.13992253]]
+
+--- variant 2: TMA-A + TMA-B (SW128), descriptor swizzle=1 ---
+[gpu-health] [WARN] GPU-e8c323a5-3461-de9a-39cc-8a44c1a8e239: XID: NVRM: Xid (PCI:0000:45:00): 13, pid=648460, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 4, SM 0): Out Of Range Address
+
+[gpu-health] [WARN] GPU-e8c323a5-3461-de9a-39cc-8a44c1a8e239: XID: NVRM: Xid (PCI:0000:45:00): 13, pid=648460, name=nvc:[driver], Graphics Exception: ESR 0x519730=0x1700000e 0x519734=0x20 0x519728=0x1f81fb60 0x51972c=0x1174
+
+[gpu-health] [WARN] GPU-e8c323a5-3461-de9a-39cc-8a44c1a8e239: XID: NVRM: Xid (PCI:0000:45:00): 43, pid=642021, name=exe, channel 0x0000000a
+
+  KERNEL CRASHED: CUDA error: an illegal memory access was encountered
+Search for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+--- variant 3: TMA-A + TMA-B (no swizzle), row-major asm + canonical LBO/SBO ---
+  KERNEL CRASHED: CUDA error: an illegal memory access was encountered
+Search for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+--- variant 4: TMA-A + TMA-B (no swizzle), row-major asm + LBO/SBO swapped ---
+  KERNEL CRASHED: CUDA error: an illegal memory access was encountered
+Search for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+--- variant 5: MANUAL-A core-major + TMA-B (SW64), v5 asm + descriptor swizzle=2 ---
+  KERNEL CRASHED: CUDA error: an illegal memory access was encountered
+Search for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+========================================================================
+  VERDICT
+========================================================================
+  NO variants passed. Diagnostic next steps:
+  - Inspect variant 5 B_smem_dump: if multiset_match=0 then TMA
+    layout is correct and only the WGMMA descriptor LBO/SBO is
+    wrong; iterate on those.
+  - If multiset_match!=0 then TMA descriptor itself is wrong
+    (likely boxDim / global stride / interleave).
+
+
+FINAL JSON:
+{
+  "variants": {
+    "0": {
+      "variant": 0,
+      "description": "TMA-A + TMA-B (no swizzle), naive row-major LBO/SBO",
+      "max_abs_err": 6.206701278686523,
+      "max_rel_err": 1.4242442846298218,
+      "mean_abs_err": 0.9388735294342041,
+      "D_max_abs": 1.8488103151321411,
+      "D_essentially_zero": false,
+      "passed": false
+    },
+    "1": {
+      "variant": 1,
+      "description": "TMA-A + TMA-B (no swizzle), v5 core-major LBO/SBO",
+      "max_abs_err": 5.226497173309326,
+      "max_rel_err": 1.1993179321289062,
+      "mean_abs_err": 1.0386691093444824,
+      "D_max_abs": 4.00148344039917,
+      "D_essentially_zero": false,
+      "passed": false
+    },
+    "2": {
+      "crashed": true,
+      "error": "CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n"
+    },
+    "3": {
+      "crashed": true,
+      "error": "CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n"
+    },
+    "4": {
+      "crashed": true,
+      "error": "CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n"
+    },
+    "5": {
+      "crashed": true,
+      "error": "CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n"
+    }
+  },
+  "passed_variants": []
+}
+Stopping app - uncaught exception raised locally: SystemExit(1).

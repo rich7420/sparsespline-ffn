@@ -1,0 +1,45 @@
+{
+  "_doc": "Cost-normalized comparison inputs for the d20 3-way (MLP V2 / Run C / Run A). Wallclock and tok/sec extracted from dispatcher_runs/*.log; FLOPs from RESULTS_2026-05-04 §1; bpb / CORE final from RESULTS §2-§4.",
+  "schedule": {
+    "num_iterations": 16600,
+    "tokens_per_step": 524288,
+    "total_tokens": 8703180800,
+    "num_gpus": 8
+  },
+  "methods": {
+    "MLP V2": {
+      "label": "mlp_d20_reference_v2_seed0",
+      "wallclock_minutes": 141.10,
+      "tok_per_sec": 1025000,
+      "bf16_mfu": 0.375,
+      "flops_total": 2.51e19,
+      "bpb_final": 0.7102,
+      "core_final": 0.2589,
+      "preempt_note": "Final-step crash on psutil; trajectory completed cleanly; total time ≈ 141.10m from log."
+    },
+    "Run C": {
+      "label": "full_rlkv_late33_grid5_lwarmup",
+      "wallclock_minutes": 225.11,
+      "tok_per_sec": 645000,
+      "bf16_mfu": 0.2194,
+      "flops_total": 2.34e19,
+      "bpb_final": 0.7166,
+      "core_final": 0.2701,
+      "preempt_note": null
+    },
+    "Run A": {
+      "label": "full_rlkv_b2_all_grid5_lwarmup",
+      "wallclock_minutes": 260.45,
+      "tok_per_sec": 551000,
+      "bf16_mfu": 0.1616,
+      "flops_total": 2.34e19,
+      "bpb_final": 0.7307,
+      "core_final": 0.2356,
+      "preempt_note": "Modal worker preempted at step ~13250; resumed from ckpt 12000. Wallclock 260.45m is cumulative across both segments (resume log persists the timer)."
+    }
+  },
+  "wallclock_equivalents": {
+    "_doc": "What does each method look like at MLP V2's wallclock budget (141.10m)? Used for the same-wallclock fair-cost row. Step at MLP-equivalent = (141.10 / wallclock_minutes) × num_iterations, rounded down. bpb / CORE values at that step are interpolated from the trajectory data in benchmarks/data/trajectory_2026-05-04.json (linear between bracketing eval points).",
+    "mlp_budget_minutes": 141.10
+  }
+}

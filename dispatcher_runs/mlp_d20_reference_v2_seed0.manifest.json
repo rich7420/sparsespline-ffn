@@ -1,0 +1,144 @@
+{
+  "run_tag": "mlp_d20_reference_v2_seed0",
+  "modal_task_id": "bky8upso6",
+  "modal_app_url": "https://modal.com/apps/hao-ai-lab/main/ap-WtMYB6VZROhG3bTM4XLAGe",
+  "status": "VALID_BASELINE_MONITORING_EVAL",
+  "status_reason": "Valid full-data d20 training baseline — 16 600/16 600 steps, monotone val bpb to 0.7102 (last-5 mean 0.7122), CORE@50 to 0.2589, train loss 2.376, no data wrap. Headline figures here come from the in-loop monitoring eval (--eval-tokens=10485760, --core-metric-max-per-task=50). The paper-final headline numbers should come from a post-hoc base_loss + base_eval@500 pass against model_016600.pt; until that runs, do not quote 0.7102 / 0.2589 as the paper number. Modal local entry point also reported exit-1 due to a missing psutil module in the post-train report import (base_train.py line 646) — patched in the image; cosmetic with respect to the training run.",
+  "promotes_to_status_after_full_eval": "VALID_BASELINE_FINAL_EVAL",
+  "date": "2026-05-03",
+  "started_utc": "2026-05-02T23:00:00Z (approx)",
+  "finished_utc": "2026-05-03T01:56:39Z",
+  "wall_minutes": 141.10,
+
+  "hardware": {
+    "platform": "Modal",
+    "gpu": "H100 SXM 80GB",
+    "num_gpus": 8,
+    "peak_flops_bf16": 9.89e14
+  },
+
+  "model": {
+    "depth": 20,
+    "vocab_size": 32768,
+    "params_total_trainable": 896533746,
+    "params_breakdown": {
+      "wte": 41943040,
+      "value_embeds": 419430400,
+      "lm_head": 41943040,
+      "transformer_matrices": 393217200,
+      "scalars": 66
+    },
+    "params_scaling": 435160240,
+    "params_scaling_components": "transformer_matrices + lm_head",
+    "params_scaling_note": "drives --target-param-data-ratio and the LR/data:param schedule; matches log line 'Tokens : Scaling params ratio: 20.00' against the 8.703 B-token budget.",
+    "params_conventional_transformer": 477103280,
+    "params_conventional_components": "transformer_matrices + lm_head + wte (excludes nanochat's value_embeds table)",
+    "ffn_type": "mlp"
+  },
+
+  "training": {
+    "num_iterations": 16600,
+    "total_batch_size_tokens": 524288,
+    "device_batch_size": 32,
+    "max_seq_len": 2048,
+    "tokens_per_microbatch_per_rank": 65536,
+    "total_training_tokens": 8703180800,
+    "tokens_to_scaling_params_ratio": 20.00,
+    "tokens_to_scaling_params_check": "8703180800 / 435160240 = 20.0007 ≈ 20.00 logged",
+    "flops_per_token_est": 2.886213e9,
+    "total_training_flops_est": 2.511923e19,
+    "epoch_count": 1,
+    "epoch_wrap": false,
+    "lr_adamw_scale": 0.774597,
+    "weight_decay_scaled": 0.070843,
+    "warmup_steps": null,
+    "warmdown_ratio": null,
+    "final_lr_frac": null,
+    "eval_tokens": 10485760,
+    "eval_every": 250,
+    "core_metric_every": 2000,
+    "core_metric_max_per_task": 50,
+    "save_every": 2000,
+    "run": "dummy"
+  },
+
+  "data": {
+    "dataset": "ClimbMix-400B (karpathy/climbmix-400b-shuffle)",
+    "num_shards_used": 240,
+    "val_shard": "shard_06542.parquet",
+    "total_shard_tokens_est": 12.62e9,
+    "margin_vs_target": 1.45,
+    "data_pass_fraction": 0.690,
+    "data_pass_note": "training reads ~0.69× of the corpus; no wrap; <1 full epoch",
+    "audit_script": "benchmarks/modal_audit_data_v2.py",
+    "modal_volume": "sparsefuse-phase3-data",
+    "data_path_on_volume": "/data/nanochat/base_data_climbmix/"
+  },
+
+  "results": {
+    "monitoring_metrics_note": "These are in-loop monitoring eval values (--eval-tokens=10485760, --core-metric-max-per-task=50). Paper-final base_loss + base_eval@500 are pending post-hoc.",
+    "final_val_bpb_monitoring": 0.710224,
+    "best_val_bpb_monitoring": 0.710224,
+    "best_val_bpb_monitoring_step": 16600,
+    "last5_val_bpb_monitoring_mean": 0.7122,
+    "last5_val_bpb_monitoring_steps": [15750, 16000, 16250, 16500, 16600],
+    "last5_val_bpb_monitoring_range": 0.00459,
+    "monotone_violations_in_raw_log": 0,
+    "raw_eval_points_count": 68,
+    "final_train_loss": 2.376542,
+    "final_core_at_50_monitoring": 0.2589,
+    "final_base_loss_full_val": null,
+    "final_core_at_500": null,
+    "throughput_tok_per_sec_steady": 1030000,
+    "bf16_mfu_steady_pct": 37.5
+  },
+
+  "checkpoints": {
+    "modal_volume_path": "/data/nanochat/base_checkpoints/mlp_d20_reference_v2_seed0/",
+    "final_step": 16600,
+    "final_model": "model_016600.pt",
+    "final_model_present": true,
+    "final_optim_ranks_present": [1, 2, 3, 4, 5, 6, 7],
+    "final_optim_rank0_present": false,
+    "final_meta_present": false,
+    "final_resume_capable": false,
+    "final_eval_capable": true,
+    "last_full_ckpt_step": 16000,
+    "last_full_ckpt_resume_capable": true,
+    "ckpt_cadence": [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 16600]
+  },
+
+  "command": {
+    "image": "nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04 + python 3.12 + torch 2.9.1 (cu126) + triton + nanochat[-e .]",
+    "torchrun": "torchrun --standalone --nproc_per_node=8 -m scripts.base_train --",
+    "args": [
+      "--depth=20",
+      "--device-batch-size=32",
+      "--total-batch-size=524288",
+      "--max-seq-len=2048",
+      "--eval-tokens=10485760",
+      "--run=dummy",
+      "--model-tag=mlp_d20_reference_v2_seed0",
+      "--target-param-data-ratio=20",
+      "--eval-every=250",
+      "--core-metric-every=2000",
+      "--core-metric-max-per-task=50",
+      "--save-every=2000"
+    ],
+    "launcher": "benchmarks/modal_h100_nanochat_d20.py::main --mode full_mlp --run-tag mlp_d20_reference_v2_seed0"
+  },
+
+  "artifacts": {
+    "training_log_local": "dispatcher_runs/mlp_d20_reference_v2_seed0.log",
+    "results_doc": "docs/RESULTS_2026-05-03_mlp_d20_baseline.md",
+    "memory_pointer": ".claude/projects/-home-rich-wsl-pal-kan/memory/project_mlp_d20_baseline.md"
+  },
+
+  "known_issues": [
+    {
+      "id": "psutil-missing",
+      "severity": "cosmetic",
+      "description": "Modal image lacked psutil; nanochat.report failed to import after training. Caused exit-1 at the local entry point and prevented rank0 from finishing optim_016600_rank0.pt and meta_016600.json. Patched in benchmarks/modal_h100_nanochat_d20.py — future runs unaffected."
+    }
+  ]
+}

@@ -80,7 +80,7 @@ def torch_profiler(
     from sparsespline_ffn import MLPFFN
     from sparsespline_ffn.rl_spline_kv_reference import RLSplineKVConfig
     from sparsespline_ffn.kernels.flash_spline_feature_autograd import (
-        flash_spline_feature,
+        flash_spline_feature, flash_spline_delta,
     )
 
     class RLKVCell(nn.Module):
@@ -117,8 +117,52 @@ def torch_profiler(
                 activation=self.cfg.activation,
                 lambda_scale=float(self.cfg.lambda_scale),
                 use_kernel=True, bwd_kernel=self.bwd_kernel,
+                fwd_kernel="triton",  # match production cells (graph-friendly)
             )
             return self.W_out(f).reshape(shape)
+
+    class RLKVNoBaseCell(nn.Module):
+        """Production NOBASE cell — matches nanochat rl_kv_*_NOBASE_all12.
+
+        - W_out is Linear(r, d), not Linear(h+r, d) (no activation half).
+        - Uses FlashSplineDelta (Triton delta-only fwd + wgmma cuda bwd).
+        - C is zero-initialised (cold start, learns from gradient flow).
+        """
+        def __init__(self, d, r, l_grid, bwd_kernel):
+            super().__init__()
+            self.d = d
+            G = max(1, l_grid - 2)
+            self.cfg = RLSplineKVConfig(
+                d=d, h_ratio=1.0, r=r, G=G,
+                spline_order=2, lambda_scale=1.0,
+                grid_lo=-3.0, grid_hi=3.0, activation="relu_sq",
+                no_base=True,
+            )
+            h = d
+            self.K = nn.Linear(d, h, bias=False)
+            self.C = nn.Parameter(torch.zeros(h, l_grid, r))
+            self.W_out = nn.Linear(r, d, bias=False)
+            self.bwd_kernel = bwd_kernel
+            with torch.no_grad():
+                s_in = (3.0 / d) ** 0.5
+                s_h = (3.0 / r) ** 0.5
+                nn.init.uniform_(self.K.weight, -s_in, s_in)
+                nn.init.uniform_(self.W_out.weight, -s_h, s_h)
+                # C zero-init (Plan A Fix 1)
+
+        def forward(self, x):
+            shape = x.shape
+            x_flat = x.reshape(-1, self.d)
+            z = self.K(x_flat)
+            delta = flash_spline_delta(
+                z, self.C,
+                grid_lo=float(self.cfg.grid_lo),
+                grid_hi=float(self.cfg.grid_hi),
+                G=int(self.cfg.G),
+                lambda_scale=float(self.cfg.lambda_scale),
+                bwd_kernel=self.bwd_kernel,
+            )
+            return self.W_out(delta).reshape(shape)
 
     class Stack(nn.Module):
         def __init__(self, builder, n_layers):
@@ -131,11 +175,15 @@ def torch_profiler(
             return x
 
     builders = {
-        "mlp_h_4d":         lambda: Stack(lambda: MLPFFN(d=d, mlp_ratio=4), n_layers),
-        "rl_kv_hopperCUDA": lambda: Stack(lambda: RLKVCell(d, r, l_grid, "hopper_cuda"),
-                                            n_layers),
-        "rl_kv_wgmmaCUDA":  lambda: Stack(lambda: RLKVCell(d, r, l_grid, "wgmma_cuda"),
-                                            n_layers),
+        "mlp_h_4d":             lambda: Stack(lambda: MLPFFN(d=d, mlp_ratio=4), n_layers),
+        "rl_kv_hopperCUDA":     lambda: Stack(lambda: RLKVCell(d, r, l_grid, "hopper_cuda"),
+                                                n_layers),
+        "rl_kv_wgmmaCUDA":      lambda: Stack(lambda: RLKVCell(d, r, l_grid, "wgmma_cuda"),
+                                                n_layers),
+        "rl_kv_NOBASE_wgmma":   lambda: Stack(lambda: RLKVNoBaseCell(d, r, l_grid, "wgmma_cuda"),
+                                                n_layers),
+        "rl_kv_NOBASE_hopper":  lambda: Stack(lambda: RLKVNoBaseCell(d, r, l_grid, "hopper_cuda"),
+                                                n_layers),
     }
 
     def run_one(name: str, model: nn.Module, *,

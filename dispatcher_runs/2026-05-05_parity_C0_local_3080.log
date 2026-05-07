@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0 -- /home/rich-wsl/sparsespline-ffn/.venv/bin/python
+rootdir: /home/rich-wsl/sparsespline-ffn
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collecting ... collected 57 items
+
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N64_h64_r8_L8-dtype0] PASSED [  1%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N64_h64_r8_L8-dtype1] PASSED [  3%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N256_h128_r16_L16-dtype0] FAILED [  5%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N256_h128_r16_L16-dtype1] PASSED [  7%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N1024_h256_r32_L22-dtype0] FAILED [  8%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N1024_h256_r32_L22-dtype1] FAILED [ 10%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N4096_h256_r32_L22-dtype0] FAILED [ 12%]
+tests/test_rlkv_kernel_parity.py::test_forward_triton_vs_reference[N4096_h256_r32_L22-dtype1] FAILED [ 14%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N64_h64_r8_L8-v10_cuda] SKIPPED [ 15%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N64_h64_r8_L8-v11_cuda] SKIPPED [ 17%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N256_h128_r16_L16-v10_cuda] SKIPPED [ 19%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N256_h128_r16_L16-v11_cuda] SKIPPED [ 21%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N1024_h256_r32_L22-v10_cuda] SKIPPED [ 22%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N1024_h256_r32_L22-v11_cuda] SKIPPED [ 24%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N4096_h256_r32_L22-v10_cuda] SKIPPED [ 26%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N4096_h256_r32_L22-v11_cuda] SKIPPED [ 28%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N32768_h2560_r32_L22-v10_cuda] SKIPPED [ 29%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N32768_h2560_r32_L22-v11_cuda] SKIPPED [ 31%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N16384_h1280_r32_L22-v10_cuda] SKIPPED [ 33%]
+tests/test_rlkv_kernel_parity.py::test_forward_wgmma_vs_reference_h100[N16384_h1280_r32_L22-v11_cuda] SKIPPED [ 35%]
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N64_h64_r8_L8-dtype0] PASSED [ 36%]
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N64_h64_r8_L8-dtype1] PASSED [ 38%]
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N256_h128_r16_L16-dtype0] PASSED [ 40%]
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N256_h128_r16_L16-dtype1] PASSED [ 42%]
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N1024_h256_r32_L22-dtype0] PASSED [ 43%]
+tests/test_rlkv_kernel_parity.py::test_backward_triton_dz_dC_vs_reference[N1024_h256_r32_L22-dtype1] 

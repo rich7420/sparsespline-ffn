@@ -1,0 +1,1006 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-r9J9NesUd84nWBlixLynyB
+Building image im-vigHW3djD4xxiNwdhSHC2Q
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 1.10s
+
+Built image im-vigHW3djD4xxiNwdhSHC2Q in 5.30s
+
+
+Building image im-2wUKDghl3CoKh0W0dNKReK
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-oe4ysow2/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 864.64ms
+
+Built image im-2wUKDghl3CoKh0W0dNKReK in 8.67s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_dual_shape_prob
+│   e.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_probe.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  N = 32768  (device_batch×seq_len = 16 × 2048; chunks_per_block = 64)
+========================================================================
+[1/2] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output spline_kv_bwd_wgmma_v5.cuda.o.d -DTORCH_EXTENSION_NAME=spline_kv_bwd_wgmma_v5_ext -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda -Xptxas=-v -lineinfo -c /repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_wgmma_v5.cu -o spline_kv_bwd_wgmma_v5.cuda.o 
+/repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_wgmma_v5.cu(94): warning #177-D: function "<unnamed>::cp_async_wait_all" was declared but never referenced
+                            void cp_async_wait_all() {
+                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ptxas info    : 10 bytes gmem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi64ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi64ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 146 registers, used 1 barriers, 123264 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi32ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi32ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 112 registers, used 1 barriers, 107008 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi16ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi16ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 78 registers, used 1 barriers, 65792 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, used 1 barriers, 86400 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0630spline_kv_bwd_v5_reduce_kernelEPKfP13__nv_bfloat16iiii' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0630spline_kv_bwd_v5_reduce_kernelEPKfP13__nv_bfloat16iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers
+[2/2] c++ spline_kv_bwd_wgmma_v5.cuda.o -shared -L/usr/local/lib/python3.12/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o spline_kv_bwd_wgmma_v5_ext.so
+  v5 OK: dC=(2560, 22, 32), dz=(32768, 2560)
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x505730=0xd02000f 0x505734=0x24 0x505728=0x1f81fb60 0x50572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5057b0=0xd03000f 0x5057b4=0x24 0x5057a8=0x1f81fb60 0x5057ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x506730=0xd05000f 0x506734=0x24 0x506728=0x1f81fb60 0x50672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5067b0=0xd02000f 0x5067b4=0x24 0x5067a8=0x1f81fb60 0x5067ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x507730=0xd00000f 0x507734=0x24 0x507728=0x1f81fb60 0x50772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5077b0=0xd05000f 0x5077b4=0x24 0x5077a8=0x1f81fb60 0x5077ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x508730=0xd00000f 0x508734=0x24 0x508728=0x1f81fb60 0x50872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5087b0=0xd04000f 0x5087b4=0x24 0x5087a8=0x1f81fb60 0x5087ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x509730=0xd03000f 0x509734=0x24 0x509728=0x1f81fb60 0x50972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5097b0=0xd03000f 0x5097b4=0x24 0x5097a8=0x1f81fb60 0x5097ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50a730=0xd03000f 0x50a734=0x24 0x50a728=0x1f81fb60 0x50a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50a7b0=0xd07000f 0x50a7b4=0x24 0x50a7a8=0x1f81fb60 0x50a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50b730=0xd02000f 0x50b734=0x24 0x50b728=0x1f81fb60 0x50b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50b7b0=0xd03000f 0x50b7b4=0x24 0x50b7a8=0x1f81fb60 0x50b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50c730=0xd04000f 0x50c734=0x24 0x50c728=0x1f81fb60 0x50c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50c7b0=0xd04000f 0x50c7b4=0x24 0x50c7a8=0x1f81fb60 0x50c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 8, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 8, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50d730=0xd07000f 0x50d734=0x24 0x50d728=0x1f81fb60 0x50d72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 0, TPC 8, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 0, TPC 8, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x50d7b0=0xd03000f 0x50d7b4=0x24 0x50d7a8=0x1f81fb60 0x50d7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x515730=0xd07000f 0x515734=0x24 0x515728=0x1f81fb60 0x51572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5157b0=0xd02000f 0x5157b4=0x24 0x5157a8=0x1f81fb60 0x5157ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x516730=0xd00000f 0x516734=0x24 0x516728=0x1f81fb60 0x51672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5167b0=0xd01000f 0x5167b4=0x24 0x5167a8=0x1f81fb60 0x5167ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x517730=0xd02000f 0x517734=0x24 0x517728=0x1f81fb60 0x51772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5177b0=0xd05000f 0x5177b4=0x24 0x5177a8=0x1f81fb60 0x5177ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x518730=0xd02000f 0x518734=0x24 0x518728=0x1f81fb60 0x51872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5187b0=0xd01000f 0x5187b4=0x24 0x5187a8=0x1f81fb60 0x5187ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x519730=0xd03000f 0x519734=0x24 0x519728=0x1f81fb60 0x51972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5197b0=0xd01000f 0x5197b4=0x24 0x5197a8=0x1f81fb60 0x5197ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x51a730=0xd01000f 0x51a734=0x24 0x51a728=0x1f81fb60 0x51a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x51a7b0=0xd03000f 0x51a7b4=0x24 0x51a7a8=0x1f81fb60 0x51a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x51b730=0xd00000f 0x51b734=0x24 0x51b728=0x1f81fb60 0x51b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x51b7b0=0xd01000f 0x51b7b4=0x24 0x51b7a8=0x1f81fb60 0x51b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x51c730=0xd03000f 0x51c734=0x24 0x51c728=0x1f81fb60 0x51c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 1, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 1, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x51c7b0=0xd03000f 0x51c7b4=0x24 0x51c7a8=0x1f81fb60 0x51c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x525730=0xd03000f 0x525734=0x24 0x525728=0x1f81fb60 0x52572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5257b0=0xd00000f 0x5257b4=0x24 0x5257a8=0x1f81fb60 0x5257ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x526730=0xd02000f 0x526734=0x24 0x526728=0x1f81fb60 0x52672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5267b0=0xd03000f 0x5267b4=0x24 0x5267a8=0x1f81fb60 0x5267ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x527730=0xd00000f 0x527734=0x24 0x527728=0x1f81fb60 0x52772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5277b0=0xd06000f 0x5277b4=0x24 0x5277a8=0x1f81fb60 0x5277ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x528730=0xd00000f 0x528734=0x24 0x528728=0x1f81fb60 0x52872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5287b0=0xd01000f 0x5287b4=0x24 0x5287a8=0x1f81fb60 0x5287ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x529730=0xd00000f 0x529734=0x24 0x529728=0x1f81fb60 0x52972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5297b0=0xd00000f 0x5297b4=0x24 0x5297a8=0x1f81fb60 0x5297ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x52a730=0xd02000f 0x52a734=0x24 0x52a728=0x1f81fb60 0x52a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x52a7b0=0xd05000f 0x52a7b4=0x24 0x52a7a8=0x1f81fb60 0x52a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x52b730=0xd00000f 0x52b734=0x24 0x52b728=0x1f81fb60 0x52b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x52b7b0=0xd00000f 0x52b7b4=0x24 0x52b7a8=0x1f81fb60 0x52b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x52c730=0xd03000f 0x52c734=0x24 0x52c728=0x1f81fb60 0x52c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 2, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 2, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x52c7b0=0xd01000f 0x52c7b4=0x24 0x52c7a8=0x1f81fb60 0x52c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x535730=0xd05000f 0x535734=0x24 0x535728=0x1f81fb60 0x53572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5357b0=0xd03000f 0x5357b4=0x24 0x5357a8=0x1f81fb60 0x5357ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x536730=0xd05000f 0x536734=0x24 0x536728=0x1f81fb60 0x53672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5367b0=0xd06000f 0x5367b4=0x24 0x5367a8=0x1f81fb60 0x5367ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x537730=0xd02000f 0x537734=0x24 0x537728=0x1f81fb60 0x53772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5377b0=0xd02000f 0x5377b4=0x24 0x5377a8=0x1f81fb60 0x5377ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x538730=0xd01000f 0x538734=0x24 0x538728=0x1f81fb60 0x53872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5387b0=0xd01000f 0x5387b4=0x24 0x5387a8=0x1f81fb60 0x5387ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x539730=0xd03000f 0x539734=0x24 0x539728=0x1f81fb60 0x53972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5397b0=0xd00000f 0x5397b4=0x24 0x5397a8=0x1f81fb60 0x5397ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x53a730=0xd02000f 0x53a734=0x24 0x53a728=0x1f81fb60 0x53a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x53a7b0=0xd03000f 0x53a7b4=0x24 0x53a7a8=0x1f81fb60 0x53a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x53b730=0xd00000f 0x53b734=0x24 0x53b728=0x1f81fb60 0x53b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x53b7b0=0xd00000f 0x53b7b4=0x24 0x53b7a8=0x1f81fb60 0x53b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x53c730=0xd03000f 0x53c734=0x24 0x53c728=0x1f81fb60 0x53c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 3, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 3, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x53c7b0=0xd01000f 0x53c7b4=0x24 0x53c7a8=0x1f81fb60 0x53c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x545730=0xd02000f 0x545734=0x24 0x545728=0x1f81fb60 0x54572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5457b0=0xd03000f 0x5457b4=0x24 0x5457a8=0x1f81fb60 0x5457ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x546730=0xd03000f 0x546734=0x24 0x546728=0x1f81fb60 0x54672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5467b0=0xd00000f 0x5467b4=0x24 0x5467a8=0x1f81fb60 0x5467ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x547730=0xd07000f 0x547734=0x24 0x547728=0x1f81fb60 0x54772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5477b0=0xd05000f 0x5477b4=0x24 0x5477a8=0x1f81fb60 0x5477ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x548730=0xd03000f 0x548734=0x24 0x548728=0x1f81fb60 0x54872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5487b0=0xd05000f 0x5487b4=0x24 0x5487a8=0x1f81fb60 0x5487ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x549730=0xd03000f 0x549734=0x24 0x549728=0x1f81fb60 0x54972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5497b0=0xd01000f 0x5497b4=0x24 0x5497a8=0x1f81fb60 0x5497ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x54a730=0xd00000f 0x54a734=0x24 0x54a728=0x1f81fb60 0x54a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x54a7b0=0xd02000f 0x54a7b4=0x24 0x54a7a8=0x1f81fb60 0x54a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x54b730=0xd00000f 0x54b734=0x24 0x54b728=0x1f81fb60 0x54b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x54b7b0=0xd01000f 0x54b7b4=0x24 0x54b7a8=0x1f81fb60 0x54b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x54c730=0xd03000f 0x54c734=0x24 0x54c728=0x1f81fb60 0x54c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 4, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 4, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x54c7b0=0xd01000f 0x54c7b4=0x24 0x54c7a8=0x1f81fb60 0x54c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x555730=0xd03000f 0x555734=0x24 0x555728=0x1f81fb60 0x55572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5557b0=0xd02000f 0x5557b4=0x24 0x5557a8=0x1f81fb60 0x5557ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x556730=0xd07000f 0x556734=0x24 0x556728=0x1f81fb60 0x55672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5567b0=0xd07000f 0x5567b4=0x24 0x5567a8=0x1f81fb60 0x5567ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x557730=0xd00000f 0x557734=0x24 0x557728=0x1f81fb60 0x55772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5577b0=0xd01000f 0x5577b4=0x24 0x5577a8=0x1f81fb60 0x5577ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x558730=0xd01000f 0x558734=0x24 0x558728=0x1f81fb60 0x55872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5587b0=0xd02000f 0x5587b4=0x24 0x5587a8=0x1f81fb60 0x5587ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x559730=0xd00000f 0x559734=0x24 0x559728=0x1f81fb60 0x55972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5597b0=0xd01000f 0x5597b4=0x24 0x5597a8=0x1f81fb60 0x5597ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x55a730=0xd02000f 0x55a734=0x24 0x55a728=0x1f81fb60 0x55a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x55a7b0=0xd00000f 0x55a7b4=0x24 0x55a7a8=0x1f81fb60 0x55a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x55b730=0xd02000f 0x55b734=0x24 0x55b728=0x1f81fb60 0x55b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x55b7b0=0xd00000f 0x55b7b4=0x24 0x55b7a8=0x1f81fb60 0x55b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x55c730=0xd06000f 0x55c734=0x24 0x55c728=0x1f81fb60 0x55c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 5, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 5, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x55c7b0=0xd00000f 0x55c7b4=0x24 0x55c7a8=0x1f81fb60 0x55c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x565730=0xd03000f 0x565734=0x24 0x565728=0x1f81fb60 0x56572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5657b0=0xd03000f 0x5657b4=0x24 0x5657a8=0x1f81fb60 0x5657ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x566730=0xd06000f 0x566734=0x24 0x566728=0x1f81fb60 0x56672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5667b0=0xd00000f 0x5667b4=0x24 0x5667a8=0x1f81fb60 0x5667ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x567730=0xd07000f 0x567734=0x24 0x567728=0x1f81fb60 0x56772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5677b0=0xd01000f 0x5677b4=0x24 0x5677a8=0x1f81fb60 0x5677ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x568730=0xd02000f 0x568734=0x24 0x568728=0x1f81fb60 0x56872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5687b0=0xd03000f 0x5687b4=0x24 0x5687a8=0x1f81fb60 0x5687ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x569730=0xd03000f 0x569734=0x24 0x569728=0x1f81fb60 0x56972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5697b0=0xd01000f 0x5697b4=0x24 0x5697a8=0x1f81fb60 0x5697ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x56a730=0xd02000f 0x56a734=0x24 0x56a728=0x1f81fb60 0x56a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x56a7b0=0xd03000f 0x56a7b4=0x24 0x56a7a8=0x1f81fb60 0x56a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x56b730=0xd07000f 0x56b734=0x24 0x56b728=0x1f81fb60 0x56b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x56b7b0=0xd04000f 0x56b7b4=0x24 0x56b7a8=0x1f81fb60 0x56b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x56c730=0xd02000f 0x56c734=0x24 0x56c728=0x1f81fb60 0x56c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 6, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 6, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x56c7b0=0xd00000f 0x56c7b4=0x24 0x56c7a8=0x1f81fb60 0x56c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 0, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 0, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x575730=0xd00000f 0x575734=0x24 0x575728=0x1f81fb60 0x57572c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 0, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 0, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5757b0=0xd03000f 0x5757b4=0x24 0x5757a8=0x1f81fb60 0x5757ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 1, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 1, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x576730=0xd03000f 0x576734=0x24 0x576728=0x1f81fb60 0x57672c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 1, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 1, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5767b0=0xd05000f 0x5767b4=0x24 0x5767a8=0x1f81fb60 0x5767ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 2, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 2, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x577730=0xd06000f 0x577734=0x24 0x577728=0x1f81fb60 0x57772c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 2, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 2, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5777b0=0xd00000f 0x5777b4=0x24 0x5777a8=0x1f81fb60 0x5777ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 3, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 3, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x578730=0xd04000f 0x578734=0x24 0x578728=0x1f81fb60 0x57872c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 3, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 3, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5787b0=0xd03000f 0x5787b4=0x24 0x5787a8=0x1f81fb60 0x5787ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 4, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 4, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x579730=0xd05000f 0x579734=0x24 0x579728=0x1f81fb60 0x57972c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 4, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 4, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x5797b0=0xd00000f 0x5797b4=0x24 0x5797a8=0x1f81fb60 0x5797ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 5, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 5, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57a730=0xd00000f 0x57a734=0x24 0x57a728=0x1f81fb60 0x57a72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 5, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 5, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57a7b0=0xd03000f 0x57a7b4=0x24 0x57a7a8=0x1f81fb60 0x57a7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 6, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 6, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57b730=0xd02000f 0x57b734=0x24 0x57b728=0x1f81fb60 0x57b72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 6, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 6, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57b7b0=0xd06000f 0x57b7b4=0x24 0x57b7a8=0x1f81fb60 0x57b7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 7, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 7, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57c730=0xd05000f 0x57c734=0x24 0x57c728=0x1f81fb60 0x57c72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 7, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 7, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57c7b0=0xd01000f 0x57c7b4=0x24 0x57c7a8=0x1f81fb60 0x57c7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 8, SM 0): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 8, SM 0): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57d730=0xd00000f 0x57d734=0x24 0x57d728=0x1f81fb60 0x57d72c=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Warp Exception on (GPC 7, TPC 8, SM 1): Misaligned Address
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics SM Global Exception on (GPC 7, TPC 8, SM 1): Multiple Warp Errors
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 13, pid=248240, name=nvc:[driver], Graphics Exception: ESR 0x57d7b0=0xd05000f 0x57d7b4=0x24 0x57d7a8=0x1f81fb60 0x57d7ac=0x1174
+
+[gpu-health] [WARN] GPU-f9c14a75-6ee5-ec50-6b35-8ee978536174: XID: NVRM: Xid (PCI:0000:00:0b): 43, pid=243898, name=exe, channel 0x0000000a
+
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 947, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 172, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 225, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/modal_h100_bwd_v5_dual_shape_probe.py", line 132, in run_probe
+    dC_v1, dz_v1 = spline_kv_bwd_wgmma_cuda(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/repo/src/sparsespline_ffn/cuda_ext/__init__.py", line 310, in spline_kv_bwd_wgmma_cuda
+    get_ext_v4().spline_kv_bwd_wgmma_cuda(
+torch.AcceleratorError: CUDA error: misaligned address
+Search for `cudaErrorMisalignedAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Stopping app - uncaught exception raised locally: AcceleratorError("CUDA error: misaligned address\nSearch for `cudaErrorMisalignedAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n").
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_dual_shape_prob │
+│ e.py:229 in main                                                             │
+│                                                                              │
+│   228 def main():                                                            │
+│ ❱ 229 │   out = run_probe.remote()                                           │
+│   230 │   if not out.get("all_parity_pass", False):                          │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ wrapped                                                                      │
+│                                                                              │
+│    45 │   │   await self.hydrate()                                           │
+│ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
+│    47                                                                        │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ in remote                                                                    │
+│                                                                              │
+│   1766 │   │                                                                 │
+│ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
+│   1768                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ in _call_function                                                            │
+│                                                                              │
+│   1710 │   │                                                                 │
+│ ❱ 1711 │   │   return await invocation.run_function()                        │
+│   1712                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ in run_function                                                              │
+│                                                                              │
+│    292 │   │   │   item = await self._get_single_output()                    │
+│ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
+│    294                                                                       │
+│                                                                              │
+│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ ls.py:527 in _process_result                                                 │
+│                                                                              │
+│   526 │   │   │                                                              │
+│ ❱ 527 │   │   │   raise exc_with_hints(exc)                                  │
+│   528                                                                        │
+│                                                                              │
+│     ...Remote call to Modal Function (ta-01KQP23DAC5A9E02B73EDGNC1P)...      │
+│                                                                              │
+│ /root/modal_h100_bwd_v5_dual_shape_probe.py:132 in run_probe                 │
+│                                                                              │
+│ ❱ 132 dC_v1, dz_v1 = spline_kv_bwd_wgmma_cuda(                               │
+│                                                                              │
+│                                                                              │
+│ /repo/src/sparsespline_ffn/cuda_ext/__init__.py:310 in                       │
+│ spline_kv_bwd_wgmma_cuda                                                     │
+│                                                                              │
+│ ❱ 310 get_ext_v4().spline_kv_bwd_wgmma_cuda(                                 │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+AcceleratorError: CUDA error: misaligned address
+Search for `cudaErrorMisalignedAddress' in 
+https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more
+information.
+CUDA kernel errors might be asynchronously reported at some other API call, so 
+the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

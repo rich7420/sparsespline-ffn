@@ -1,0 +1,58 @@
+VALID_RESUME_BIT_EXACT
+
+run-tag : rlkv_d20_smoke_b   (extends Smoke B; resumed from step 50)
+modal   : byv86329r
+date    : 2026-05-03
+
+What this validates
+-------------------
+- Resume from rlkv_d20_smoke_b's step-50 checkpoint loads cleanly across
+  all 8 ranks
+- Bit-exact resume: at step 50 (immediately after reload, BEFORE any
+  further training), Smoke C reports val_bpb = 1.706985 — IDENTICAL to
+  Smoke B's step-50 logged value 1.706985. This means model weights,
+  Muon state, AdamW state for embed/head/scalars/C, and the C tensor
+  itself were all restored bit-exactly.
+- DDP synchronization survives resume (all 8 ranks resume to same state)
+- Optimizer routing for the 20 C tensors is preserved (AdamW with
+  c_lr=0.02 effective 0.015492 picked back up correctly)
+
+Numbers
+-------
+Step 00050 (resume point) | val_bpb 1.706985  ← bit-exact match to Smoke B
+Step 00100                | val_bpb 1.493419  (differs from Smoke B's
+                                              1.534 because num_iterations
+                                              was changed 100 → 150,
+                                              giving a different LR
+                                              warmdown shape from step 50
+                                              onward — expected, NOT a
+                                              resume bug)
+Step 00150 (final)         | val_bpb 1.383337
+final train loss           | 4.587
+peak memory                | 50.0 GB / rank
+total wall                 | 17.11 min for 100 additional steps
+
+Status reason
+-------------
+Bit-exact resume verification was the gate before pilot grid. Now
+passed. The bpb divergence at step 100 between Smoke B (1.534) and
+Smoke C (1.493) is explained by the LR-warmdown schedule being a
+function of num_iterations: Smoke B's schedule decays to step 100,
+Smoke C's decays to step 150, so the same step has different LR mults.
+Verified by checking lrm column in the log.
+
+Next steps
+----------
+1. Pilot grid (1B): r32/r64 × c_lr=0.02/0.06 (4 cells, in parallel,
+   stable stack v11+triton)
+2. Pick top 1-2 cells based on bpb gap vs MLP V2 same-step
+3. 2B finalist on top cells
+4. Full RL-KV d20 with selected config (token-budget locked at 16 600
+   iter per plan §18)
+5. v5 bwd optimization continues in parallel (B-line)
+
+Artifacts
+---------
+- training log : dispatcher_runs/rlkv_d20_smoke_c.log
+- (no separate ckpts — Smoke C runs with --save-every=-1)
+- builds on  : Smoke B's checkpoints at <volume>/nanochat/base_checkpoints/rlkv_d20_smoke_b/

@@ -48,6 +48,12 @@ class RLSplineKVConfig:
     fwd_kernel: str = "auto"               # "auto" (CUDA when eligible) | "triton" | "wgmma_cuda"
     no_base: bool = False                  # Plan A: drop ReLU² base, pure-spline FFN
 
+    # v8 amendment (THEORY_v8_MULTIPLICATIVE_GATING.md) — opt-in, default
+    # leaves v7 additive behaviour unchanged.
+    gating_mode: str = "additive"          # "additive" (v7) | "multiplicative" (v8)
+    c_init_std: float = 0.0                # 0 → keep init_C_zero behaviour;
+                                            # >0 → init C ~ N(0, c_init_std), overrides init_C_zero
+
     def __post_init__(self) -> None:
         if self.G < 2:
             raise ValueError(f"G={self.G} too small")
@@ -61,6 +67,12 @@ class RLSplineKVConfig:
             raise ValueError(f"spline_order must be 1 or 2; got {self.spline_order}")
         if self.activation not in ("relu_sq", "gelu", "identity"):
             raise ValueError(f"unknown activation: {self.activation}")
+        if self.gating_mode not in ("additive", "multiplicative"):
+            raise ValueError(f"gating_mode must be 'additive' or 'multiplicative'; got {self.gating_mode}")
+        if self.c_init_std < 0:
+            raise ValueError(f"c_init_std must be >= 0; got {self.c_init_std}")
+        if self.gating_mode == "multiplicative" and self.no_base:
+            raise ValueError("multiplicative gating requires base path (no_base=True is incompatible)")
 
 
 def _activation(z: torch.Tensor, name: str) -> torch.Tensor:
@@ -214,9 +226,20 @@ class RLSplineKVReference(nn.Module):
 
         self.K = nn.Linear(d, h, bias=cfg.bias)
         self.C = nn.Parameter(torch.empty(h, L, cfg.r))
-        # Plan A: when no_base=True, W_out only receives the spline residual
-        # (no [a; λδ] cat), so its input dim is r, not h+r.
-        wout_in = cfg.r if cfg.no_base else (h + cfg.r)
+        # v7 cases:
+        #   no_base=True  → W_out is Linear(r, d) — spline-only branch
+        #   default       → W_out is Linear(h+r, d) — additive cat
+        # v8 amendment (multiplicative gating, THEORY_v8):
+        #   gating_mode="multiplicative" → W_out is Linear(h, d).  The spline
+        #   modulates the base path elementwise; output projection is on the
+        #   gated activation only.  A new W_d_proj Linear(r, h) lifts the
+        #   r-dim spline residual to the h-dim base hidden for gating.
+        if cfg.gating_mode == "multiplicative":
+            wout_in = h
+            self.W_d_proj = nn.Linear(cfg.r, h, bias=False)
+        else:
+            wout_in = cfg.r if cfg.no_base else (h + cfg.r)
+            self.W_d_proj = None
         self.W_out = nn.Linear(wout_in, d, bias=cfg.bias)
 
         self.register_buffer("grid_lo_buf", torch.tensor(float(cfg.grid_lo)))
@@ -233,10 +256,18 @@ class RLSplineKVReference(nn.Module):
         d = self.cfg.d
         # nanochat-style sqrt(3/d) uniform
         s_in = (3.0 / d) ** 0.5
-        wout_in = self.cfg.r if self.cfg.no_base else (self.h + self.cfg.r)
+        if self.cfg.gating_mode == "multiplicative":
+            wout_in = self.h
+        else:
+            wout_in = self.cfg.r if self.cfg.no_base else (self.h + self.cfg.r)
         s_h = (3.0 / wout_in) ** 0.5
         nn.init.uniform_(self.K.weight, -s_in, s_in)
         nn.init.uniform_(self.W_out.weight, -s_h, s_h)
+        # v8: lift projection P. Init small so initial gate ≈ 1 (preserves
+        # vanilla-MLP cold start when C_init_std=0 and ensures gate excursion
+        # stays bounded for nonzero C init).
+        if self.W_d_proj is not None:
+            nn.init.uniform_(self.W_d_proj.weight, -0.01, 0.01)
         # C: zero init for soft cold-start (delta=0 at step 0 but dC nonzero
         # through W_out_d gradient — works for BOTH with-base and no_base):
         #   no_base zero-C cold-start:
@@ -247,7 +278,11 @@ class RLSplineKVReference(nn.Module):
         #     dL/dW_out_d = δ^T @ dL/dy = 0 at step 1, but unblocks at step 2
         #   So zero-C is correct for no_base too — earlier code force-non-zero
         #   was based on a wrong analysis (Plan A Fix 1).
-        if self.cfg.init_C_zero:
+        # c_init_std (v8.B) takes precedence: if > 0, use that std, else
+        # fall back to the v7 init_C_zero / std=0.02 path.
+        if self.cfg.c_init_std > 0:
+            nn.init.normal_(self.C, mean=0.0, std=float(self.cfg.c_init_std))
+        elif self.cfg.init_C_zero:
             with torch.no_grad():
                 self.C.zero_()
         else:
@@ -276,6 +311,43 @@ class RLSplineKVReference(nn.Module):
             )                                           # [N, r]
             f = delta                                   # alias for diag below
             y = self.W_out(delta)                       # [N, d]
+        elif self.cfg.gating_mode == "multiplicative":
+            # v8 amendment — multiplicative spline gating of the base path.
+            # See THEORY_v8_MULTIPLICATIVE_GATING.md.
+            #   y = W_out @ ((1 + λ·(P · δ)) ⊙ ReLU²(z))
+            # Note: FlashSplineDelta / reference both already multiply by λ
+            # internally — `delta` below already contains λ.
+            if self.cfg.spline_order != 2:
+                raise NotImplementedError(
+                    "multiplicative gating currently requires spline_order=2"
+                )
+            if self.cfg.use_kernel and z.is_cuda:
+                from sparsespline_ffn.kernels.flash_spline_feature_autograd import (
+                    FlashSplineDelta as _FD,
+                )
+                delta = _FD.apply(
+                    z, self.C,
+                    float(self.cfg.grid_lo), float(self.cfg.grid_hi),
+                    int(self.cfg.G), float(self.cfg.lambda_scale),
+                    self.cfg.bwd_kernel,
+                )                                       # [N, r]
+            else:
+                f_full = flash_spline_feature_reference(
+                    z, self.C,
+                    grid_lo=float(self.cfg.grid_lo),
+                    grid_hi=float(self.cfg.grid_hi),
+                    G=int(self.cfg.G),
+                    activation=self.cfg.activation,
+                    lambda_scale=float(self.cfg.lambda_scale),
+                    spline_order=int(self.cfg.spline_order),
+                )
+                delta = f_full[:, self.h:]              # [N, r], includes λ
+            delta_h = self.W_d_proj(delta)              # [N, h]
+            a = _activation(z, self.cfg.activation)     # [N, h] base path
+            gate = 1.0 + delta_h                        # [N, h]
+            gated = gate * a                            # [N, h]
+            f = gated                                   # alias for diag
+            y = self.W_out(gated)                       # [N, d]
         elif (self.cfg.use_kernel and self.cfg.spline_order == 2
                 and z.is_cuda):
             from sparsespline_ffn.kernels.flash_spline_feature_autograd import (
@@ -317,6 +389,36 @@ class RLSplineKVReference(nn.Module):
                     w_a_grad_norm = 0.0
                     w_d_grad_norm = (W_out_grad.detach().norm().item()
                                      if W_out_grad is not None else 0.0)
+                elif self.cfg.gating_mode == "multiplicative":
+                    # v8 — f is the gated activation [N, h] = (1+λδ_h)·a.
+                    # We re-derive `a` from z and `δ_h` from f/a to avoid
+                    # plumbing extra intermediates from forward.
+                    a = _activation(z, self.cfg.activation).float()  # [N, h]
+                    gated = f.float()
+                    eps = 1e-9
+                    # gate = gated / a, but a may be 0 in dead-ReLU zones.
+                    # Use a-masked gate to avoid div-by-zero noise.
+                    a_active = (a.abs() > eps)
+                    gate = torch.where(a_active, gated / a.clamp(min=eps),
+                                       torch.ones_like(a))
+                    delta_h = gate - 1.0
+                    base = a
+                    delta = delta_h
+                    W_out = self.W_out.weight.float()  # [d, h]
+                    # y_base = W_out @ a; y_delta = W_out @ ((gate-1)·a) = W_out @ (delta_h·a)
+                    ya = a @ W_out.T
+                    yd = (delta_h * a) @ W_out.T
+                    rms_a = float(ya.pow(2).mean().sqrt().item())
+                    rms_d = float(yd.pow(2).mean().sqrt().item())
+                    # Gradient norms — for multiplicative there is no
+                    # input-axis split.  W_a_grad_norm reports W_out (the
+                    # output projection); W_d_grad_norm reports P (the lift).
+                    W_out_grad = self.W_out.weight.grad
+                    w_a_grad_norm = (W_out_grad.detach().norm().item()
+                                     if W_out_grad is not None else 0.0)
+                    P_grad = self.W_d_proj.weight.grad if self.W_d_proj is not None else None
+                    w_d_grad_norm = (P_grad.detach().norm().item()
+                                     if P_grad is not None else 0.0)
                 else:
                     base = f[:, : self.h].float()
                     delta = f[:, self.h:].float()
@@ -363,6 +465,20 @@ class RLSplineKVReference(nn.Module):
                 self._diag["bin_entropy_norm"] = float(entropy / max(1e-9, math.log(G)))
                 self._diag["edge_bin_frac"] = float(edge_count) / max(1, valid_bins.numel())
                 self._diag["active_frac"] = float(in_range_mask.float().mean().item())
+                # v8 — gate distribution diagnostics
+                if self.cfg.gating_mode == "multiplicative":
+                    a = _activation(z, self.cfg.activation).float()
+                    gated = f.float()
+                    a_active = (a.abs() > 1e-9)
+                    gate = torch.where(a_active, gated / a.clamp(min=1e-9),
+                                       torch.ones_like(a))
+                    self._diag["gate_mean"] = float(gate.mean().item())
+                    self._diag["gate_std"] = float(gate.std().item())
+                    self._diag["gate_min"] = float(gate.min().item())
+                    self._diag["gate_max"] = float(gate.max().item())
+                    self._diag["gating_mode"] = "multiplicative"
+                else:
+                    self._diag["gating_mode"] = "additive"
         return y.reshape(original_shape)
 
     def num_params(self) -> int:

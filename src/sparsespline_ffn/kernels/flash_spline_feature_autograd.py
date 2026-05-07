@@ -45,7 +45,10 @@ class FlashSplineFeature(torch.autograd.Function):
         lambda_scale: float,
         use_kernel: bool,
         bwd_kernel: str = "triton",   # "triton" | "hopper_cuda" | "wgmma_cuda"
-        fwd_kernel: str = "auto",      # "auto" | "triton" | "wgmma_cuda"
+        fwd_kernel: str = "auto",      # "auto" (= v10 dense-W wgmma when eligible) |
+                                        # "v10_cuda" (force v10) |
+                                        # "wgmma_cuda" (force v1 CUDA scalar) |
+                                        # "triton"
     ) -> torch.Tensor:                # [N, h+r]
         # Detached inputs for the kernel/reference forward
         z_d = z.detach()
@@ -68,10 +71,41 @@ class FlashSplineFeature(torch.autograd.Function):
             and C.shape[-1] in (32, 64)           # 3.A.4: r in {32, 64}
         )
 
-        if chosen_fwd in ("auto", "wgmma_cuda") and cuda_fwd_eligible:
+        # v11 (precision-corrected dense-W wgmma, fp16 inputs) is the safe
+        # high-throughput default.  v10 is retained for ablation but has a
+        # known bf16(B) precision bug that causes training divergence — see
+        # docs/RESULTS_2026-05-02_v10_numerical_bug.md.
+        wgmma_eligible_shape = (
+            cuda_fwd_eligible
+            and (C.shape[-1] == 32 and C.shape[-2] in (16, 22, 32) or
+                 C.shape[-1] == 64 and C.shape[-2] == 22)
+        )
+        if chosen_fwd == "v11_cuda" and wgmma_eligible_shape:
+            from sparsespline_ffn.cuda_ext import spline_kv_fwd_v11_cuda as _fwd
+            f = _fwd(z_d, C_d, float(grid_lo), float(grid_hi), int(G),
+                     activation=activation, lambda_scale=float(lambda_scale))
+        elif chosen_fwd == "v10_cuda" and wgmma_eligible_shape:
+            from sparsespline_ffn.cuda_ext import spline_kv_fwd_v10_cuda as _fwd
+            f = _fwd(z_d, C_d, float(grid_lo), float(grid_hi), int(G),
+                     activation=activation, lambda_scale=float(lambda_scale))
+        elif chosen_fwd in ("auto", "wgmma_cuda") and cuda_fwd_eligible:
+            # "auto" defaults to v1 CUDA — safe and bit-equivalent to triton.
+            # Switch to "v11_cuda" explicitly once v11 is validated end-to-end.
             from sparsespline_ffn.cuda_ext import spline_kv_fwd_cuda as _fwd
             f = _fwd(z_d, C_d, float(grid_lo), float(grid_hi), int(G),
                      activation=activation, lambda_scale=float(lambda_scale))
+        elif chosen_fwd == "v10_cuda" and not wgmma_eligible_shape:
+            raise RuntimeError(
+                f"fwd_kernel='v10_cuda' but inputs are not eligible for v10 dispatch: "
+                f"R={C.shape[-1]}, L={C.shape[-2]}. "
+                f"Set fwd_kernel='auto' to fall back to v1 CUDA or Triton."
+            )
+        elif chosen_fwd == "v11_cuda" and not wgmma_eligible_shape:
+            raise RuntimeError(
+                f"fwd_kernel='v11_cuda' but inputs are not eligible for v11 dispatch: "
+                f"R={C.shape[-1]}, L={C.shape[-2]}. "
+                f"Set fwd_kernel='auto' to fall back to v1 CUDA or Triton."
+            )
         elif chosen_fwd == "wgmma_cuda" and not cuda_fwd_eligible:
             # Explicit user request couldn't be honored — surface the reason
             # rather than silently falling back to Triton.
@@ -171,6 +205,15 @@ class FlashSplineFeature(torch.autograd.Function):
                         z.detach(), C.detach(), g_delta,
                         ctx.grid_lo, ctx.grid_hi, ctx.G,
                     )
+            elif bk == "wgmma_v5_cuda":
+                # v5: register-resident dC + fp16 wgmma. ~2.75x faster than v1
+                # at single-kernel level.  Returns (dC bf16, dz fp32) — same
+                # contract as the wgmma_cuda non-fused path.
+                from sparsespline_ffn.cuda_ext import spline_kv_bwd_wgmma_v5_cuda as _cuda_bwd
+                dC, dz_spline = _cuda_bwd(
+                    z.detach(), C.detach(), g_delta,
+                    ctx.grid_lo, ctx.grid_hi, ctx.G,
+                )
             else:
                 # Default Triton v3 backward (tl.dot → wgmma codegen on Hopper)
                 from sparsespline_ffn.kernels.triton_flash_spline_feature import (

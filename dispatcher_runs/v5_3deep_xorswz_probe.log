@@ -1,0 +1,235 @@
+✓ Initialized. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-oHFqroikCHlrn3CiUNCane
+Building image im-laFWmtS4WPRVKuNBtz7h3Z
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 644.36ms
+
+Built image im-laFWmtS4WPRVKuNBtz7h3Z in 4.43s
+
+
+Building image im-RPRVPHfkK5NmbtuIM4HLlB
+
+=> Step 0: FROM base
+
+=> Step 1: RUN cd /repo && pip install -e .
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Obtaining file:///repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.3 in /usr/local/lib/python3.12/site-packages (from sparsespline-ffn==0.1.0) (2.9.1+cu126)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.25.2)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (4.15.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (69.0.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2026.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.80)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.3.0.4)
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (10.3.7.77)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (11.7.1.2)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.5.4.2)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.77)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (12.6.85)
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (1.11.1.6)
+Requirement already satisfied: triton==3.5.1 in /usr/local/lib/python3.12/site-packages (from torch>=2.3->sparsespline-ffn==0.1.0) (3.5.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.3->sparsespline-ffn==0.1.0) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/site-packages (from jinja2->torch>=2.3->sparsespline-ffn==0.1.0) (3.0.3)
+Building wheels for collected packages: sparsespline-ffn
+  Building editable for sparsespline-ffn (pyproject.toml): started
+  Building editable for sparsespline-ffn (pyproject.toml): finished with status 'done'
+  Created wheel for sparsespline-ffn: filename=sparsespline_ffn-0.1.0-0.editable-py3-none-any.whl size=5341 sha256=a0540f4fffccdd502dda92caf74b59a2224eb610b4274594c8b4a08e63531889
+  Stored in directory: /tmp/pip-ephem-wheel-cache-hj6ua5d1/wheels/ed/25/30/93256a9245166a3129eecc7f476749387af4b58dcad2872e48
+Successfully built sparsespline-ffn
+Installing collected packages: sparsespline-ffn
+Successfully installed sparsespline-ffn-0.1.0
+
+[notice] A new release of pip is available: 23.3.2 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+Saving image...
+Image saved, took 711.28ms
+
+Built image im-RPRVPHfkK5NmbtuIM4HLlB in 8.19s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_dual_shape_prob
+│   e.py
+├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+└── 🔨 Created function run_probe.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.6.3
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+========================================================================
+  N = 32768  (device_batch×seq_len = 16 × 2048; chunks_per_block = 64)
+========================================================================
+[1/2] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output spline_kv_bwd_wgmma_v5.cuda.o.d -DTORCH_EXTENSION_NAME=spline_kv_bwd_wgmma_v5_ext -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/site-packages/torch/include -isystem /usr/local/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/local/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O3 --use_fast_math -gencode arch=compute_90a,code=sm_90a -std=c++17 --extended-lambda -Xptxas=-v -lineinfo -c /repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_wgmma_v5.cu -o spline_kv_bwd_wgmma_v5.cuda.o 
+/repo/src/sparsespline_ffn/cuda_ext/spline_kv_bwd_wgmma_v5.cu(94): warning #177-D: function "<unnamed>::cp_async_wait_all" was declared but never referenced
+                            void cp_async_wait_all() {
+                                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ptxas info    : 10 bytes gmem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi64ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi64ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 152 registers, used 1 barriers, 122880 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi32ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi32ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 118 registers, used 1 barriers, 106496 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi16ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi16ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 80 registers, used 1 barriers, 65536 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0629spline_kv_bwd_wgmma_v5_kernelILi128ELi8ELi24ELi32ELi4EEEvPK13__nv_bfloat16PK6__halfS6_PfS7_iiiffi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, used 1 barriers, 86016 bytes smem
+ptxas info    : Compiling entry function '_ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0630spline_kv_bwd_v5_reduce_kernelEPKfP13__nv_bfloat16iiii' for 'sm_90a'
+ptxas info    : Function properties for _ZN58_GLOBAL__N__417e3b97_25_spline_kv_bwd_wgmma_v5_cu_de535e0630spline_kv_bwd_v5_reduce_kernelEPKfP13__nv_bfloat16iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers
+[2/2] c++ spline_kv_bwd_wgmma_v5.cuda.o -shared -L/usr/local/lib/python3.12/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o spline_kv_bwd_wgmma_v5_ext.so
+  v5 OK: dC=(2560, 22, 32), dz=(32768, 2560)
+  dC_v5_vs_v1         : signed=+2.046e-05 max_abs=2.884e-01 max_rel=2.916e-03
+  dz_v5_vs_v1         : signed=-4.259e-13 max_abs=9.537e-07 max_rel=1.110e-07
+  → PARITY: True
+  v5     :   6.668 ms/call
+  v1     :  19.370 ms/call  (v5 is 2.90× v1)
+  triton :   7.028 ms/call  (v5 is 1.05× triton)
+
+========================================================================
+  N = 65536  (device_batch×seq_len = 32 × 2048; chunks_per_block = 128)
+========================================================================
+  v5 OK: dC=(2560, 22, 32), dz=(65536, 2560)
+  dC_v5_vs_v1         : signed=-4.566e-05 max_abs=5.509e-01 max_rel=4.154e-03
+  dz_v5_vs_v1         : signed=+5.838e-14 max_abs=9.537e-07 max_rel=1.169e-07
+  → PARITY: True
+  v5     :  13.276 ms/call
+  v1     :  38.920 ms/call  (v5 is 2.93× v1)
+  triton :  14.098 ms/call  (v5 is 1.06× triton)
+
+========================================================================
+  DECISION
+========================================================================
+  all_parity_pass:      True
+  min v5/triton speedup: 1.054
+  max v5/triton speedup: 1.062
+  verdict:               PARITY_KEEP_TRITON
+
+
+FINAL JSON:
+{
+  "shapes": {
+    "32768": {
+      "v5_runs": true,
+      "parity": {
+        "dC_v5_vs_v1": {
+          "label": "dC v5 vs v1",
+          "max_abs_err": 0.28841400146484375,
+          "max_rel_err": 0.0029159932002288946,
+          "mean_abs_err": 0.023280374705791473,
+          "mean_signed_err": 2.046335066552274e-05,
+          "ref_max": 98.90763854980469,
+          "has_nan": false,
+          "has_inf": false
+        },
+        "dz_v5_vs_v1": {
+          "label": "dz v5 vs v1",
+          "max_abs_err": 9.5367431640625e-07,
+          "max_rel_err": 1.1099502263728094e-07,
+          "mean_abs_err": 6.211380715326342e-11,
+          "mean_signed_err": -4.2593221159271943e-13,
+          "ref_max": 8.592045783996582,
+          "has_nan": false,
+          "has_inf": false
+        }
+      },
+      "parity_pass": true,
+      "speed": {
+        "N": 32768,
+        "chunks_per_block": 64,
+        "v5_ms_per_call": 6.668181762695313,
+        "v1_ms_per_call": 19.370352783203124,
+        "triton_ms_per_call": 7.028467407226563,
+        "v5_speedup_vs_v1": 2.9048927387626473,
+        "v5_speedup_vs_triton": 1.054030567454961
+      }
+    },
+    "65536": {
+      "v5_runs": true,
+      "parity": {
+        "dC_v5_vs_v1": {
+          "label": "dC v5 vs v1",
+          "max_abs_err": 0.5508880615234375,
+          "max_rel_err": 0.0041542677065811535,
+          "mean_abs_err": 0.032917946577072144,
+          "mean_signed_err": -4.565979907056317e-05,
+          "ref_max": 132.6077423095703,
+          "has_nan": false,
+          "has_inf": false
+        },
+        "dz_v5_vs_v1": {
+          "label": "dz v5 vs v1",
+          "max_abs_err": 9.5367431640625e-07,
+          "max_rel_err": 1.1687570664541792e-07,
+          "mean_abs_err": 5.461536778383902e-11,
+          "mean_signed_err": 5.838440896108882e-14,
+          "ref_max": 8.159730911254883,
+          "has_nan": false,
+          "has_inf": false
+        }
+      },
+      "parity_pass": true,
+      "speed": {
+        "N": 65536,
+        "chunks_per_block": 128,
+        "v5_ms_per_call": 13.275765380859376,
+        "v1_ms_per_call": 38.91999755859375,
+        "triton_ms_per_call": 14.097698974609376,
+        "v5_speedup_vs_v1": 2.9316575310006234,
+        "v5_speedup_vs_triton": 1.0619123319951889
+      }
+    }
+  },
+  "all_parity_pass": true,
+  "min_speedup_vs_triton": 1.054030567454961,
+  "max_speedup_vs_triton": 1.0619123319951889,
+  "verdict": "PARITY_KEEP_TRITON"
+}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/hao-ai-lab/main/ap-oHFqroikCHlrn3CiUNCane
