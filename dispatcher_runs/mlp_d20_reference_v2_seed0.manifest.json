@@ -1,7 +1,7 @@
 {
   "run_tag": "mlp_d20_reference_v2_seed0",
   "modal_task_id": "bky8upso6",
-  "modal_app_url": "https://modal.com/apps/hao-ai-lab/main/ap-WtMYB6VZROhG3bTM4XLAGe",
+  "modal_app_url": "https://modal.com/apps/anonymized-workspace/main/ap-WtMYB6VZROhG3bTM4XLAGe",
   "status": "VALID_BASELINE_MONITORING_EVAL",
   "status_reason": "Valid full-data d20 training baseline — 16 600/16 600 steps, monotone val bpb to 0.7102 (last-5 mean 0.7122), CORE@50 to 0.2589, train loss 2.376, no data wrap. Headline figures here come from the in-loop monitoring eval (--eval-tokens=10485760, --core-metric-max-per-task=50). The paper-final headline numbers should come from a post-hoc base_loss + base_eval@500 pass against model_016600.pt; until that runs, do not quote 0.7102 / 0.2589 as the paper number. Modal local entry point also reported exit-1 due to a missing psutil module in the post-train report import (base_train.py line 646) — patched in the image; cosmetic with respect to the training run.",
   "promotes_to_status_after_full_eval": "VALID_BASELINE_FINAL_EVAL",
@@ -131,7 +131,7 @@
   "artifacts": {
     "training_log_local": "dispatcher_runs/mlp_d20_reference_v2_seed0.log",
     "results_doc": "docs/RESULTS_2026-05-03_mlp_d20_baseline.md",
-    "memory_pointer": ".claude/projects/-home-rich-wsl-pal-kan/memory/project_mlp_d20_baseline.md"
+    "memory_pointer": ".claude/projects/-home-anon-pal-kan/memory/project_mlp_d20_baseline.md"
   },
 
   "known_issues": [

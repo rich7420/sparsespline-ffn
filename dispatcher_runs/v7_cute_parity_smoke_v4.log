@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-sMf9dT1J21wyYAkqU5CZ9C
+https://modal.com/apps/anonymized-workspace/main/ap-sMf9dT1J21wyYAkqU5CZ9C
 Building image im-w960JJBkSszFSDJO8MVLFV
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-0fhK2zVoQPwrrVXQYXzzHk in 9.09s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7_cute_parity.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_v7_cute_parity.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_parity.
 
 ==========

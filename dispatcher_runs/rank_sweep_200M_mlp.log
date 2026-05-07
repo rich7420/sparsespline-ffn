@@ -1,6 +1,6 @@
 # CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type mlp --run-tag rank_sweep_200M_mlp
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-R5quf6IoIoiAAMBX9UJ9kv
+https://modal.com/apps/anonymized-workspace/main/ap-R5quf6IoIoiAAMBX9UJ9kv
 Building image im-GzQQwvIcIs9UUl95jOGaun
 
 => Step 0: FROM base
@@ -72,8 +72,8 @@ Built image im-Y9VLfggGaafuCk6zT6msUa in 10.49s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=rlkv_pilot_1B  run_tag=rank_sweep_200M_mlp  ffn_type=mlp
@@ -2135,4 +2135,4 @@ Minimum validation bpb: 0.801020
 Stopping app - local entrypoint completed.
 [modal-client] 2026-05-05T16:47:50+0800 Timed out waiting for final app logs.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-R5quf6IoIoiAAMBX9UJ9kv
+https://modal.com/apps/anonymized-workspace/main/ap-R5quf6IoIoiAAMBX9UJ9kv

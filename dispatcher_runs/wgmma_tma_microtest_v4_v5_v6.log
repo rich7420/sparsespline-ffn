@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-3c0zE03aWscFhaK1pJ8Brj
+https://modal.com/apps/anonymized-workspace/main/ap-3c0zE03aWscFhaK1pJ8Brj
 Building image im-gUEuWuAmoKZq246nbjWZMR
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-t0x6JM66IQBUIZ3NZfiLOM in 8.47s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_wgmma_tma_microtest.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_wgmma_tma_microtest.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_probe.
 
 ==========

@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-hrWU19GTJYDYtNtDOBa02u
+https://modal.com/apps/anonymized-workspace/main/ap-hrWU19GTJYDYtNtDOBa02u
 Building image im-rZ6grHw8fwyr98XUPy2Jb6
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-NWRVg7igKsPK5GkJwjcBl9 in 8.79s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=full_rl_kv  run_tag=full_rlkv_late33_grid5_lwarmup_r64  ffn_type=rl_kv_b2_late33
@@ -17313,4 +17313,4 @@ Minimum validation bpb: 0.716566
 Stopping app - local entrypoint completed.
 [modal-client] 2026-05-06T23:55:13+0800 Timed out waiting for final app logs.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-hrWU19GTJYDYtNtDOBa02u
+https://modal.com/apps/anonymized-workspace/main/ap-hrWU19GTJYDYtNtDOBa02u

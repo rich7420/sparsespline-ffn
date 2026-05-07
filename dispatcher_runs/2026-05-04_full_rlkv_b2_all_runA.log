@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-LjJOHe0KVWWW9WjVPWWfxj
+https://modal.com/apps/anonymized-workspace/main/ap-LjJOHe0KVWWW9WjVPWWfxj
 Building image im-nlKkMDq6ovqvGGBulgfqnZ
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-syZBGmyO27B6yeH0xB7D1u in 8.95s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=full_rl_kv  run_tag=full_rlkv_b2_all_grid5_lwarmup  ffn_type=rl_kv_b2

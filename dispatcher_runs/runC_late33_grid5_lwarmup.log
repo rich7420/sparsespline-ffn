@@ -1,9 +1,9 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-G5KM9Z8EFWOSGjNQzAmiTd
+https://modal.com/apps/anonymized-workspace/main/ap-G5KM9Z8EFWOSGjNQzAmiTd
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=rlkv_pilot_1B_diag  run_tag=rlkv_pilot_1B_diag_runC_late33_grid5_lwarmup  ffn_type=rl_kv_b2_late33

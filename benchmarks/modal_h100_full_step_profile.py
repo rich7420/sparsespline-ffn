@@ -24,7 +24,7 @@ IMAGE = (
     .pip_install("numpy", "ninja", "pyarrow", "tokenizers", "tiktoken",
                   "regex", "huggingface-hub")
     .add_local_dir(
-        local_path="/home/rich-wsl/sparsespline-ffn",
+        local_path="/home/anon/sparsespline-ffn",
         remote_path="/repo",
         ignore=[".venv/**", ".git/**", "nanochat/.venv/**",
                 "nanochat/.nanochat-runtime/**", "benchmark_runs/**",

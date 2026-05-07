@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-RIjMdHn6NuIHOrG4E7TRB5
+https://modal.com/apps/anonymized-workspace/main/ap-RIjMdHn6NuIHOrG4E7TRB5
 Building image im-Zwd4EIHP9mZCbWBYVgVuon
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-KoE7XspQo4TYV59yyoCbB3 in 8.46s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_n_scaling.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_n_scaling.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_probe.
 
 ==========
@@ -176,42 +176,42 @@ Traceback (most recent call last):
 torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 4.02 GiB is free. Process 1 has 75.15 GiB memory in use. Of the allocated memory 73.07 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
 Stopping app - uncaught exception raised locally: OutOfMemoryError('CUDA out of memory. Tried to allocate 20.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 4.02 GiB is free. Process 1 has 75.15 GiB memory in use. Of the allocated memory 73.07 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)').
 ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_n_scaling.py:27 │
+│ /home/anon/sparsespline-ffn/benchmarks/modal_h100_bwd_v5_n_scaling.py:27 │
 │ 0 in main                                                                    │
 │                                                                              │
 │   269 def main():                                                            │
 │ ❱ 270 │   out = run_probe.remote()                                           │
 │   271 │   if not out["all_pass"]:                                            │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
 │ wrapped                                                                      │
 │                                                                              │
 │    45 │   │   await self.hydrate()                                           │
 │ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
 │    47                                                                        │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
 │ in remote                                                                    │
 │                                                                              │
 │   1766 │   │                                                                 │
 │ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
 │   1768                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
 │ in _call_function                                                            │
 │                                                                              │
 │   1710 │   │                                                                 │
 │ ❱ 1711 │   │   return await invocation.run_function()                        │
 │   1712                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
 │ in run_function                                                              │
 │                                                                              │
 │    292 │   │   │   item = await self._get_single_output()                    │
 │ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
 │    294                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
 │ ls.py:527 in _process_result                                                 │
 │                                                                              │
 │   526 │   │   │                                                              │

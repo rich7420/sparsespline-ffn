@@ -5,27 +5,27 @@ Placement sweep — 5 cells
 
 [early33]  layers=6 (0..5)
 [early33]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_early33 --run-tag placement_sweep_200M_early33 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
-[early33]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_early33.log
+[early33]  log -> /home/anon/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_early33.log
 [early33]  rc=0  dt=46.1 min
 
 [middle33]  layers=6 (7..12)
 [middle33]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_middle33 --run-tag placement_sweep_200M_middle33 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
-[middle33]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_middle33.log
+[middle33]  log -> /home/anon/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_middle33.log
 [middle33]  rc=0  dt=39.4 min
 
 [late33]  layers=7 (13..19)
 [late33]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late33 --run-tag placement_sweep_200M_late33 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
-[late33]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_late33.log
+[late33]  log -> /home/anon/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_late33.log
 [late33]  rc=0  dt=41.6 min
 
 [late20]  layers=4 (16..19)
 [late20]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late20 --run-tag placement_sweep_200M_late20 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
-[late20]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_late20.log
+[late20]  log -> /home/anon/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_late20.log
 [late20]  rc=0  dt=38.8 min
 
 [late50]  layers=10 (10..19)
 [late50]  CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late50 --run-tag placement_sweep_200M_late50 --rlkv-h-ratio 2.0 --rlkv-r 32 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
-[late50]  log -> /home/rich-wsl/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_late50.log
+[late50]  log -> /home/anon/sparsespline-ffn/dispatcher_runs/placement_sweep_200M_late50.log
 [late50]  rc=0  dt=42.9 min
 
 --- Sweep summary ---

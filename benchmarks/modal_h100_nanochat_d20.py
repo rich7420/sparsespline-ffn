@@ -41,7 +41,7 @@ IMAGE = (
         "psutil",
     )
     .add_local_dir(
-        local_path="/home/rich-wsl/sparsespline-ffn",
+        local_path="/home/anon/sparsespline-ffn",
         remote_path="/repo",
         # dispatcher_runs/** holds the local `tee` log written during launch;
         # if not ignored, Modal sees the file change during image build and

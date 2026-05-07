@@ -20,7 +20,7 @@ IMAGE = (
                   index_url="https://download.pytorch.org/whl/cu126")
     .pip_install("numpy", "tokenizers", "tiktoken", "regex")
     .add_local_dir(
-        local_path="/home/rich-wsl/sparsespline-ffn",
+        local_path="/home/anon/sparsespline-ffn",
         remote_path="/repo",
         ignore=[".venv/**", ".git/**",
                 "**/__pycache__/**", "**/*.pyc"],

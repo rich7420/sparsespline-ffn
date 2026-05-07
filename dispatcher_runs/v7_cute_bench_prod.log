@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-06yNGcHMIg8JJ37CRtpknu
+https://modal.com/apps/anonymized-workspace/main/ap-06yNGcHMIg8JJ37CRtpknu
 Building image im-D8ddRI11tzcgFBXlmkCqvI
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-bN9Cx18eRTYXyurzqUfPHE in 8.02s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7_cute_bench.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_v7_cute_bench.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_bench.
 
 ==========

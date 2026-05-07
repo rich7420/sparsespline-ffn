@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-dD8GNc2XzUlMqWuKG8KFRj
+https://modal.com/apps/anonymized-workspace/main/ap-dD8GNc2XzUlMqWuKG8KFRj
 Building image im-4YOYGJmYSDXHHK5HInDbPS
 
 => Step 0: FROM base
@@ -71,9 +71,9 @@ Built image im-HmSFbg0prdRWxdpJuiIr6l in 10.08s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_chat_pipeline
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_chat_pipeline
 │   .py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_chat_pipeline_8gpu.
 [launcher] model_tag=mlp_d20_reference_v2_seed0  model_step=16000
 [launcher] chat_sft.py args: ['--run=dummy', '--model-tag=mlp_d20_reference_v2_seed0', '--model-step=16000', '--device-batch-size=16', '--num-iterations=-1', '--eval-every=-1', '--chatcore-every=999999', '--chatcore-max-cat=-1', '--chatcore-max-sample=50']
@@ -2575,4 +2575,4 @@ Minimum validation bpb: 0.5926
 Stopping app - local entrypoint completed.
 [modal-client] 2026-05-05T01:31:08+0800 Timed out waiting for final app logs.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-dD8GNc2XzUlMqWuKG8KFRj
+https://modal.com/apps/anonymized-workspace/main/ap-dD8GNc2XzUlMqWuKG8KFRj

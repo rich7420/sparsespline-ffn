@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0 -- /home/rich-wsl/sparsespline-ffn/.venv/bin/python
-rootdir: /home/rich-wsl/sparsespline-ffn
+platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0 -- /home/anon/sparsespline-ffn/.venv/bin/python
+rootdir: /home/anon/sparsespline-ffn
 configfile: pyproject.toml
 plugins: cov-7.1.0
 collecting ... collected 57 items

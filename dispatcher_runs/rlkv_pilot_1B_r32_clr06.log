@@ -1,9 +1,9 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-4AqK0h1kMzYnHfPujZpjqL
+https://modal.com/apps/anonymized-workspace/main/ap-4AqK0h1kMzYnHfPujZpjqL
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=rlkv_pilot_1B  run_tag=rlkv_pilot_1B_r32_clr06  ffn_type=rl_kv_b2
@@ -2163,4 +2163,4 @@ Minimum validation bpb: 0.848429
 Stopping app - local entrypoint completed.
 [modal-client] 2026-05-03T13:28:19+0800 Timed out waiting for final app logs.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-4AqK0h1kMzYnHfPujZpjqL
+https://modal.com/apps/anonymized-workspace/main/ap-4AqK0h1kMzYnHfPujZpjqL

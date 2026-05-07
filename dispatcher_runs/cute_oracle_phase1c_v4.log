@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-GGRVxAQ7TBzIWHaBNik7I2
+https://modal.com/apps/anonymized-workspace/main/ap-GGRVxAQ7TBzIWHaBNik7I2
 Building image im-GB79f1c7BHWhYvYXt0r2If
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-uwFRG1hMucINaVBHGKfc7O in 8.23s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_cute_oracle.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_cute_oracle.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_oracle.
 
 ==========
@@ -433,42 +433,42 @@ A copy of this license is made available in this container at /NGC-DL-CONTAINER-
 
 Stopping app - uncaught exception raised locally: RemoteError('Input aborted - exceeded limit of 8 retries. This usually means your program is crashing during initialization. Check your code for segmentation faults, out-of-memory errors, or unhandled exceptions.').
 ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_cute_oracle.py:219 in  │
+│ /home/anon/sparsespline-ffn/benchmarks/modal_h100_cute_oracle.py:219 in  │
 │ main                                                                         │
 │                                                                              │
 │   218 def main(phase: int = 0):                                              │
 │ ❱ 219 │   out = run_oracle.remote(phase)                                     │
 │   220 │   if not out.get("passed"):                                          │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
 │ wrapped                                                                      │
 │                                                                              │
 │    45 │   │   await self.hydrate()                                           │
 │ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
 │    47                                                                        │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
 │ in remote                                                                    │
 │                                                                              │
 │   1766 │   │                                                                 │
 │ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
 │   1768                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
 │ in _call_function                                                            │
 │                                                                              │
 │   1710 │   │                                                                 │
 │ ❱ 1711 │   │   return await invocation.run_function()                        │
 │   1712                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
 │ in run_function                                                              │
 │                                                                              │
 │    292 │   │   │   item = await self._get_single_output()                    │
 │ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
 │    294                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
 │ ls.py:529 in _process_result                                                 │
 │                                                                              │
 │   528 │   │                                                                  │

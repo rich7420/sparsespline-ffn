@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-SmCdv48OpyL8u3TKTSbtaP
+https://modal.com/apps/anonymized-workspace/main/ap-SmCdv48OpyL8u3TKTSbtaP
 Building image im-CrkUYl6OPAPDVz8AzwQ1Ov
 
 => Step 0: FROM base
@@ -71,9 +71,9 @@ Built image im-GNJSO4vuuPQGXoiUsTH5k6 in 12.02s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_chat_pipeline
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_chat_pipeline
 │   .py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_chat_pipeline_8gpu.
 [launcher] model_tag=full_rlkv_late33_grid5_lwarmup  model_step=16000
 [launcher] chat_sft.py args: ['--run=dummy', '--model-tag=full_rlkv_late33_grid5_lwarmup', '--model-step=16000', '--device-batch-size=16', '--num-iterations=-1', '--eval-every=-1', '--chatcore-every=999999', '--chatcore-max-cat=-1', '--chatcore-max-sample=200']
@@ -2715,4 +2715,4 @@ Root Cause (first observed failure):
 [launcher] result: {'rc': 1, 'num_gpus': 8}
 Stopping app - local entrypoint completed.
 [1A[KRank 1 | 0/23 (0.00%)✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-SmCdv48OpyL8u3TKTSbtaP
+https://modal.com/apps/anonymized-workspace/main/ap-SmCdv48OpyL8u3TKTSbtaP

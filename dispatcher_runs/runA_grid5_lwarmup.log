@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-1YIOU3DFU3TPCSQUvdjdU0
+https://modal.com/apps/anonymized-workspace/main/ap-1YIOU3DFU3TPCSQUvdjdU0
 Building image im-LjdHezvQbNjLjxfdCJyj8I
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-WbI0gU3Kn6dw1Q45dQp9Mf in 9.60s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=rlkv_pilot_1B_diag  run_tag=rlkv_pilot_1B_diag_runA_grid5_lwarmup  ffn_type=rl_kv_b2
@@ -303,4 +303,4 @@ Root Cause (first observed failure):
 [launcher] result: {'rc': 1, 'num_gpus': 8}
 Stopping app - local entrypoint completed.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-1YIOU3DFU3TPCSQUvdjdU0
+https://modal.com/apps/anonymized-workspace/main/ap-1YIOU3DFU3TPCSQUvdjdU0

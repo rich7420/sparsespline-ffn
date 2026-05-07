@@ -1,6 +1,6 @@
 # CMD: modal run benchmarks/modal_h100_nanochat_d20.py::main --mode rlkv_pilot_1B --ffn-type rl_kv_b2_late33 --run-tag rank_sweep_200M_r64 --rlkv-h-ratio 2.0 --rlkv-r 64 --rlkv-l 22 --rlkv-fwd-kernel v11_cuda --rlkv-bwd-kernel triton --rlkv-grid-lo -5.0 --rlkv-grid-hi 5.0 --rlkv-lambda-warmup-steps 1000 --rlkv-lambda-warmup-lo 0.25 --c-lr 0.02 --c-weight-decay 0.0
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-WBTc6i3PxPnnShcnyC1PsY
+https://modal.com/apps/anonymized-workspace/main/ap-WBTc6i3PxPnnShcnyC1PsY
 Building image im-IgjMv53bRWY4FXnm1ICRIE
 
 => Step 0: FROM base
@@ -72,8 +72,8 @@ Built image im-gdHgg7A3jDpKWnQ28Y2KPh in 11.69s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=rlkv_pilot_1B  run_tag=rank_sweep_200M_r64  ffn_type=rl_kv_b2_late33
@@ -2260,4 +2260,4 @@ Minimum validation bpb: 0.809967
 Stopping app - local entrypoint completed.
 [modal-client] 2026-05-05T18:24:22+0800 Timed out waiting for final app logs.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-WBTc6i3PxPnnShcnyC1PsY
+https://modal.com/apps/anonymized-workspace/main/ap-WBTc6i3PxPnnShcnyC1PsY

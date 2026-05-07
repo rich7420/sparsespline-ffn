@@ -26,7 +26,7 @@ IMAGE = (
     )
     .pip_install("numpy", "pytest")
     .add_local_dir(
-        local_path="/home/rich-wsl/sparsespline-ffn",
+        local_path="/home/anon/sparsespline-ffn",
         remote_path="/repo",
         ignore=[
             ".venv/**", ".git/**",

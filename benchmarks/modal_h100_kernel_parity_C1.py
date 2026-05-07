@@ -18,7 +18,7 @@ What this writes back to repo dir:
   - `docs/_artifacts/kernel_parity_C1_h100_summary.md` (markdown table)
 
 Reproducer:
-    /home/rich-wsl/.local/bin/modal run \\
+    /home/anon/.local/bin/modal run \\
         benchmarks/modal_h100_kernel_parity_C1.py::main
 """
 from __future__ import annotations
@@ -37,7 +37,7 @@ IMAGE = (
         "tiktoken", "regex", "huggingface-hub", "ninja",
     )
     .add_local_dir(
-        local_path="/home/rich-wsl/sparsespline-ffn",
+        local_path="/home/anon/sparsespline-ffn",
         remote_path="/repo",
         ignore=[".venv/**", ".git/**",
                 "nanochat/.nanochat-runtime/**", "nanochat/.venv/**",
@@ -128,7 +128,7 @@ def main(pytest_filter: str = "") -> None:
     import os
     from datetime import datetime
 
-    repo_root = "/home/rich-wsl/sparsespline-ffn"
+    repo_root = "/home/anon/sparsespline-ffn"
     log_path = os.path.join(
         repo_root, "dispatcher_runs",
         f"2026-05-05_kernel_parity_C1_h100.log")
@@ -169,7 +169,7 @@ Raw log: `dispatcher_runs/2026-05-05_kernel_parity_C1_h100.log`
 ## How to reproduce
 
 ```bash
-/home/rich-wsl/.local/bin/modal run \\
+/home/anon/.local/bin/modal run \\
     benchmarks/modal_h100_kernel_parity_C1.py::main
 ```
 
@@ -177,7 +177,7 @@ To run only the H100-specific parametrisations (skip the local-shape
 subset that already passed on the 3080):
 
 ```bash
-/home/rich-wsl/.local/bin/modal run \\
+/home/anon/.local/bin/modal run \\
     benchmarks/modal_h100_kernel_parity_C1.py::main \\
     --pytest-filter "h100 or wgmma"
 ```

@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-rvTZaS9OWaJhjgwctSD5jE
+https://modal.com/apps/anonymized-workspace/main/ap-rvTZaS9OWaJhjgwctSD5jE
 Building image im-Fxfqfy1ZPqmAvwtUobFCcm
 
 => Step 0: FROM base
@@ -71,9 +71,9 @@ Built image im-aAeeExZbJuQl2su5pGv2QH in 33.36s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_chat_pipeline
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_chat_pipeline
 │   .py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_chat_pipeline_8gpu.
 [launcher] model_tag=full_rlkv_late33_grid5_lwarmup  model_step=16000
 [launcher] chat_sft.py args: ['--run=dummy', '--model-tag=full_rlkv_late33_grid5_lwarmup', '--model-step=16000', '--device-batch-size=16', '--num-iterations=-1', '--eval-every=-1', '--chatcore-every=999999', '--chatcore-max-cat=-1', '--chatcore-max-sample=50']
@@ -2685,4 +2685,4 @@ Minimum validation bpb: 0.6077
 [launcher] result: {'rc': 0, 'num_gpus': 8}
 Stopping app - local entrypoint completed.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-rvTZaS9OWaJhjgwctSD5jE
+https://modal.com/apps/anonymized-workspace/main/ap-rvTZaS9OWaJhjgwctSD5jE

@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-TZWxf22nziwlrdpbFfZuiO
+https://modal.com/apps/anonymized-workspace/main/ap-TZWxf22nziwlrdpbFfZuiO
 Building image im-1t7oisasyUn5PB6qjIe7Ce
 
 => Step 0: FROM base
@@ -71,12 +71,12 @@ Built image im-FSbEtqAtbgE6fQFIpdArvK in 8.17s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7_cute_parity.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_v7_cute_parity.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_parity.
 Stopping app - uncaught exception raised locally: TypeError("main() got an unexpected keyword argument 'n'").
 ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/cli/run.py:376 in f │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/cli/run.py:376 in f │
 │                                                                              │
 │   375 │   │   │   │   else:                                                  │
 │ ❱ 376 │   │   │   │   │   res = func(*args, **kwargs)                        │

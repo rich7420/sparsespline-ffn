@@ -4,20 +4,20 @@
 # more specific rules go below the fallback.
 
 # Default owner for everything in the repo.
-*                                       @rich7420
+*                                       @anonymous
 
 # Library surface — any change here ships to users.
-/src/sparsespline_ffn/                  @rich7420
-/src/sparsespline_ffn/kernels/          @rich7420
+/src/sparsespline_ffn/                  @anonymous
+/src/sparsespline_ffn/kernels/          @anonymous
 
 # Theory + architecture docs (treat as load-bearing).
-/docs/                                  @rich7420
+/docs/                                  @anonymous
 
 # Public-API tests pin the user contract; review carefully.
-/tests/test_kernel_api.py               @rich7420
-/tests/test_integrations.py             @rich7420
+/tests/test_kernel_api.py               @anonymous
+/tests/test_integrations.py             @anonymous
 
 # CI / packaging plumbing.
-/.github/                               @rich7420
-/pyproject.toml                         @rich7420
-/Makefile                               @rich7420
+/.github/                               @anonymous
+/pyproject.toml                         @anonymous
+/Makefile                               @anonymous

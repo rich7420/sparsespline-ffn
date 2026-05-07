@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-ORtQtv1eBntKF5LNlCz3Ot
+https://modal.com/apps/anonymized-workspace/main/ap-ORtQtv1eBntKF5LNlCz3Ot
 Building image im-JHw3SQppbOpaCD8VWpkADl
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-wp108dpXa7ToBXEv6e6rfq in 9.01s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_parity.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_parity.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_parity.
 
 ==========
@@ -140,42 +140,42 @@ Traceback (most recent call last):
 RuntimeError: Error building extension 'spline_kv_bwd_v7ws_cute_ext'
 Stopping app - uncaught exception raised locally: RuntimeError("Error building extension 'spline_kv_bwd_v7ws_cute_ext'").
 ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_parity.py:12 │
+│ /home/anon/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_parity.py:12 │
 │ 3 in main                                                                    │
 │                                                                              │
 │   122 def main(n: int = 2048, h: int = 64, l: int = 22, r: int = 32):        │
 │ ❱ 123 │   out = run_parity.remote(N=n, H=h, L=l, R=r)                        │
 │   124 │   if not out.get("passed"):                                          │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
 │ wrapped                                                                      │
 │                                                                              │
 │    45 │   │   await self.hydrate()                                           │
 │ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
 │    47                                                                        │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
 │ in remote                                                                    │
 │                                                                              │
 │   1766 │   │                                                                 │
 │ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
 │   1768                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
 │ in _call_function                                                            │
 │                                                                              │
 │   1710 │   │                                                                 │
 │ ❱ 1711 │   │   return await invocation.run_function()                        │
 │   1712                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
 │ in run_function                                                              │
 │                                                                              │
 │    292 │   │   │   item = await self._get_single_output()                    │
 │ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
 │    294                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
 │ ls.py:527 in _process_result                                                 │
 │                                                                              │
 │   526 │   │   │                                                              │

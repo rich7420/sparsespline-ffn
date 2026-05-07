@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-EhyXiDmzfk2hRDeS6PErl2
+https://modal.com/apps/anonymized-workspace/main/ap-EhyXiDmzfk2hRDeS6PErl2
 Building image im-wxLH3zwSMYnz5VBjMTkYLN
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-diK6gFCbOvt0ZJTAmUxAs2 in 8.07s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_bench.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_v7ws_cute_bench.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_bench.
 
 ==========
@@ -152,4 +152,4 @@ FINAL JSON:
 }
 Stopping app - local entrypoint completed.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-EhyXiDmzfk2hRDeS6PErl2
+https://modal.com/apps/anonymized-workspace/main/ap-EhyXiDmzfk2hRDeS6PErl2

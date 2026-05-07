@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-NemJZAxdouxBfIOiYgUBuC
+https://modal.com/apps/anonymized-workspace/main/ap-NemJZAxdouxBfIOiYgUBuC
 Building image im-RSq7LThRBVDPGMY7V7gPPq
 
 => Step 0: FROM base
@@ -215,8 +215,8 @@ Built image im-wmJGQ7mZcxaVbo7oa80gSA in 9.25s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_parity_h100.
 [c1] dispatching to H100 (filter=<all>) ...
 

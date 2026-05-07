@@ -51,4 +51,4 @@ Artifacts
 - training log : dispatcher_runs/mlp_d20_reference_v2_seed0.log
 - manifest   : dispatcher_runs/mlp_d20_reference_v2_seed0.manifest.json
 - results    : docs/RESULTS_2026-05-03_mlp_d20_baseline.md
-- memory     : ~/.claude/projects/-home-rich-wsl-pal-kan/memory/project_mlp_d20_baseline.md
+- memory     : ~/.claude/projects/-home-anon-pal-kan/memory/project_mlp_d20_baseline.md

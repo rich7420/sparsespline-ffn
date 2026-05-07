@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-oVnoqcpHSVZiGtXyBJZ4ho
+https://modal.com/apps/anonymized-workspace/main/ap-oVnoqcpHSVZiGtXyBJZ4ho
 Building image im-kP1jk6tgOPzlO2FZr110N5
 
 => Step 0: FROM base
@@ -71,8 +71,8 @@ Built image im-5RVAyUQeH0X3avvexFl5Wq in 6.57s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 └── 🔨 Created function run_parity_h100.
 [c1] dispatching to H100 (filter=<all>) ...
 
@@ -131,42 +131,42 @@ Task's current input(s) ["in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0"] cancel
 [modal-client] 2026-05-06T10:24:26+0000 Successfully canceled input ('in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0',)
 Stopping app - uncaught exception raised locally: FunctionTimeoutError("Task's current input in-01KQY9MH5Y1FN340GAZXKNMWXK:1778059461824-0 hit its timeout of 3600s").
 ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py:14 │
+│ /home/anon/sparsespline-ffn/benchmarks/modal_h100_kernel_parity_C1.py:14 │
 │ 1 in main                                                                    │
 │                                                                              │
 │   140 │   │     flush=True)                                                  │
 │ ❱ 141 │   result = run_parity_h100.remote(pytest_filter=pytest_filter)       │
 │   142                                                                        │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_object.py:46 in    │
 │ wrapped                                                                      │
 │                                                                              │
 │    45 │   │   await self.hydrate()                                           │
 │ ❱  46 │   │   return await method(self, *args, **kwargs)                     │
 │    47                                                                        │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1767  │
 │ in remote                                                                    │
 │                                                                              │
 │   1766 │   │                                                                 │
 │ ❱ 1767 │   │   return await self._call_function(args, kwargs)                │
 │   1768                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:1711  │
 │ in _call_function                                                            │
 │                                                                              │
 │   1710 │   │                                                                 │
 │ ❱ 1711 │   │   return await invocation.run_function()                        │
 │   1712                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_functions.py:293   │
 │ in run_function                                                              │
 │                                                                              │
 │    292 │   │   │   item = await self._get_single_output()                    │
 │ ❱  293 │   │   │   return await _process_result(item.result, item.data_forma │
 │    294                                                                       │
 │                                                                              │
-│ /home/rich-wsl/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
+│ /home/anon/.local/lib/python3.12/site-packages/modal/_utils/function_uti │
 │ ls.py:489 in _process_result                                                 │
 │                                                                              │
 │   488 │   if result.status == api_pb2.GenericResult.GENERIC_STATUS_TIMEOUT:  │

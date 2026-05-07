@@ -25,7 +25,7 @@ IMAGE = (
     )
     .pip_install("pyarrow", "tiktoken", "tokenizers", "requests")
     .add_local_dir(
-        local_path="/home/rich-wsl/sparsespline-ffn/nanochat",
+        local_path="/home/anon/sparsespline-ffn/nanochat",
         remote_path="/repo/nanochat",
         ignore=["__pycache__/**", "*.pyc", ".nanochat-runtime/**"],
         copy=True,

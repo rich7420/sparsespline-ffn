@@ -5,8 +5,8 @@ type: software
 version: 0.1.0
 date-released: "2026-05-01"
 license: MIT
-url: "https://github.com/rich7420/sparsespline-ffn"
-repository-code: "https://github.com/rich7420/sparsespline-ffn"
+url: "https://github.com/anonymous/sparsespline-ffn"
+repository-code: "https://github.com/anonymous/sparsespline-ffn"
 abstract: >
   SparseSpline-FFN is a transformer FFN replacement built around
   locally-supported B1 spline activations and a Tucker-decomposed readout.

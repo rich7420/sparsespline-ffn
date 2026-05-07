@@ -1,6 +1,6 @@
 tee: dispatcher_runs/mlp_d20_reference_v2_seed0.log: No such file or directory
 ✓ Initialized. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-WtMYB6VZROhG3bTM4XLAGe
+https://modal.com/apps/anonymized-workspace/main/ap-WtMYB6VZROhG3bTM4XLAGe
 Building image im-n7T10zUlswS0wyin9OrQBe
 
 => Step 0: FROM base
@@ -72,8 +72,8 @@ Built image im-Aenq9fALJtsgFLphsQhcFs in 10.40s
 
 ✓ Created objects.
 ├── 🔨 Created mount 
-│   /home/rich-wsl/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
-├── 🔨 Created mount /home/rich-wsl/sparsespline-ffn
+│   /home/anon/sparsespline-ffn/benchmarks/modal_h100_nanochat_d20.py
+├── 🔨 Created mount /home/anon/sparsespline-ffn
 ├── 🔨 Created function run_d20_1gpu.
 └── 🔨 Created function run_d20_8gpu.
 [launcher] mode=full_mlp  run_tag=mlp_d20_reference_v2_seed0  ffn_type=mlp
@@ -17277,4 +17277,4 @@ Root Cause (first observed failure):
 Stopping app - local entrypoint completed.
 [modal-client] 2026-05-03T09:56:52+0800 Timed out waiting for final app logs.
 ✓ App completed. View run at 
-https://modal.com/apps/hao-ai-lab/main/ap-WtMYB6VZROhG3bTM4XLAGe
+https://modal.com/apps/anonymized-workspace/main/ap-WtMYB6VZROhG3bTM4XLAGe

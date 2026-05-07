@@ -40,10 +40,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/rich7420/sparsespline-ffn"
-Repository = "https://github.com/rich7420/sparsespline-ffn"
-Issues = "https://github.com/rich7420/sparsespline-ffn/issues"
-Changelog = "https://github.com/rich7420/sparsespline-ffn/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/anonymous/sparsespline-ffn"
+Repository = "https://github.com/anonymous/sparsespline-ffn"
+Issues = "https://github.com/anonymous/sparsespline-ffn/issues"
+Changelog = "https://github.com/anonymous/sparsespline-ffn/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 cuda = [

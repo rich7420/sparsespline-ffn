@@ -56,10 +56,10 @@ def parse_log(path: Path) -> dict:
 # Run registry — explicit mapping so seeds / sizes never get confused.
 RUNS = {
     # 100M, seed 0 (existing — captured both as .output AND fallback /tmp logs)
-    "MLP_100M_s0":       Path("/tmp/claude-1000/-home-rich-wsl-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/b2epdddku.output"),
-    "RLKV_100M_v11v5_s0": Path("/tmp/claude-1000/-home-rich-wsl-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/bghsqfo3y.output"),
-    "RLKV_100M_v1v1_s0":   Path("/tmp/claude-1000/-home-rich-wsl-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/b8nj6dcdg.output"),
-    "RLKV_100M_v11v1_s0":  Path("/tmp/claude-1000/-home-rich-wsl-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/bxecn21zo.output"),
+    "MLP_100M_s0":       Path("/tmp/claude-1000/-home-anon-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/b2epdddku.output"),
+    "RLKV_100M_v11v5_s0": Path("/tmp/claude-1000/-home-anon-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/bghsqfo3y.output"),
+    "RLKV_100M_v1v1_s0":   Path("/tmp/claude-1000/-home-anon-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/b8nj6dcdg.output"),
+    "RLKV_100M_v11v1_s0":  Path("/tmp/claude-1000/-home-anon-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/bxecn21zo.output"),
     # 100M, seed 1, 2 — redirected to /tmp because of the > /tmp/X.log mistake
     "MLP_100M_s1":         Path("/tmp/mlp_s1.log"),
     "MLP_100M_s2":         Path("/tmp/mlp_s2.log"),
@@ -69,8 +69,8 @@ RUNS = {
     "MLP_200M_s0":         Path("/tmp/mlp_200M.log"),
     "RLKV_200M_v11v5_s0":  Path("/tmp/v11v5_200M.log"),
     # 800M
-    "MLP_800M_s0":         Path("/tmp/claude-1000/-home-rich-wsl-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/blvnu9tnz.output"),
-    "RLKV_800M_v11v5_s0":  Path("/tmp/claude-1000/-home-rich-wsl-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/b8588qbjt.output"),
+    "MLP_800M_s0":         Path("/tmp/claude-1000/-home-anon-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/blvnu9tnz.output"),
+    "RLKV_800M_v11v5_s0":  Path("/tmp/claude-1000/-home-anon-pal-kan/3e7acc8b-38f7-4a29-a12e-e03141de1bb3/tasks/b8588qbjt.output"),
 }
 
 
